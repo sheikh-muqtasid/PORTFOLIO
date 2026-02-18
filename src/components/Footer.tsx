@@ -1,4 +1,4 @@
-import { Row, IconButton, SmartLink, Text, Button } from "@once-ui-system/core";
+import { Row, IconButton, Text, Button } from "@once-ui-system/core";
 import { person, social } from "@/resources";
 import styles from "./Footer.module.scss";
 
@@ -6,7 +6,13 @@ export const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <Row as="footer" fillWidth padding="8" horizontal="center" s={{ direction: "column" }}>
+    <Row
+      as="footer"
+      fillWidth
+      padding="8"
+      horizontal="center"
+      s={{ direction: "column" }}
+    >
       <Row
         className={styles.mobile}
         maxWidth="m"
@@ -18,15 +24,14 @@ export const Footer = () => {
         s={{
           direction: "column",
           horizontal: "center",
-          align: "center",
         }}
       >
         <Text variant="body-default-s" onBackground="neutral-strong">
           <Text onBackground="neutral-weak">© {currentYear} /</Text>
           <Text paddingX="4">{person.name}</Text>
-
         </Text>
-        <Row gap="16">
+
+        <Row gap="16" horizontal="center">
           {social.map(
             (item) =>
               item.link && (
@@ -38,23 +43,20 @@ export const Footer = () => {
                   size="s"
                   variant="ghost"
                 />
-              ),
+              )
           )}
         </Row>
-        <Row gap="16" vertical="center" s={{ direction: "column" }}>
-            <Text variant="body-default-s" onBackground="neutral-weak">
-                +92 3330919080
-            </Text>
-            <Button
-                href="tel:+923330919080"
-                variant="secondary"
-                size="s"
-                arrowIcon
-            >
-                Schedule a Call
-            </Button>
+
+        <Row gap="16" horizontal="center" s={{ direction: "column" }}>
+          <Text variant="body-default-s" onBackground="neutral-weak">
+            +92 3330919080
+          </Text>
+          <Button href="tel:+923330919080" variant="secondary" size="s" arrowIcon>
+            Schedule a Call
+          </Button>
         </Row>
       </Row>
+
       <Row height="80" hide s={{ hide: false }} />
     </Row>
   );
