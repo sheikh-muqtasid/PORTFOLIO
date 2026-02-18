@@ -102,7 +102,7 @@ const about: About = {
     title: "Work Experience",
     experiences: [
       {
-        company: "Ptalnex",
+        company: "Petalnex",
         timeframe: "Nov 2025 - Present",
         role: "MERN Stack Developer",
         achievements: [
