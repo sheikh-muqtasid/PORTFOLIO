@@ -1,0 +1,31 @@
+/* Custom CSS */
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.scrolling-slider {
+  display: flex;
+  overflow: hidden;
+  user-select: none;
+  width: 100%;
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.scrolling-slider-content {
+  display: flex;
+  gap: var(--static-space-32);
+  animation: scroll 20s linear infinite;
+  min-width: 100%;
+  flex-shrink: 0;
+  align-items: center; 
+}
+
+.scrolling-slider:hover .scrolling-slider-content {
+  animation-play-state: paused;
+}
