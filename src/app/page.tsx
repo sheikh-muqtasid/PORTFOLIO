@@ -16,7 +16,6 @@ import { Mailchimp } from "@/components";
 import { ProjectSlider } from "@/components/work/ProjectSlider";
 import { SkillsSlider } from "@/components/work/SkillsSlider";
 import { ContactForm } from "@/components/ContactForm";
-import { Posts } from "@/components/blog/Posts";
 
 export async function generateMetadata() {
   return Meta.generate({
@@ -158,9 +157,6 @@ export default function Home() {
               <Heading as="h2" variant="display-strong-xs" wrap="balance">
                 Latest from the blog
               </Heading>
-            </Row>
-            <Row flex={3} paddingX="20">
-              <Posts range={[1, 2]} columns="2" />
             </Row>
           </Row>
           <Row fillWidth paddingLeft="64" horizontal="end">
