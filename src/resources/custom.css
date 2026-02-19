@@ -29,3 +29,38 @@
 .scrolling-slider:hover .scrolling-slider-content {
   animation-play-state: paused;
 }
+
+.glass {
+  background: var(--neutral-alpha-weak);
+  backdrop-filter: blur(var(--static-space-4));
+  border: 1px solid var(--neutral-alpha-weak);
+}
+
+.hero-glow {
+  position: relative;
+}
+
+.hero-glow::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 600px;
+  background: radial-gradient(circle at 50% 0%, var(--brand-alpha-weak) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.6;
+}
+
+.shimmer {
+  background: linear-gradient(90deg, transparent, var(--neutral-alpha-weak), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
