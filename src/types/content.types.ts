@@ -128,6 +128,8 @@ export interface About extends BasePageConfig {
     display: boolean;
     /** Link to the calendar */
     link: string;
+    /** Label for the calendar link */
+    label?: string;
   };
   /** Introduction section */
   intro: {

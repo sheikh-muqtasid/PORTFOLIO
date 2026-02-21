@@ -86,7 +86,8 @@ const about: About = {
   },
   calendar: {
     display: true,
-    link: "tel:+923330919080",
+    link: "https://calendly.com/sheikh-muqtasid", // Replace with your actual Calendly link
+    label: "Schedule Meeting",
   },
   intro: {
     display: true,

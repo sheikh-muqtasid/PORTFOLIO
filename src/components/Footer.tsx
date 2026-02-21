@@ -1,5 +1,5 @@
 import { Row, IconButton, Text, Button } from "@once-ui-system/core";
-import { person, social } from "@/resources";
+import { person, social, about } from "@/resources";
 import styles from "./Footer.module.scss";
 
 export const Footer = () => {
@@ -47,14 +47,13 @@ export const Footer = () => {
           )}
         </Row>
 
-        <Row gap="16" horizontal="center" s={{ direction: "column" }}>
-          <Text variant="body-default-s" onBackground="neutral-weak">
-            +92 3330919080
-          </Text>
-          <Button href="tel:+923330919080" variant="secondary" size="s" arrowIcon>
-            Schedule a Call
-          </Button>
-        </Row>
+        {about.calendar.display && (
+          <Row gap="16" horizontal="center" s={{ direction: "column" }}>
+            <Button href={about.calendar.link} variant="secondary" size="s" arrowIcon>
+              {about.calendar.label}
+            </Button>
+          </Row>
+        )}
       </Row>
 
       <Row height="128" hide s={{ hide: false }} />
