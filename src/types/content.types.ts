@@ -6,7 +6,7 @@ import { zones } from "tzdata";
  * See: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
  */
 export type IANATimeZone = Extract<keyof typeof zones, string>; // Narrow to string keys for React usage
-
+    
 /**
  * Represents a person featured in the portfolio.
  */
