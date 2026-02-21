@@ -86,8 +86,8 @@ const about: About = {
   },
   calendar: {
     display: true,
-    link: "https://calendly.com/sheikh-muqtasid", // Replace with your actual Calendly link
-    label: "Schedule Meeting",
+    link: "https://calendly.com/sheikhmuqtasid/30min", // Replace with your actual Calendly link
+    label: "Schedule a Meeting",
   },
   intro: {
     display: true,
