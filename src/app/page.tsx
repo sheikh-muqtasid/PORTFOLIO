@@ -46,11 +46,13 @@ export default function Home() {
       <Column fillWidth horizontal="center" gap="48">
         <Column horizontal="center" gap="24">
           <RevealFx translateY="4" horizontal="center">
-            <Avatar
-              src={person.avatar}
-              size="xl"
-              style={{ width: '160px', height: '160px' }}
-            />
+            <div className="avatar-float">
+              <Avatar
+                src={person.avatar}
+                size="xl"
+                style={{ width: '160px', height: '160px' }}
+              />
+            </div>
           </RevealFx>
           <RevealFx translateY="8" delay={0.2} horizontal="center">
             <Badge
@@ -66,7 +68,8 @@ export default function Home() {
             <Heading
               wrap="balance"
               variant="display-strong-xl"
-              style={{ letterSpacing: '-0.02em', textAlign: 'center' }}
+              style={{ letterSpacing: '-0.02em', textAlign: 'center', lineHeight: '1.2' }}
+              className="gradient-text"
             >
               {home.headline}
             </Heading>
@@ -75,34 +78,33 @@ export default function Home() {
             <Text
               wrap="balance"
               onBackground="neutral-weak"
-              variant="heading-default-xl"
-              style={{ textAlign: 'center' }}
+              variant="heading-default-l"
+              style={{ textAlign: 'center', lineHeight: '1.6' }}
             >
               {home.subline}
             </Text>
           </RevealFx>
           <RevealFx translateY="20" delay={0.8} horizontal="center">
-            <Row gap="12" wrap horizontal="center">
+            <Row gap="16" wrap horizontal="center">
               <Button
-                id="about"
+                id="work"
                 data-border="rounded"
-                href={about.path}
-                variant="secondary"
+                href="/work"
+                variant="primary"
                 size="l"
                 arrowIcon
               >
-                {about.title}
+                View Work
               </Button>
               <Button
-                id="resume"
+                id="contact"
                 data-border="rounded"
-                href="/resume.pdf"
-                target="_blank"
-                variant="tertiary"
+                href="mailto:sheikhmuqtasid@gmail.com"
+                variant="secondary"
                 size="l"
-                prefixIcon="document"
+                prefixIcon="email"
               >
-                Resume
+                Contact Me
               </Button>
             </Row>
           </RevealFx>

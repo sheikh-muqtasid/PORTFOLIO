@@ -64,3 +64,27 @@
   0% { background-position: -200% 0; }
   100% { background-position: 200% 0; }
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+  100% { transform: translateY(0px); }
+}
+
+.avatar-float {
+  animation: float 6s ease-in-out infinite;
+  display: inline-block;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--brand-solid-strong) 0%, var(--accent-solid-strong) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+}

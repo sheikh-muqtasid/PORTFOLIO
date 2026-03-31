@@ -52,7 +52,7 @@ const home: Home = {
   label: "Home",
   title: `${person.name}'s Portfolio`,
   description: `Portfolio website showcasing my work as a ${person.role}`,
-  headline: <>MERN Stack & Flutter Developer</>,
+  headline: <>I build scalable websites that feel fast and intuitive.</>,
   featured: {
     display: true,
     title: (
@@ -68,7 +68,8 @@ const home: Home = {
   },
   subline: (
     <>
-    I craft scalable web applications and cross-platform mobile experiences with precision, modern design, and high performance, transforming ideas into impactful digital solutions that engage users and empower businesses.  </>
+      Leveraging the MERN Stack and Flutter to craft cross-platform digital experiences with precision and modern design aesthetics.
+    </>
   ),
 };
 
