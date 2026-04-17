@@ -15,7 +15,7 @@ import {
 import { baseURL, about, person, social } from "@/resources";
 import TableOfContents from "@/components/about/TableOfContents";
 import styles from "@/components/about/about.module.scss";
-import React from "react";
+import { Fragment, ReactNode } from "react";
 
 export async function generateMetadata() {
   return Meta.generate({
@@ -85,7 +85,6 @@ export default function About() {
             fitHeight
             position="sticky"
             s={{ position: "relative" }}
-            xs={{}}
             minWidth="160"
             paddingX="l"
             paddingBottom="xl"
@@ -168,7 +167,7 @@ export default function About() {
                       .map(
                   (item) =>
                     item.link && (
-                      <React.Fragment key={item.name}>
+                      <Fragment key={item.name}>
                         <Row s={{ hide: true }}>
                           <Button
                             key={item.name}
@@ -189,7 +188,7 @@ export default function About() {
                             variant="secondary"
                           />
                         </Row>
-                      </React.Fragment>
+                      </Fragment>
                     ),
                 )}
               </Row>
@@ -222,8 +221,7 @@ export default function About() {
                       {experience.role}
                     </Text>
                     <Column as="ul" gap="16">
-                      {experience.achievements.map(
-                        (achievement: React.ReactNode, index: number) => (
+                      {experience.achievements.map((achievement: ReactNode, index: number) => (
                           <Text
                             as="li"
                             variant="body-default-m"
@@ -234,27 +232,6 @@ export default function About() {
                         ),
                       )}
                     </Column>
-                    {experience.images && experience.images.length > 0 && (
-                      <Row fillWidth paddingTop="m" paddingLeft="40" gap="12" wrap>
-                        {experience.images.map((image, index) => (
-                          <Row
-                            key={index}
-                            border="neutral-medium"
-                            radius="m"
-                            minWidth={image.width}
-                            height={image.height}
-                          >
-                            <Media
-                              enlarge
-                              radius="m"
-                              sizes={image.width.toString()}
-                              alt={image.alt}
-                              src={image.src}
-                            />
-                          </Row>
-                        ))}
-                      </Row>
-                    )}
                   </Column>
                 ))}
               </Column>
@@ -306,27 +283,6 @@ export default function About() {
                           <Tag key={`${skill.title}-${tagIndex}`} size="l" prefixIcon={tag.icon}>
                             {tag.name}
                           </Tag>
-                        ))}
-                      </Row>
-                    )}
-                    {skill.images && skill.images.length > 0 && (
-                      <Row fillWidth paddingTop="m" gap="12" wrap>
-                        {skill.images.map((image, index) => (
-                          <Row
-                            key={index}
-                            border="neutral-medium"
-                            radius="m"
-                            minWidth={image.width}
-                            height={image.height}
-                          >
-                            <Media
-                              enlarge
-                              radius="m"
-                              sizes={image.width.toString()}
-                              alt={image.alt}
-                              src={image.src}
-                            />
-                          </Row>
                         ))}
                       </Row>
                     )}
