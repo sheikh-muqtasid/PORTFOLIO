@@ -97,8 +97,8 @@ function createHeading(as: "h1" | "h2" | "h3" | "h4" | "h5" | "h6") {
     return (
       <HeadingLink
         className={isMajor ? "case-study-heading" : ""}
-        marginTop="28"
-        marginBottom="14"
+        marginTop="24"
+        marginBottom="12"
         as={as}
         id={slug}
         {...props}
