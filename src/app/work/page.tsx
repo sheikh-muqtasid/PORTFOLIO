@@ -14,7 +14,7 @@ export async function generateMetadata() {
 
 export default function Work() {
   return (
-    <Column maxWidth="m" paddingTop="24">
+    <Column maxWidth="m" paddingTop="24" horizontal="center" gap="48">
       <Schema
         as="webPage"
         baseURL={baseURL}
@@ -28,9 +28,14 @@ export default function Work() {
           image: `${baseURL}${person.avatar}`,
         }}
       />
-      <Heading marginBottom="l" variant="heading-strong-xl" align="center">
-        {work.title}
-      </Heading>
+      <Column maxWidth="s" horizontal="center" align="center" gap="16">
+        <Heading variant="display-strong-l" align="center" className="gradient-text">
+          Featured Engineering & Projects
+        </Heading>
+        <span style={{ color: "var(--neutral-on-background-weak)", textAlign: "center", fontSize: "1.1rem" }}>
+          A curated collection of full-stack web applications, live enterprise platforms, and mobile solutions.
+        </span>
+      </Column>
       <Projects />
     </Column>
   );

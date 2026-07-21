@@ -39,10 +39,11 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       s={{ direction: "column" }}
       fillWidth
       gap="32"
-      className={styles.card}
+      padding="24"
+      className={`pro-card ${styles.card}`}
       vertical="center"
     >
-      <Column flex={6} style={{ overflow: "hidden", borderRadius: "inherit" }}>
+      <Column flex={6} className="pro-card-image-wrap">
         <Carousel
           sizes="(max-width: 960px) 100vw, 960px"
           aspectRatio="16 / 9"
@@ -52,7 +53,12 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           }))}
         />
       </Column>
-      <Column flex={6} gap="24" paddingX="32" marginBottom="24">
+      <Column flex={6} gap="24" paddingX="16" paddingY="12">
+        {link && (
+          <div className="live-badge" style={{ width: "fit-content" }}>
+            <span className="live-dot" /> Live Web App
+          </div>
+        )}
         {title && (
           <Heading as="h2" wrap="balance" variant="display-strong-xs">
             {title}
@@ -66,7 +72,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                 {description}
               </Text>
             )}
-            <Flex gap="24" wrap paddingTop="24">
+            <Flex gap="20" wrap paddingTop="16" vertical="center">
               {content?.trim() && (
                 <SmartLink
                   suffixIcon="arrowRight"
@@ -78,11 +84,18 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
               )}
               {link && (
                 <SmartLink
-                  suffixIcon="arrowUpRightFromSquare"
-                  style={{ margin: "0", width: "fit-content" }}
+                  suffixIcon="openLink"
+                  style={{
+                    margin: "0",
+                    width: "fit-content",
+                    padding: "6px 14px",
+                    borderRadius: "8px",
+                    background: "rgba(255, 255, 255, 0.06)",
+                    border: "1px solid rgba(255, 255, 255, 0.12)",
+                  }}
                   href={link}
                 >
-                  <Text variant="body-strong-m">View project</Text>
+                  <Text variant="body-strong-m">View Live Site ↗</Text>
                 </SmartLink>
               )}
             </Flex>

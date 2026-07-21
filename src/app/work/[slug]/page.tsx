@@ -94,14 +94,34 @@ export default async function Project({
       />
       <Column maxWidth="s" gap="16" horizontal="center" align="center">
         <SmartLink href="/work">
-          <Text variant="label-strong-m">Projects</Text>
+          <Text variant="label-strong-m">← All Projects</Text>
         </SmartLink>
-        <Text variant="body-default-xs" onBackground="neutral-weak" marginBottom="12">
+        <Text variant="body-default-xs" onBackground="neutral-weak" marginBottom="4">
           {post.metadata.publishedAt && formatDate(post.metadata.publishedAt)}
         </Text>
-        <Heading variant="display-strong-m">{post.metadata.title}</Heading>
+        {post.metadata.link && (
+          <div className="live-badge" style={{ marginBottom: "8px" }}>
+            <span className="live-dot" /> Live Web Application
+          </div>
+        )}
+        <Heading variant="display-strong-m" wrap="balance" style={{ textAlign: "center" }}>
+          {post.metadata.title}
+        </Heading>
+        {post.metadata.link && (
+          <Row marginTop="12">
+            <Button
+              href={post.metadata.link}
+              variant="primary"
+              size="m"
+              prefixIcon="openLink"
+              className="pro-button-glow"
+            >
+              Visit Live Website
+            </Button>
+          </Row>
+        )}
       </Column>
-      <Row marginBottom="32" horizontal="center">
+      <Row marginBottom="24" horizontal="center">
         <Row gap="16" vertical="center">
           {post.metadata.team && <AvatarGroup reverse avatars={avatars} size="s" />}
           <Text variant="label-default-m" onBackground="brand-weak">
@@ -119,31 +139,43 @@ export default async function Project({
         </Row>
       </Row>
       {post.metadata.images.length > 0 && (
-        <Carousel
+        <Column className="pro-hero-carousel">
+          <Carousel
             indicator="line"
-            aspectRatio="21 / 9"
-            sizes="(max-width: 960px) 100vw, 960px"
+            aspectRatio="16 / 9"
+            sizes="(max-width: 760px) 100vw, 760px"
             items={post.metadata.images.map((image) => ({
-                slide: image,
-                alt: post.metadata.title,
+              slide: image,
+              alt: post.metadata.title,
             }))}
-        />
+          />
+        </Column>
       )}
-      <Column style={{ margin: "auto" }} as="article" maxWidth="xs" gap="l">
+      <Column style={{ margin: "auto" }} as="article" maxWidth="s" gap="l" className="case-study-article">
         <CustomMDX source={post.content} />
         {post.metadata.link && (
-          <Row marginTop="32">
+          <Column marginTop="40" padding="32" radius="l" className="pro-card" gap="16" horizontal="center">
+            <Text variant="heading-strong-m">Experience the Live Application</Text>
+            <Text variant="body-default-s" onBackground="neutral-weak" style={{ textAlign: "center" }}>
+              Explore the fully functional deployment with live data and interactive workflows.
+            </Text>
             <Button
               href={post.metadata.link}
-              variant="secondary"
-              size="m"
-              weight="default"
-              arrowIcon
+              variant="primary"
+              size="l"
+              prefixIcon="openLink"
+              className="pro-button-glow"
             >
-              View project
+              Launch Live Website ↗
             </Button>
-          </Row>
+          </Column>
         )}
+      </Column>
+      <Column fillWidth marginTop="64" gap="32" horizontal="center">
+        <Heading variant="display-strong-xs" align="center">
+          Explore More Projects
+        </Heading>
+        <Projects exclude={[post.slug]} range={[1, 3]} />
       </Column>
       <ScrollToHash />
     </Column>

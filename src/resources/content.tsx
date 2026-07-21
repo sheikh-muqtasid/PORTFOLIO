@@ -109,7 +109,7 @@ const about: About = {
         role: "MERN Stack Developer",
         achievements: [
           <>
-            Built full-stack web apps using MERN stack (MongoDB, Express, React, Node.js).
+            Built and deployed production medical portals (e.g., Dr. O.O. Oduntan Medical Platform at drod.petalwebdev.com) with online booking and patient management.
           </>,
           <>
             Developed REST APIs for document management systems with role-based access control.

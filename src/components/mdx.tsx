@@ -70,7 +70,8 @@ function createImage({ alt, src, ...props }: MediaProps & { src: string }) {
       enlarge
       radius="m"
       border="neutral-alpha-medium"
-      sizes="(max-width: 960px) 100vw, 960px"
+      className="pro-media-compact"
+      sizes="(max-width: 760px) 100vw, 760px"
       alt={alt}
       src={src}
       {...props}
@@ -91,9 +92,17 @@ function createHeading(as: "h1" | "h2" | "h3" | "h4" | "h5" | "h6") {
     children,
     ...props
   }: Omit<React.ComponentProps<typeof HeadingLink>, "as" | "id">) => {
-    const slug = slugify(children as string);
+    const slug = typeof children === "string" ? slugify(children) : "heading";
+    const isMajor = as === "h2" || as === "h3";
     return (
-      <HeadingLink marginTop="24" marginBottom="12" as={as} id={slug} {...props}>
+      <HeadingLink
+        className={isMajor ? "case-study-heading" : ""}
+        marginTop="28"
+        marginBottom="14"
+        as={as}
+        id={slug}
+        {...props}
+      >
         {children}
       </HeadingLink>
     );
@@ -107,11 +116,11 @@ function createHeading(as: "h1" | "h2" | "h3" | "h4" | "h5" | "h6") {
 function createParagraph({ children }: TextProps) {
   return (
     <Text
-      style={{ lineHeight: "175%" }}
+      style={{ lineHeight: "180%", letterSpacing: "-0.01em" }}
       variant="body-default-m"
       onBackground="neutral-medium"
       marginTop="8"
-      marginBottom="12"
+      marginBottom="16"
     >
       {children}
     </Text>
@@ -152,23 +161,24 @@ function createCodeBlock(props: any) {
 }
 
 function createList(as: "ul" | "ol") {
-  return ({ children }: { children: ReactNode }) => <List as={as}>{children}</List>;
+  return ({ children }: { children: ReactNode }) => (
+    <Column gap="4" marginTop="8" marginBottom="16">
+      {children}
+    </Column>
+  );
 }
 
 function createListItem({ children }: { children: ReactNode }) {
   return (
-    <ListItem marginTop="4" marginBottom="8" style={{ lineHeight: "175%" }}>
-      {children}
-    </ListItem>
+    <div className="case-study-list-item">
+      <span className="case-study-bullet">✦</span>
+      <div style={{ flex: 1, lineHeight: "165%" }}>{children}</div>
+    </div>
   );
 }
 
 function createHR() {
-  return (
-    <Row fillWidth horizontal="center">
-      <Line maxWidth="40" />
-    </Row>
-  );
+  return <div className="pro-divider" />;
 }
 
 const components = {
