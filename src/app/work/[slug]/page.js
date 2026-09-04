@@ -1,0 +1,171 @@
+import { notFound } from "next/navigation";
+import { getPosts } from "@/utils/utils";
+import {
+  Meta,
+  Schema,
+  AvatarGroup,
+  Button,
+  Column,
+  Heading,
+  Text,
+  SmartLink,
+  Row,
+  Carousel,
+} from "@once-ui-system/core";
+import { baseURL, about, person, work } from "@/resources";
+import { formatDate } from "@/utils/formatDate";
+import { ScrollToHash, CustomMDX } from "@/components";
+import { Projects } from "@/components/work/Projects";
+
+export async function generateStaticParams() {
+  const posts = getPosts(["src", "app", "work", "projects"]);
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
+}
+
+export async function generateMetadata({ params }) {
+  const routeParams = await params;
+  const slugPath = Array.isArray(routeParams?.slug)
+    ? routeParams.slug.join("/")
+    : routeParams?.slug || "";
+
+  const posts = getPosts(["src", "app", "work", "projects"]);
+  const post = posts.find((p) => p.slug === slugPath);
+
+  if (!post) return {};
+
+  return Meta.generate({
+    title: post.metadata.title,
+    description: post.metadata.summary,
+    baseURL: baseURL,
+    image: post.metadata.image || `/api/og/generate?title=${post.metadata.title}`,
+    path: `${work.path}/${post.slug}`,
+  });
+}
+
+export default async function Project({ params }) {
+  const routeParams = await params;
+  const slugPath = Array.isArray(routeParams?.slug)
+    ? routeParams.slug.join("/")
+    : routeParams?.slug || "";
+
+  const post = getPosts(["src", "app", "work", "projects"]).find((p) => p.slug === slugPath);
+
+  if (!post) {
+    notFound();
+  }
+
+  const avatars =
+    post.metadata.team?.map((member) => ({
+      src: member.avatar,
+    })) || [];
+
+  return (
+    <Column as="section" maxWidth="m" horizontal="center" gap="l">
+      <Schema
+        as="blogPosting"
+        baseURL={baseURL}
+        path={`${work.path}/${post.slug}`}
+        title={post.metadata.title}
+        description={post.metadata.summary}
+        datePublished={post.metadata.publishedAt}
+        dateModified={post.metadata.publishedAt}
+        image={
+          post.metadata.image || `/api/og/generate?title=${encodeURIComponent(post.metadata.title)}`
+        }
+        author={{
+          name: person.name,
+          url: `${baseURL}${about.path}`,
+          image: `${baseURL}${person.avatar}`,
+        }}
+      />
+      <Column maxWidth="s" gap="16" horizontal="center" align="center">
+        <SmartLink href="/work">
+          <Text variant="label-strong-m">← All Projects</Text>
+        </SmartLink>
+        <Text variant="body-default-xs" onBackground="neutral-weak" marginBottom="4">
+          {post.metadata.publishedAt && formatDate(post.metadata.publishedAt)}
+        </Text>
+        {post.metadata.link && (
+          <div className="live-badge" style={{ marginBottom: "8px" }}>
+            <span className="live-dot" /> Live Web Application
+          </div>
+        )}
+        <Heading variant="display-strong-m" wrap="balance" style={{ textAlign: "center" }}>
+          {post.metadata.title}
+        </Heading>
+        {post.metadata.link && (
+          <Row marginTop="12">
+            <Button
+              href={post.metadata.link}
+              variant="primary"
+              size="m"
+              prefixIcon="openLink"
+              className="pro-button-glow"
+            >
+              Visit Live Website
+            </Button>
+          </Row>
+        )}
+      </Column>
+      <Row marginBottom="24" horizontal="center">
+        <Row gap="16" vertical="center">
+          {post.metadata.team && <AvatarGroup reverse avatars={avatars} size="s" />}
+          <Text variant="label-default-m" onBackground="brand-weak">
+            {post.metadata.team?.map((member, idx) => (
+              <span key={idx}>
+                {idx > 0 && (
+                  <Text as="span" onBackground="neutral-weak">
+                    ,{" "}
+                  </Text>
+                )}
+                <SmartLink href={member.linkedIn}>{member.name}</SmartLink>
+              </span>
+            ))}
+          </Text>
+        </Row>
+      </Row>
+      {post.metadata.images && post.metadata.images.length > 0 && (
+        <Column className="pro-hero-carousel">
+          <Carousel
+            indicator="line"
+            aspectRatio="16 / 9"
+            sizes="(max-width: 760px) 100vw, 760px"
+            items={post.metadata.images.map((image) => ({
+              slide: image,
+              alt: post.metadata.title,
+            }))}
+          />
+        </Column>
+      )}
+      <Column style={{ margin: "auto" }} as="article" maxWidth="s" gap="l" className="case-study-article">
+        <CustomMDX source={post.content} />
+        {post.metadata.link && (
+          <Column marginTop="40" padding="32" radius="l" className="pro-card" gap="16" horizontal="center">
+            <Text variant="heading-strong-m">Experience the Live Application</Text>
+            <Text variant="body-default-s" onBackground="neutral-weak" style={{ textAlign: "center" }}>
+              Explore the fully functional deployment with live data and interactive workflows.
+            </Text>
+            <Button
+              href={post.metadata.link}
+              variant="primary"
+              size="l"
+              prefixIcon="openLink"
+              className="pro-button-glow"
+            >
+              Launch Live Website ↗
+            </Button>
+          </Column>
+        )}
+      </Column>
+      <Column fillWidth marginTop="64" gap="32" horizontal="center">
+        <Heading variant="display-strong-xs" align="center">
+          Explore More Projects
+        </Heading>
+        <Projects exclude={[post.slug]} range={[1, 3]} />
+      </Column>
+      <ScrollToHash />
+    </Column>
+  );
+}
