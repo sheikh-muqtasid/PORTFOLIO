@@ -1,3 +1,11 @@
+@import "tailwindcss";
+
+@theme {
+  --font-heading: var(--font-heading), system-ui, sans-serif;
+  --font-body: var(--font-body), system-ui, sans-serif;
+  --font-code: var(--font-code), monospace;
+}
+
 /* Custom CSS */
 
 @keyframes scroll {
@@ -277,3 +285,54 @@ html {
   object-fit: cover !important;
   border-radius: 12px !important;
 }
+
+/* ========================================================
+   3D MODERN PREMIUM DESIGN SYSTEM
+   ======================================================== */
+
+:root {
+  --bg-deep: #0A0A0B;
+  --bg-surface: #121215;
+  --accent-lime: #D4FF3F;
+  --accent-lime-glow: rgba(212, 255, 63, 0.25);
+  --accent-indigo: #6366F1;
+}
+
+html, body {
+  background-color: #0A0A0B !important;
+  color: #F8FAFC !important;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Subtle Film Grain Noise Texture */
+.noise-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 999;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* 3D Tilt container */
+.tilt-perspective {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

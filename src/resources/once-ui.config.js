@@ -1,7 +1,7 @@
-import { Outfit, Inter, JetBrains_Mono } from "next/font/google";
+import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
 
 // IMPORTANT: Replace with your own domain address - it's used for SEO in meta tags and schema
-const baseURL = "https://demo.magic-portfolio.com";
+const baseURL = "https://sheikhmuqtasid.vercel.app";
 
 const routes = {
   "/": true,
@@ -14,7 +14,7 @@ const routes = {
 const display = {
   location: true,
   time: true,
-  themeSwitcher: true,
+  themeSwitcher: false,
 };
 
 // Enable password protection on selected routes
@@ -24,7 +24,7 @@ const protectedRoutes = {
 };
 
 // Import and set font for each variant
-const heading = Outfit({
+const heading = Space_Grotesk({
   variable: "--font-heading",
   subsets: ["latin"],
   display: "swap",
@@ -36,7 +36,7 @@ const body = Inter({
   display: "swap",
 });
 
-const label = Outfit({
+const label = Space_Grotesk({
   variable: "--font-label",
   subsets: ["latin"],
   display: "swap",
@@ -57,7 +57,7 @@ const fonts = {
 
 // default customization applied to the HTML in the main layout.jsx
 const style = {
-  theme: "system", // dark | light | system
+  theme: "dark", // dark | light | system
   neutral: "slate", // sand | gray | slate | custom
   brand: "indigo", // blue | indigo | violet | magenta | pink | red | orange | yellow | moss | green | emerald | aqua | cyan | custom
   accent: "cyan", // blue | indigo | violet | magenta | pink | red | orange | yellow | moss | green | emerald | aqua | cyan | custom

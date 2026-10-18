@@ -99,12 +99,14 @@ export default async function Project({ params }) {
           <Row marginTop="12">
             <Button
               href={post.metadata.link}
+              target="_blank"
+              rel="noopener noreferrer"
               variant="primary"
               size="m"
               prefixIcon="openLink"
               className="pro-button-glow"
             >
-              Visit Live Website
+              Visit Live Website ↗
             </Button>
           </Row>
         )}
@@ -120,7 +122,9 @@ export default async function Project({ params }) {
                     ,{" "}
                   </Text>
                 )}
-                <SmartLink href={member.linkedIn}>{member.name}</SmartLink>
+                <SmartLink href={member.linkedIn} target="_blank" rel="noopener noreferrer">
+                  {member.name}
+                </SmartLink>
               </span>
             ))}
           </Text>
@@ -134,7 +138,7 @@ export default async function Project({ params }) {
             sizes="(max-width: 760px) 100vw, 760px"
             items={post.metadata.images.map((image) => ({
               slide: image,
-              alt: post.metadata.title,
+              alt: `${post.metadata.title} UI preview and mockup`,
             }))}
           />
         </Column>
@@ -149,6 +153,8 @@ export default async function Project({ params }) {
             </Text>
             <Button
               href={post.metadata.link}
+              target="_blank"
+              rel="noopener noreferrer"
               variant="primary"
               size="l"
               prefixIcon="openLink"

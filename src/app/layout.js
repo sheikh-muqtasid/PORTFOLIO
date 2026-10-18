@@ -14,14 +14,39 @@ import { Footer, Header, RouteGuard, Providers } from "@/components";
 import { baseURL, effects, fonts, style, dataStyle, home } from "@/resources";
 
 export async function generateMetadata() {
+  const title = "Sheikh Muqtasid — Custom Websites for Businesses";
+  const description =
+    "Custom-coded, high-performance websites and web applications built with Next.js, React, and Node.js for restaurants, local businesses, and growing startups. Fast, secure, and built to convert.";
+
   return {
-    ...Meta.generate({
-      title: home.title,
-      description: home.description,
-      baseURL: baseURL,
-      path: home.path,
-      image: home.image,
-    }),
+    title,
+    description,
+    metadataBase: new URL(baseURL),
+    alternates: {
+      canonical: "/",
+    },
+    openGraph: {
+      title,
+      description,
+      url: baseURL,
+      siteName: "Sheikh Muqtasid Portfolio",
+      images: [
+        {
+          url: "/images/og/home.jpg",
+          width: 1200,
+          height: 630,
+          alt: "Sheikh Muqtasid — Custom Websites for Businesses",
+        },
+      ],
+      locale: "en_US",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: ["/images/og/home.jpg"],
+    },
     icons: {
       icon: "/images/avatar.jpg",
     },
@@ -35,6 +60,7 @@ export default async function RootLayout({ children }) {
       as="html"
       lang="en"
       fillWidth
+      data-theme="dark"
       className={classNames(
         fonts.heading.variable,
         fonts.body.variable,
@@ -50,7 +76,8 @@ export default async function RootLayout({ children }) {
               (function() {
                 try {
                   const root = document.documentElement;
-                  const defaultTheme = 'system';
+                  root.setAttribute('data-theme', 'dark');
+                  localStorage.setItem('data-theme', 'dark');
                   
                   // Set defaults from config
                   const config = ${JSON.stringify({
@@ -70,30 +97,7 @@ export default async function RootLayout({ children }) {
                   Object.entries(config).forEach(([key, value]) => {
                     root.setAttribute('data-' + key, value);
                   });
-                  
-                  // Resolve theme
-                  const resolveTheme = (themeValue) => {
-                    if (!themeValue || themeValue === 'system') {
-                      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-                    }
-                    return themeValue;
-                  };
-                  
-                  // Apply saved theme
-                  const savedTheme = localStorage.getItem('data-theme');
-                  const resolvedTheme = resolveTheme(savedTheme);
-                  root.setAttribute('data-theme', resolvedTheme);
-                  
-                  // Apply any saved style overrides
-                  const styleKeys = Object.keys(config);
-                  styleKeys.forEach(key => {
-                    const value = localStorage.getItem('data-' + key);
-                    if (value) {
-                      root.setAttribute('data-' + key, value);
-                    }
-                  });
                 } catch (e) {
-                  console.error('Failed to initialize theme:', e);
                   document.documentElement.setAttribute('data-theme', 'dark');
                 }
               })();
@@ -104,58 +108,19 @@ export default async function RootLayout({ children }) {
       <Providers>
         <Column
           as="body"
+          suppressHydrationWarning
           background="page"
           fillWidth
-          style={{ minHeight: "100vh" }}
+          style={{ minHeight: "100vh", backgroundColor: "#0A0A0B" }}
           margin="0"
           padding="0"
           horizontal="center"
         >
-          <RevealFx fill position="absolute">
-            <Background
-              mask={{
-                x: effects.mask.x,
-                y: effects.mask.y,
-                radius: effects.mask.radius,
-                cursor: effects.mask.cursor,
-              }}
-              gradient={{
-                display: effects.gradient.display,
-                opacity: effects.gradient.opacity,
-                x: effects.gradient.x,
-                y: effects.gradient.y,
-                width: effects.gradient.width,
-                height: effects.gradient.height,
-                tilt: effects.gradient.tilt,
-                colorStart: effects.gradient.colorStart,
-                colorEnd: effects.gradient.colorEnd,
-              }}
-              dots={{
-                display: effects.dots.display,
-                opacity: effects.dots.opacity,
-                size: effects.dots.size,
-                color: effects.dots.color,
-              }}
-              grid={{
-                display: effects.grid.display,
-                opacity: effects.grid.opacity,
-                color: effects.grid.color,
-                width: effects.grid.width,
-                height: effects.grid.height,
-              }}
-              lines={{
-                display: effects.lines.display,
-                opacity: effects.lines.opacity,
-                size: effects.lines.size,
-                thickness: effects.lines.thickness,
-                angle: effects.lines.angle,
-                color: effects.lines.color,
-              }}
-            />
-          </RevealFx>
-          <Flex fillWidth minHeight="16" s={{ hide: true }} />
+          {/* Subtle noise grain texture overlay */}
+          <div className="noise-overlay" aria-hidden="true" />
+          
           <Header />
-          <Flex zIndex={0} fillWidth padding="l" horizontal="center" flex={1}>
+          <Flex zIndex={0} fillWidth padding="0" horizontal="center" flex={1}>
             <Flex horizontal="center" fillWidth minHeight="0">
               <RouteGuard>{children}</RouteGuard>
             </Flex>

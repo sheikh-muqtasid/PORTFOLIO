@@ -27,7 +27,7 @@ export const MinimalProjectCard = ({
       <div className="pro-card-image-wrap" style={{ position: "relative", width: "100%", height: "140px" }}>
         <Image
           src={image}
-          alt={title}
+          alt={`${title} project mockup and UI overview`}
           fill
           style={{ objectFit: "cover" }}
         />
@@ -64,12 +64,14 @@ export const MinimalProjectCard = ({
           {link && (
             <Button
               href={link}
+              target="_blank"
+              rel="noopener noreferrer"
               variant="primary"
               size="s"
               style={{ flex: 1 }}
               prefixIcon="openLink"
             >
-              Live Site
+              Live Site ↗
             </Button>
           )}
         </Flex>

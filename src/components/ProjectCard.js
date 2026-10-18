@@ -37,7 +37,7 @@ export const ProjectCard = ({
           aspectRatio="16 / 9"
           items={images.map((image) => ({
             slide: image,
-            alt: title,
+            alt: `${title} project interface preview`,
           }))}
         />
       </Column>
@@ -82,6 +82,8 @@ export const ProjectCard = ({
                     border: "1px solid rgba(255, 255, 255, 0.12)",
                   }}
                   href={link}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   <Text variant="body-strong-m">View Live Site ↗</Text>
                 </SmartLink>
