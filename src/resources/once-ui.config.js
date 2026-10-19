@@ -1,4 +1,4 @@
-import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
+import { Fraunces, Inter, JetBrains_Mono } from "next/font/google";
 
 // IMPORTANT: Replace with your own domain address - it's used for SEO in meta tags and schema
 const baseURL = "https://sheikhmuqtasid.vercel.app";
@@ -9,6 +9,10 @@ const routes = {
   "/work": true,
   "/blog": false,
   "/gallery": false,
+  // Standalone concept restaurant demo sites (render their own chrome; header/footer hide there)
+  "/ember-oak": true,
+  "/casa-fuego": true,
+  "/saffron-smoke": true,
 };
 
 const display = {
@@ -24,7 +28,8 @@ const protectedRoutes = {
 };
 
 // Import and set font for each variant
-const heading = Space_Grotesk({
+// Serif display (Fraunces) pairs with the clean Inter sans for the minimal premium look.
+const heading = Fraunces({
   variable: "--font-heading",
   subsets: ["latin"],
   display: "swap",
@@ -36,7 +41,7 @@ const body = Inter({
   display: "swap",
 });
 
-const label = Space_Grotesk({
+const label = Inter({
   variable: "--font-label",
   subsets: ["latin"],
   display: "swap",
@@ -57,7 +62,7 @@ const fonts = {
 
 // default customization applied to the HTML in the main layout.jsx
 const style = {
-  theme: "dark", // dark | light | system
+  theme: "light", // dark | light | system
   neutral: "slate", // sand | gray | slate | custom
   brand: "indigo", // blue | indigo | violet | magenta | pink | red | orange | yellow | moss | green | emerald | aqua | cyan | custom
   accent: "cyan", // blue | indigo | violet | magenta | pink | red | orange | yellow | moss | green | emerald | aqua | cyan | custom

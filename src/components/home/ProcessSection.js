@@ -3,68 +3,55 @@
 import React from "react";
 import { processSteps } from "@/resources";
 import { FaPhone, FaPenNib, FaCode, FaRocket } from "react-icons/fa6";
+import { SectionHeader } from "./SectionHeader";
 
 const stepIcons = [FaPhone, FaPenNib, FaCode, FaRocket];
 
 export const ProcessSection = () => {
   return (
-    <section id="process" className="w-full scroll-mt-24 py-20 relative">
+    <section id="process" className="w-full scroll-mt-24 py-20 md:py-28 bg-paper">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="flex flex-col items-center text-center mb-16 space-y-3">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-xs font-mono uppercase tracking-widest text-[#D4FF3F]">
-            Transparent Workflow
-          </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white font-heading">
-            Simple, risk-free development process.
-          </h2>
-          <p className="text-slate-400 max-w-2xl text-base sm:text-lg leading-relaxed">
-            You always know exactly what is happening next. No tech jargon, no surprises, and zero hidden costs.
-          </p>
-        </div>
+        <SectionHeader
+          eyebrow="How it works"
+          title="A simple, no-surprises process."
+          copy="You always know what happens next — no jargon, no hidden costs, no waiting in the dark."
+        />
 
-        {/* 4 Steps Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {processSteps.map((step, idx) => {
-            const Icon = stepIcons[idx] || FaCode;
+        <ol className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6 list-none m-0 p-0">
+          {stepIcons.map((Icon, idx) => {
+            const step = processSteps[idx];
+            if (!step) return null;
             return (
-              <div
+              <li
                 key={step.step}
-                className="relative bg-[#121215]/80 hover:bg-[#15161c] border border-white/10 hover:border-[#D4FF3F]/40 rounded-2xl p-7 backdrop-blur-xl transition-all duration-300 hover:shadow-xl hover:-translate-y-1 group flex flex-col justify-between"
+                className="relative bg-surface border border-line rounded-3xl p-7 shadow-[0_10px_36px_rgba(28,25,23,0.05)] hover:shadow-[0_18px_48px_rgba(28,25,23,0.10)] hover:-translate-y-1 hover:border-ember/25 transition-all duration-300 flex flex-col"
               >
-                {/* Step number badge */}
                 <div className="flex items-center justify-between mb-6">
-                  <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#D4FF3F] group-hover:scale-110 group-hover:border-[#D4FF3F]/40 transition-all">
-                    <Icon className="w-5 h-5" />
-                  </div>
-                  <span className="text-2xl font-black font-mono text-slate-600 group-hover:text-[#D4FF3F]/60 transition-colors">
+                  <span className="w-12 h-12 rounded-2xl bg-ember-tint border border-ember/15 flex items-center justify-center text-ember">
+                    <Icon className="w-5 h-5" aria-hidden="true" />
+                  </span>
+                  <span className="font-heading text-3xl font-semibold text-line" aria-hidden="true">
                     {step.step}
                   </span>
                 </div>
-
-                {/* Content */}
-                <div className="space-y-3">
-                  <h3 className="text-xl font-bold text-white group-hover:text-[#D4FF3F] transition-colors">
-                    {step.title}
-                  </h3>
-                  <p className="text-sm text-slate-300 leading-relaxed font-normal">
-                    {step.description}
-                  </p>
-                </div>
-
-                {/* Progress bar accent */}
-                <div className="mt-6 pt-4 border-t border-white/5">
-                  <div className="w-full h-1 bg-white/5 rounded-full overflow-hidden">
+                <h3 className="font-heading text-xl font-semibold text-ink tracking-tight mb-2">
+                  {step.title}
+                </h3>
+                <p className="text-sm text-body leading-relaxed flex-1">
+                  {step.description}
+                </p>
+                <div className="mt-6 pt-5 border-t border-line" aria-hidden="true">
+                  <div className="w-full h-1 bg-cream rounded-full overflow-hidden">
                     <div
-                      className="h-full bg-gradient-to-r from-[#D4FF3F]/40 to-[#D4FF3F]"
+                      className="h-full bg-ember/70 rounded-full"
                       style={{ width: `${(idx + 1) * 25}%` }}
                     />
                   </div>
                 </div>
-              </div>
+              </li>
             );
           })}
-        </div>
+        </ol>
       </div>
     </section>
   );

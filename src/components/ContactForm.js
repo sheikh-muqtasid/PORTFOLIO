@@ -1,20 +1,36 @@
 "use client";
 
 import React, { useState } from "react";
-import { FaCalendarDays, FaEnvelope, FaClock, FaCheck } from "react-icons/fa6";
+import { FaCalendarDays, FaEnvelope, FaClock, FaCheck, FaPaperPlane } from "react-icons/fa6";
 import { person } from "@/resources";
 
-/**
- * CONTACT FORM COMPONENT
- * 
- * BACKEND SETUP INSTRUCTIONS:
- * 1. Formspree: Create a form at https://formspree.io and paste your endpoint into FORMSPREE_ENDPOINT below.
- *    Example: const FORMSPREE_ENDPOINT = "https://formspree.io/f/mqkvnxxx";
- * 2. Getform.io: Create an endpoint at https://getform.io and paste it below.
- * 3. Currently configured with automatic fallback: Displays immediate success feedback to the user,
- *    and provides direct mailto link trigger if backend is not set.
- */
-const FORMSPREE_ENDPOINT = ""; // e.g. "https://formspree.io/f/YOUR_FORM_ID"
+/* ============================================================================
+   CONTACT FORM — HOW TO WIRE UP FORMSPREE (2 minutes, no other code changes)
+   ----------------------------------------------------------------------------
+   1. Go to https://formspree.io/forms, create a free account, click "New Form".
+   2. Formspree gives you an endpoint that looks like:
+         https://formspree.io/f/xqkrndgw
+   3. Replace the YOUR_FORM_ID below with your real form ID:
+         const FORMSPREE_ENDPOINT = "https://formspree.io/f/xqkrndgw";
+      That's it — submissions will POST straight to your Formspree inbox.
+
+   UNTIL YOU DO THIS: the form is NOT dead. It falls back to opening the
+   visitor's email app with their message pre-filled (see handleSubmit below),
+   so no inquiry is ever silently lost.
+   ========================================================================== */
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
+
+/* ============================================================================
+   "BOOK A FREE CALL" LINK — PLACEHOLDER
+   ----------------------------------------------------------------------------
+   Paste your scheduling link (Calendly, Cal.com, etc.) here. While this is
+   empty, the card below renders as a clearly-marked placeholder instead of a
+   dead link.
+   Example: const BOOKING_LINK = "https://calendly.com/your-handle/30min";
+   ========================================================================== */
+const BOOKING_LINK = "";
+
+const isFormspreeConfigured = !FORMSPREE_ENDPOINT.includes("YOUR_FORM_ID");
 
 export const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -25,11 +41,22 @@ export const ContactForm = () => {
   });
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [usedEmailFallback, setUsedEmailFallback] = useState(false);
   const [error, setError] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const openMailtoFallback = () => {
+    const subject = encodeURIComponent(
+      `Project Inquiry: ${formData.projectType} — from ${formData.name}`
+    );
+    const body = encodeURIComponent(
+      `Hi Sheikh,\n\nMy name is ${formData.name} (${formData.email}).\n\nProject type: ${formData.projectType}\n\nProject details:\n${formData.details}\n\nLooking forward to hearing from you!`
+    );
+    window.location.href = `mailto:${person.email}?subject=${subject}&body=${body}`;
   };
 
   const handleSubmit = async (e) => {
@@ -38,133 +65,137 @@ export const ContactForm = () => {
     setError("");
 
     try {
-      if (FORMSPREE_ENDPOINT) {
+      if (isFormspreeConfigured) {
         const response = await fetch(FORMSPREE_ENDPOINT, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
           },
-          body: JSON.stringify(formData),
+          body: JSON.stringify({
+            name: formData.name,
+            email: formData.email,
+            projectType: formData.projectType,
+            details: formData.details,
+          }),
         });
 
-        if (response.ok) {
-          setSubmitted(true);
-          setFormData({ name: "", email: "", projectType: "Business Website", details: "" });
-        } else {
-          throw new Error("Submission failed. Please try direct email.");
+        if (!response.ok) {
+          throw new Error(
+            "Something went wrong sending your message. Please email me directly instead."
+          );
         }
+        setUsedEmailFallback(false);
       } else {
-        // Fallback: Simulate submission, trigger mailto client, and show success confirmation
-        await new Promise((resolve) => setTimeout(resolve, 600));
-        
-        const subject = encodeURIComponent(`Project Inquiry: ${formData.projectType} from ${formData.name}`);
-        const body = encodeURIComponent(
-          `Hi Sheikh,\n\nMy name is ${formData.name} (${formData.email}).\n\nProject Type: ${formData.projectType}\n\nProject Details:\n${formData.details}\n\nLooking forward to hearing from you!`
-        );
-        
-        // Open default mail client in background
-        const mailtoLink = `mailto:${person.email}?subject=${subject}&body=${body}`;
-        const mailWindow = window.open(mailtoLink, "_blank");
-        if (mailWindow) mailWindow.close();
-
-        setSubmitted(true);
-        setFormData({ name: "", email: "", projectType: "Business Website", details: "" });
+        // Formspree not configured yet — hand the message to the visitor's
+        // email app so the inquiry still reaches sheikhmuqtasid@gmail.com.
+        openMailtoFallback();
+        setUsedEmailFallback(true);
       }
+
+      setSubmitted(true);
+      setFormData({ name: "", email: "", projectType: "Business Website", details: "" });
     } catch (err) {
-      setError(err.message || "Something went wrong. Please reach out via email directly.");
+      setError(err.message || "Something went wrong. Please email me directly.");
     } finally {
       setSubmitting(false);
     }
   };
 
   return (
-    <section id="contact" className="w-full scroll-mt-24 pt-20 pb-28 sm:pb-36 relative">
-      {/* Background ambient lighting */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[400px] bg-[#D4FF3F]/5 rounded-full blur-3xl pointer-events-none" />
-
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
+    <section id="contact" className="w-full scroll-mt-24 pt-20 md:pt-28 pb-24 md:pb-32 bg-cream/60 relative overflow-hidden">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 relative">
         {/* Eyebrow */}
-        <div className="flex items-center justify-center gap-2 mb-3">
-          <span className="w-2 h-2 rounded-full bg-[#D4FF3F] animate-pulse" />
-          <span className="text-xs uppercase font-mono tracking-widest text-[#D4FF3F] font-semibold">
-            Let&apos;s Build Together
+        <div className="flex items-center justify-center gap-2 mb-4">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-ember opacity-60" />
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-ember" />
+          </span>
+          <span className="text-xs uppercase font-semibold tracking-[0.14em] text-ember">
+            Let&rsquo;s build together
           </span>
         </div>
 
-        {/* Section Headline */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-4">
-            Have a project in mind? Let&apos;s talk.
+        {/* Headline */}
+        <div className="text-center mb-10 md:mb-12">
+          <h2 className="font-heading font-semibold tracking-tight text-ink text-[clamp(2rem,4.5vw,3.2rem)] leading-[1.1] mb-4">
+            Have a project in mind? Let&rsquo;s talk.
           </h2>
-          <p className="text-base sm:text-lg text-slate-400 max-w-xl mx-auto leading-relaxed">
-            Tell me about your business goals. You will receive a response with timeline estimates and next steps within 24 hours.
+          <p className="text-body text-base sm:text-lg max-w-xl mx-auto leading-relaxed">
+            Tell me about your goals and I&rsquo;ll reply with next steps and a tailored
+            estimate — <strong className="text-ink font-semibold">within 24 hours</strong>.
           </p>
         </div>
 
-        {/* Form Card */}
-        <div className="bg-[#121215]/80 backdrop-blur-xl border border-white/10 rounded-2xl sm:rounded-3xl p-6 sm:p-10 shadow-2xl relative overflow-hidden">
-          {/* Accent glow on top border */}
-          <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#D4FF3F]/60 to-transparent" />
+        {/* Form card */}
+        <div className="bg-surface border border-line rounded-[1.75rem] p-6 sm:p-10 shadow-[0_24px_70px_rgba(28,25,23,0.10)] relative overflow-hidden">
+          <div
+            className="absolute top-0 left-0 right-0 h-1"
+            aria-hidden="true"
+            style={{ background: "linear-gradient(90deg, transparent, #a63a0a 30%, #a63a0a 70%, transparent)" }}
+          />
 
           {submitted ? (
-            <div className="py-12 px-4 text-center space-y-4">
-              <div className="w-16 h-16 rounded-full bg-[#D4FF3F]/10 border border-[#D4FF3F]/40 flex items-center justify-center mx-auto text-[#D4FF3F] mb-6">
-                <FaCheck className="w-8 h-8" />
+            <div className="py-10 px-4 text-center space-y-4">
+              <div className="w-16 h-16 rounded-full bg-ember-tint border border-ember/25 flex items-center justify-center mx-auto text-ember mb-4">
+                <FaCheck className="w-7 h-7" aria-hidden="true" />
               </div>
-              <h3 className="text-2xl font-bold text-white">Message Sent Successfully!</h3>
-              <p className="text-slate-300 max-w-md mx-auto text-sm sm:text-base leading-relaxed">
-                Thank you for reaching out! Sheikh Muqtasid will review your project details and get back to you within 24 hours.
+              <h3 className="font-heading text-2xl font-semibold text-ink">
+                {usedEmailFallback ? "Opening your email app…" : "Message sent!"}
+              </h3>
+              <p className="text-body max-w-md mx-auto text-sm sm:text-base leading-relaxed">
+                {usedEmailFallback
+                  ? "Your email app should now open with your message pre-filled — just hit send and it lands directly in my inbox. I reply within 24 hours."
+                  : "Thanks for reaching out! I'll review your project details and get back to you within 24 hours."}
               </p>
               <button
                 type="button"
                 onClick={() => setSubmitted(false)}
-                className="mt-6 inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-xs uppercase font-bold tracking-wider bg-white/10 hover:bg-white/20 text-white transition-all"
+                className="mt-4 inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-xs uppercase font-bold tracking-wider bg-cream border border-line text-ink hover:border-ember/40 transition-all cursor-pointer"
               >
-                Send Another Message
+                Send another message
               </button>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                {/* Name */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div className="space-y-2">
-                  <label htmlFor="contact-name" className="block text-xs uppercase font-mono tracking-wider text-slate-300 font-medium">
-                    Your Name <span className="text-[#D4FF3F]">*</span>
+                  <label htmlFor="contact-name" className="block text-xs uppercase font-semibold tracking-[0.1em] text-body">
+                    Your name <span className="text-ember" aria-hidden="true">*</span>
                   </label>
                   <input
                     id="contact-name"
                     name="name"
                     type="text"
                     required
+                    autoComplete="name"
                     value={formData.name}
                     onChange={handleChange}
                     placeholder="Alex Morgan"
-                    className="w-full px-4 py-3.5 rounded-xl bg-white/[0.04] border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-[#D4FF3F] focus:ring-1 focus:ring-[#D4FF3F] transition-all"
+                    className="w-full px-4 py-3.5 rounded-xl bg-paper border border-line text-ink placeholder:text-muted text-sm focus:outline-none focus:border-ember focus:ring-2 focus:ring-ember/25 transition-all"
                   />
                 </div>
 
-                {/* Email */}
                 <div className="space-y-2">
-                  <label htmlFor="contact-email" className="block text-xs uppercase font-mono tracking-wider text-slate-300 font-medium">
-                    Email Address <span className="text-[#D4FF3F]">*</span>
+                  <label htmlFor="contact-email" className="block text-xs uppercase font-semibold tracking-[0.1em] text-body">
+                    Email address <span className="text-ember" aria-hidden="true">*</span>
                   </label>
                   <input
                     id="contact-email"
                     name="email"
                     type="email"
                     required
+                    autoComplete="email"
                     value={formData.email}
                     onChange={handleChange}
-                    placeholder="alex@yourcompany.com"
-                    className="w-full px-4 py-3.5 rounded-xl bg-white/[0.04] border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-[#D4FF3F] focus:ring-1 focus:ring-[#D4FF3F] transition-all"
+                    placeholder="alex@yourrestaurant.com"
+                    className="w-full px-4 py-3.5 rounded-xl bg-paper border border-line text-ink placeholder:text-muted text-sm focus:outline-none focus:border-ember focus:ring-2 focus:ring-ember/25 transition-all"
                   />
                 </div>
               </div>
 
-              {/* Project Type */}
               <div className="space-y-2">
-                <label htmlFor="contact-projectType" className="block text-xs uppercase font-mono tracking-wider text-slate-300 font-medium">
+                <label htmlFor="contact-projectType" className="block text-xs uppercase font-semibold tracking-[0.1em] text-body">
                   What are you looking to build?
                 </label>
                 <select
@@ -172,101 +203,113 @@ export const ContactForm = () => {
                   name="projectType"
                   value={formData.projectType}
                   onChange={handleChange}
-                  className="w-full px-4 py-3.5 rounded-xl bg-[#161720] border border-white/10 text-white text-sm focus:outline-none focus:border-[#D4FF3F] focus:ring-1 focus:ring-[#D4FF3F] transition-all"
+                  className="w-full px-4 py-3.5 rounded-xl bg-paper border border-line text-ink text-sm focus:outline-none focus:border-ember focus:ring-2 focus:ring-ember/25 transition-all"
                 >
-                  <option value="Business Website">Business Website (24/7 Salesperson)</option>
-                  <option value="Restaurant Website">Restaurant Website (Digital Menu & Reservations)</option>
-                  <option value="Web App & Dashboard">Web App & Dashboard (Custom SaaS / Portal)</option>
-                  <option value="Mobile App">Mobile App (Flutter iOS & Android)</option>
-                  <option value="Website Redesign">Website Redesign & Speed Optimization</option>
-                  <option value="Other Project">Other Custom Software Project</option>
+                  <option value="Restaurant Website">Restaurant Website (menu, reservations &amp; more)</option>
+                  <option value="Business Website">Business Website</option>
+                  <option value="Web App & Dashboard">Web App &amp; Dashboard</option>
+                  <option value="Mobile App">Mobile App (Flutter iOS &amp; Android)</option>
+                  <option value="Website Redesign">Website Redesign</option>
+                  <option value="Other Project">Something else</option>
                 </select>
               </div>
 
-              {/* Project Details */}
               <div className="space-y-2">
-                <label htmlFor="contact-details" className="block text-xs uppercase font-mono tracking-wider text-slate-300 font-medium">
-                  Project Details & Goals <span className="text-[#D4FF3F]">*</span>
+                <label htmlFor="contact-details" className="block text-xs uppercase font-semibold tracking-[0.1em] text-body">
+                  Project details &amp; goals <span className="text-ember" aria-hidden="true">*</span>
                 </label>
                 <textarea
                   id="contact-details"
                   name="details"
-                  rows={4}
+                  rows={5}
                   required
                   value={formData.details}
                   onChange={handleChange}
-                  placeholder="Tell me about your business, what problem this website should solve, and any target launch date..."
-                  className="w-full px-4 py-3.5 rounded-xl bg-white/[0.04] border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-[#D4FF3F] focus:ring-1 focus:ring-[#D4FF3F] transition-all resize-y"
+                  placeholder="Tell me about your restaurant or business, what the website should do (online menu, reservations, takeaway orders…), and any target launch date."
+                  className="w-full px-4 py-3.5 rounded-xl bg-paper border border-line text-ink placeholder:text-muted text-sm focus:outline-none focus:border-ember focus:ring-2 focus:ring-ember/25 transition-all resize-y min-h-[120px]"
                 />
               </div>
 
               {error && (
-                <div className="p-3.5 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 text-xs">
+                <p role="alert" className="p-4 rounded-xl bg-red-50 border border-red-200 text-red-800 text-sm">
                   {error}
-                </div>
+                </p>
               )}
 
-              {/* Submit Button */}
               <button
                 type="submit"
                 disabled={submitting}
-                className="w-full py-4 px-6 rounded-xl text-sm uppercase tracking-wider font-bold bg-[#D4FF3F] text-[#0A0A0B] hover:bg-[#c6f032] hover:shadow-[0_0_25px_rgba(212,255,63,0.4)] transition-all duration-300 transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer"
+                className="w-full py-4 px-6 rounded-full text-sm uppercase tracking-wider font-bold bg-ember text-white hover:bg-ember-dark transition-all duration-300 hover:-translate-y-0.5 shadow-[0_12px_28px_rgba(166,58,10,0.28)] disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ember"
               >
-                {submitting ? (
-                  <span>Sending Message...</span>
-                ) : (
-                  <>
-                    <span>Send Project Inquiry</span>
-                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                    </svg>
-                  </>
-                )}
+                <FaPaperPlane className="w-4 h-4" aria-hidden="true" />
+                {submitting ? <span>Sending…</span> : <span>Send project inquiry</span>}
               </button>
+
+              <p className="text-center text-xs text-muted">
+                Prefer email? Write to{" "}
+                <a
+                  href={`mailto:${person.email}`}
+                  className="text-ember font-semibold underline decoration-ember/40 underline-offset-4 hover:decoration-ember rounded"
+                >
+                  {person.email}
+                </a>
+              </p>
             </form>
           )}
 
-          {/* Quick contact channels & promise */}
-          <div className="mt-8 pt-8 border-t border-white/10 grid grid-cols-1 sm:grid-cols-3 gap-4 text-center sm:text-left">
-            {/* Direct Email */}
+          {/* Direct channels */}
+          <div className="mt-8 pt-8 border-t border-line grid grid-cols-1 sm:grid-cols-3 gap-4">
             <a
               href={`mailto:${person.email}`}
-              className="p-3 rounded-xl bg-white/[0.02] hover:bg-white/[0.06] border border-white/5 hover:border-white/15 transition-all flex items-center gap-3 group"
+              className="p-4 rounded-2xl bg-paper border border-line hover:border-ember/40 transition-all flex items-center gap-3 group"
             >
-              <div className="w-9 h-9 rounded-lg bg-white/5 group-hover:bg-[#D4FF3F]/10 flex items-center justify-center text-slate-300 group-hover:text-[#D4FF3F] transition-colors">
+              <span className="w-10 h-10 rounded-xl bg-ember-tint flex items-center justify-center text-ember flex-shrink-0" aria-hidden="true">
                 <FaEnvelope className="w-4 h-4" />
-              </div>
-              <div className="overflow-hidden text-left">
-                <div className="text-[11px] text-slate-400 font-mono uppercase">Direct Email</div>
-                <div className="text-xs text-white font-medium truncate">{person.email}</div>
-              </div>
+              </span>
+              <span className="min-w-0">
+                <span className="block text-[11px] text-muted font-semibold uppercase tracking-wider">Direct email</span>
+                <span className="block text-xs text-ink font-medium truncate">{person.email}</span>
+              </span>
             </a>
 
-            {/* Book a Call */}
-            <a
-              href="https://calendly.com/sheikhmuqtasid/30min"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-3 rounded-xl bg-white/[0.02] hover:bg-white/[0.06] border border-white/5 hover:border-white/15 transition-all flex items-center gap-3 group"
-            >
-              <div className="w-9 h-9 rounded-lg bg-white/5 group-hover:bg-[#D4FF3F]/10 flex items-center justify-center text-slate-300 group-hover:text-[#D4FF3F] transition-colors">
-                <FaCalendarDays className="w-4 h-4" />
+            {BOOKING_LINK ? (
+              <a
+                href={BOOKING_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-4 rounded-2xl bg-paper border border-line hover:border-ember/40 transition-all flex items-center gap-3 group"
+              >
+                <span className="w-10 h-10 rounded-xl bg-ember-tint flex items-center justify-center text-ember flex-shrink-0" aria-hidden="true">
+                  <FaCalendarDays className="w-4 h-4" />
+                </span>
+                <span className="min-w-0">
+                  <span className="block text-[11px] text-muted font-semibold uppercase tracking-wider">Book a free call</span>
+                  <span className="block text-xs text-ink font-medium">Pick a time that suits you ↗</span>
+                </span>
+              </a>
+            ) : (
+              <div
+                className="p-4 rounded-2xl bg-paper border border-dashed border-ember/30 flex items-center gap-3"
+                title="Add your scheduling URL in ContactForm.js → BOOKING_LINK"
+              >
+                <span className="w-10 h-10 rounded-xl bg-ember-tint flex items-center justify-center text-ember flex-shrink-0" aria-hidden="true">
+                  <FaCalendarDays className="w-4 h-4" />
+                </span>
+                <span className="min-w-0">
+                  <span className="block text-[11px] text-muted font-semibold uppercase tracking-wider">Book a free call</span>
+                  <span className="block text-xs text-ember font-semibold">[scheduling link placeholder]</span>
+                </span>
               </div>
-              <div className="overflow-hidden text-left">
-                <div className="text-[11px] text-slate-400 font-mono uppercase">Schedule Call</div>
-                <div className="text-xs text-white font-medium truncate">Free 20-min consult ↗</div>
-              </div>
-            </a>
+            )}
 
-            {/* Turnaround Promise */}
-            <div className="p-3 rounded-xl bg-white/[0.02] border border-white/5 flex items-center gap-3">
-              <div className="w-9 h-9 rounded-lg bg-[#D4FF3F]/10 flex items-center justify-center text-[#D4FF3F]">
+            <div className="p-4 rounded-2xl bg-paper border border-line flex items-center gap-3">
+              <span className="w-10 h-10 rounded-xl bg-ember-tint flex items-center justify-center text-ember flex-shrink-0" aria-hidden="true">
                 <FaClock className="w-4 h-4" />
-              </div>
-              <div className="text-left">
-                <div className="text-[11px] text-slate-400 font-mono uppercase">Response Guarantee</div>
-                <div className="text-xs text-[#D4FF3F] font-semibold">Replies within 24 hours</div>
-              </div>
+              </span>
+              <span>
+                <span className="block text-[11px] text-muted font-semibold uppercase tracking-wider">Response promise</span>
+                <span className="block text-xs text-ember font-semibold">Replies within 24 hours</span>
+              </span>
             </div>
           </div>
         </div>

@@ -4,26 +4,31 @@ import React, { useRef, useMemo, useEffect, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
-// Interactive 3D Crystal Centerpiece
-function CrystalGeometry() {
+// Crafted porcelain centerpiece — reacts to the mouse with a gentle parallax
+// sway. It never spins continuously: idle motion is a small sine oscillation.
+function CeramicGeometry() {
   const meshRef = useRef();
   const wireRef = useRef();
-  const ringsRef = useRef();
+  const ringRef = useRef();
 
-  useFrame((state, delta) => {
+  useFrame((state) => {
     const time = state.clock.getElapsedTime();
     const px = state.pointer.x;
     const py = state.pointer.y;
 
+    // Gentle idle sway (±0.07 rad) + subtle mouse parallax
+    const swayX = Math.sin(time * 0.4) * 0.06;
+    const swayY = Math.cos(time * 0.3) * 0.07;
+
     if (meshRef.current) {
       meshRef.current.rotation.x = THREE.MathUtils.lerp(
         meshRef.current.rotation.x,
-        py * 0.3 + time * 0.18,
+        py * 0.28 + swayX,
         0.05
       );
       meshRef.current.rotation.y = THREE.MathUtils.lerp(
         meshRef.current.rotation.y,
-        px * 0.35 + time * 0.25,
+        px * 0.32 + swayY,
         0.05
       );
     }
@@ -31,68 +36,67 @@ function CrystalGeometry() {
     if (wireRef.current) {
       wireRef.current.rotation.x = THREE.MathUtils.lerp(
         wireRef.current.rotation.x,
-        -py * 0.25 - time * 0.12,
+        -py * 0.22 - swayX * 0.8,
         0.05
       );
       wireRef.current.rotation.y = THREE.MathUtils.lerp(
         wireRef.current.rotation.y,
-        -px * 0.3 - time * 0.16,
+        -px * 0.26 - swayY * 0.8,
         0.05
       );
     }
 
-    if (ringsRef.current) {
-      ringsRef.current.rotation.z = time * 0.08;
-      ringsRef.current.rotation.x = 0.5 + Math.sin(time * 0.2) * 0.1;
+    if (ringRef.current) {
+      ringRef.current.rotation.z = Math.sin(time * 0.15) * 0.12;
+      ringRef.current.rotation.x = 0.5 + Math.sin(time * 0.2) * 0.08;
     }
   });
 
   return (
     <group>
-      {/* Inner faceted crystal */}
+      {/* Inner faceted porcelain form */}
       <mesh ref={meshRef}>
         <icosahedronGeometry args={[1.55, 0]} />
         <meshPhysicalMaterial
-          color="#161722"
-          roughness={0.12}
-          metalness={0.88}
-          clearcoat={1}
-          clearcoatRoughness={0.1}
-          reflectivity={0.9}
+          color="#EDE4D4"
+          roughness={0.38}
+          metalness={0.12}
+          clearcoat={0.7}
+          clearcoatRoughness={0.35}
           flatShading={true}
         />
       </mesh>
 
-      {/* Outer wireframe geometric lattice */}
+      {/* Outer wireframe lattice in the ember accent */}
       <mesh ref={wireRef}>
         <icosahedronGeometry args={[1.88, 1]} />
         <meshStandardMaterial
-          color="#D4FF3F"
+          color="#A63A0A"
           wireframe={true}
           transparent={true}
-          opacity={0.32}
-          roughness={0.2}
-          metalness={0.8}
+          opacity={0.3}
+          roughness={0.4}
+          metalness={0.4}
         />
       </mesh>
 
-      {/* Orbital accent ring */}
-      <mesh ref={ringsRef}>
-        <torusGeometry args={[2.3, 0.02, 16, 64]} />
+      {/* Thin orbital accent ring */}
+      <mesh ref={ringRef}>
+        <torusGeometry args={[2.3, 0.018, 16, 72]} />
         <meshStandardMaterial
-          color="#D4FF3F"
-          emissive="#D4FF3F"
-          emissiveIntensity={0.6}
-          roughness={0.2}
-          metalness={0.9}
+          color="#A63A0A"
+          emissive="#A63A0A"
+          emissiveIntensity={0.45}
+          roughness={0.4}
+          metalness={0.6}
         />
       </mesh>
     </group>
   );
 }
 
-// Procedural floating particle constellation
-function ParticleField({ count = 90 }) {
+// Soft procedural particle constellation in warm neutrals
+function ParticleField({ count = 70 }) {
   const pointsRef = useRef();
 
   const [positions] = useMemo(() => {
@@ -112,24 +116,21 @@ function ParticleField({ count = 90 }) {
   useFrame((state) => {
     if (pointsRef.current) {
       const t = state.clock.getElapsedTime();
-      pointsRef.current.rotation.y = t * 0.04;
-      pointsRef.current.rotation.x = Math.sin(t * 0.03) * 0.08;
+      pointsRef.current.rotation.y = Math.sin(t * 0.05) * 0.15;
+      pointsRef.current.rotation.x = Math.sin(t * 0.04) * 0.08;
     }
   });
 
   return (
     <points ref={pointsRef}>
       <bufferGeometry>
-        <bufferAttribute
-          attach="attributes-position"
-          args={[positions, 3]}
-        />
+        <bufferAttribute attach="attributes-position" args={[positions, 3]} />
       </bufferGeometry>
       <pointsMaterial
-        size={0.06}
-        color="#D4FF3F"
+        size={0.055}
+        color="#B9A586"
         transparent={true}
-        opacity={0.65}
+        opacity={0.7}
         sizeAttenuation={true}
       />
     </points>
@@ -156,8 +157,10 @@ export default function Hero3DScene() {
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-[360px] sm:h-[440px] md:h-[500px] flex items-center justify-center"
+      className="relative w-full h-[320px] sm:h-[420px] md:h-[480px] flex items-center justify-center"
       style={{ touchAction: "none" }}
+      role="img"
+      aria-label="Interactive 3D geometric sculpture that gently follows the cursor"
     >
       <Canvas
         camera={{ position: [0, 0, 5.2], fov: 45 }}
@@ -170,16 +173,16 @@ export default function Hero3DScene() {
         }}
         style={{ pointerEvents: "auto" }}
       >
-        <ambientLight intensity={0.8} />
-        {/* Electric Lime rim light */}
-        <pointLight position={[3.5, 3.5, 3]} color="#D4FF3F" intensity={3.5} />
-        {/* Electric Indigo fill light */}
-        <pointLight position={[-4, -3, -2]} color="#6366F1" intensity={2.8} />
-        {/* Soft overhead key */}
-        <directionalLight position={[0, 6, 4]} intensity={1.2} />
+        <ambientLight intensity={1.5} />
+        {/* Warm key light */}
+        <pointLight position={[3.5, 3.5, 3]} color="#FFF6E8" intensity={4} />
+        {/* Ember rim light */}
+        <pointLight position={[-4, -3, -2]} color="#D9822B" intensity={2.2} />
+        {/* Soft overhead fill */}
+        <directionalLight position={[0, 6, 4]} intensity={1.4} />
 
-        <CrystalGeometry />
-        <ParticleField count={80} />
+        <CeramicGeometry />
+        <ParticleField count={70} />
       </Canvas>
     </div>
   );

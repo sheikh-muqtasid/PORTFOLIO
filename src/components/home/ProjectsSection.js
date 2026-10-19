@@ -4,17 +4,35 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Tilt from "react-parallax-tilt";
-import { FaArrowUpRightFromSquare, FaBookOpen } from "react-icons/fa6";
+import { FaArrowUpRightFromSquare, FaBookOpen, FaFlask } from "react-icons/fa6";
+import { SectionHeader } from "./SectionHeader";
 
+/**
+ * Live URLs are taken verbatim from each project's MDX frontmatter (`link:` field).
+ * A "Live Site" button is rendered ONLY where a real URL exists in the MDX.
+ */
 const projects = [
+  {
+    id: "qrplate",
+    title: "QRPlate – Digital Menu Platform",
+    isFeatured: true,
+    outcome:
+      "QR-based digital menus built for restaurants: owners update dishes and prices instantly, diners scan a code and browse the full menu from their phones.",
+    mockup: "/images/projects/project-02/qr-plate-mockup.png",
+    alt: "QRPlate restaurant digital menu platform — QR code menus and restaurant owner dashboard mockup",
+    tags: ["Next.js", "MERN Stack", "Cloudinary", "B2B SaaS"],
+    liveUrl: null,
+    isLive: false,
+    caseStudyUrl: "/work/qrplate",
+  },
   {
     id: "mental-wellbeing-app",
     title: "Serenity Speak – Mental Wellbeing App",
-    isFeatured: true,
+    isFeatured: false,
     outcome:
-      "Cross-platform wellness app providing guided sessions, stress-level tracking, and personalized habit routines to support daily mental health.",
+      "Cross-platform wellness app with guided sessions, stress-level tracking, and daily habit routines that support mental health.",
     mockup: "/images/projects/project-01/mental-wellbeing-app.png",
-    alt: "Serenity Speak Mental Wellbeing cross-platform mobile application interface mockup",
+    alt: "Serenity Speak mental wellbeing cross-platform mobile app interface mockup",
     tags: ["Flutter", "Dart", "Firebase", "Cross-Platform"],
     liveUrl: "https://github.com/sheikh-muqtasid/mental-wellbeing-app/releases/tag/apk",
     liveLabel: "Live App (APK)",
@@ -22,30 +40,17 @@ const projects = [
     caseStudyUrl: "/work/mental-wellbeing-app",
   },
   {
-    id: "qrplate",
-    title: "QRPlate – Digital Menu Platform",
-    isFeatured: false,
-    outcome:
-      "Digital menu platform that lets restaurants replace paper menus with instant QR codes customers scan at the table.",
-    mockup: "/images/projects/project-02/qr-plate-mockup.png",
-    alt: "QRPlate digital restaurant menu and table ordering dashboard mockup",
-    tags: ["Next.js", "MERN Stack", "Cloudinary", "B2B SaaS"],
-    liveUrl: null,
-    isLive: false,
-    caseStudyUrl: "/work/qrplate",
-  },
-  {
     id: "dr-oduntan-medical",
     title: "Doctor Medical Portal",
     isFeatured: false,
     outcome:
-      "Production healthcare web platform enabling patients to schedule online consultations and access medical guidance with ease.",
+      "Production healthcare platform where patients book online consultations and explore medical services in a clean, reassuring interface.",
     mockup: "/images/projects/dr-oduntan/mockup.jpg",
-    alt: "Doctor Medical Portal appointment scheduling and patient consultation interface mockup",
+    alt: "Doctor medical portal — online consultation booking and patient information interface mockup",
     tags: ["React", "Next.js", "Node.js", "Healthcare"],
     liveUrl: "https://drod.petalwebdev.com/",
-    liveLabel: "Live Site (Offline)",
-    isLive: false, // marked clearly since 503 was returned on verification
+    liveLabel: "Live Site",
+    isLive: true,
     caseStudyUrl: "/work/dr-oduntan-medical",
   },
   {
@@ -53,9 +58,9 @@ const projects = [
     title: "UAEprop – Real Estate Marketplace",
     isFeatured: false,
     outcome:
-      "High-performance real estate marketplace connecting buyers and renters across the UAE with instant search and visual media optimization.",
+      "High-performance property marketplace connecting buyers and renters with instant search, rich listings, and automated image optimization.",
     mockup: "/images/projects/project-03/ua-prop-mockup.png",
-    alt: "UAEprop modern real estate marketplace and property discovery platform mockup",
+    alt: "UAEprop real estate marketplace — property search and listing interface mockup",
     tags: ["Next.js 16", "React 19", "MongoDB", "Cloudinary"],
     liveUrl: "https://pak-prop-user-frontend.vercel.app/",
     liveLabel: "Live Site",
@@ -67,10 +72,10 @@ const projects = [
     title: "Dental Suite – Clinic Management System",
     isFeatured: false,
     outcome:
-      "Centralized clinic workflow platform helping dental practices organize patient records, appointments, and treatment history securely.",
+      "Centralized clinic platform helping dental practices organize patient records, appointments, and treatment history securely.",
     mockup: "/images/projects/dental-suite/clinic-mockup.png",
-    alt: "Dental Suite dental clinic workflow and patient management dashboard mockup",
-    tags: ["React.js", "Express", "MongoDB", "Clinic ERP"],
+    alt: "Dental Suite clinic management system — patient records and appointment scheduling dashboard mockup",
+    tags: ["React", "Express", "MongoDB", "Clinic ERP"],
     liveUrl: null,
     isLive: false,
     caseStudyUrl: "/work/dental-suite",
@@ -80,10 +85,10 @@ const projects = [
     title: "Visage – Enterprise Management Dashboard",
     isFeatured: false,
     outcome:
-      "Enterprise ERP dashboard that centralizes operations, logistics, and revenue tracking into real-time interactive business analytics.",
+      "Enterprise ERP dashboard centralizing operations, logistics, and revenue tracking into real-time interactive analytics.",
     mockup: "/images/projects/visage/dashboard-mockup.png",
-    alt: "Visage enterprise ERP management and business analytics dashboard mockup",
-    tags: ["React.js", "PrimeReact", "REST APIs", "Analytics"],
+    alt: "Visage enterprise management dashboard — business analytics and operations overview mockup",
+    tags: ["React", "PrimeReact", "REST APIs", "Analytics"],
     liveUrl: "https://visage-soap.vercel.app/",
     liveLabel: "Live Site",
     isLive: true,
@@ -94,9 +99,9 @@ const projects = [
     title: "Royal Snooker – Club Management SaaS",
     isFeatured: false,
     outcome:
-      "All-in-one club management SaaS featuring a live table occupancy grid, integrated POS system, and automated membership tracking.",
+      "All-in-one club management SaaS with a live table occupancy grid, integrated POS, and automated membership tracking.",
     mockup: "/images/projects/snooker/cover.png",
-    alt: "Royal Snooker club management SaaS live table grid and POS dashboard mockup",
+    alt: "Royal Snooker club management SaaS — live table grid and point-of-sale dashboard mockup",
     tags: ["React", "Next.js", "Redux", "POS SaaS"],
     liveUrl: "https://saa-s-snooker-front-end.vercel.app",
     liveLabel: "Live Site",
@@ -105,206 +110,244 @@ const projects = [
   },
 ];
 
+// Fictional restaurant demo sites — concept builds that show what a finished
+// restaurant website can look like. Thumbnails live in public/demos/*/hero.jpg.
+const conceptBuilds = [
+  {
+    id: "ember-oak",
+    name: "Ember & Oak",
+    route: "/ember-oak",
+    thumb: "/demos/ember-oak/hero.jpg",
+    alt: "Ember and Oak modern American steakhouse concept website — dining room hero image",
+    blurb: "Modern American steakhouse concept: full menu, online reservations, gallery, hours & location.",
+    features: ["Full menu", "Online reservations", "Gallery", "Hours & location"],
+  },
+  {
+    id: "casa-fuego",
+    name: "Casa Fuego",
+    route: "/casa-fuego",
+    thumb: "/demos/casa-fuego/hero.jpg",
+    alt: "Casa Fuego Mexican taqueria and cantina concept website — vibrant interior hero image",
+    blurb: "Mexican taqueria & cantina concept: full menu, reservations, hours & location.",
+    features: ["Full menu", "Reservations", "Hours & location"],
+  },
+  {
+    id: "saffron-smoke",
+    name: "Saffron & Smoke",
+    route: "/saffron-smoke",
+    thumb: "/demos/saffron-smoke/hero.jpg",
+    alt: "Saffron and Smoke Pakistani and Indian fine dining concept website — elegant plating hero image",
+    blurb: "Pakistani/Indian fine dining concept: full menu, reservations, gallery.",
+    features: ["Full menu", "Reservations", "Gallery"],
+  },
+];
+
+const tiltProps = {
+  tiltMaxAngleX: 5,
+  tiltMaxAngleY: 5,
+  perspective: 1100,
+  transitionSpeed: 1100,
+  scale: 1.01,
+  glareEnable: true,
+  glareMaxOpacity: 0.08,
+  glareColor: "#ffffff",
+  glareBorderRadius: "1.5rem",
+};
+
+function ProjectButtons({ project, compact = false }) {
+  const btn = compact ? "px-4 py-2 text-[11px]" : "px-5 py-2.5 text-xs";
+  return (
+    <div className="flex flex-wrap items-center gap-3">
+      <Link
+        href={project.caseStudyUrl}
+        className={`inline-flex items-center gap-2 ${btn} rounded-full font-bold uppercase tracking-wider bg-white text-ink border border-line hover:border-ink/40 shadow-sm transition-all`}
+      >
+        <FaBookOpen className="w-3.5 h-3.5 text-ember" aria-hidden="true" />
+        <span>Case Study</span>
+      </Link>
+      {project.liveUrl && project.isLive && (
+        <a
+          href={project.liveUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={`inline-flex items-center gap-2 ${btn} rounded-full font-bold uppercase tracking-wider bg-ember text-white hover:bg-ember-dark shadow-[0_8px_20px_rgba(166,58,10,0.25)] transition-all`}
+        >
+          <span>{project.liveLabel || "Live Site"}</span>
+          <FaArrowUpRightFromSquare className="w-3 h-3" aria-hidden="true" />
+        </a>
+      )}
+    </div>
+  );
+}
+
 export const ProjectsSection = () => {
   const featuredProject = projects[0];
   const gridProjects = projects.slice(1);
 
   return (
-    <section id="work" className="w-full scroll-mt-24 py-20 relative">
+    <section id="work" className="w-full scroll-mt-24 py-20 md:py-28 bg-cream/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="flex flex-col items-center text-center mb-16 space-y-3">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-xs font-mono uppercase tracking-widest text-[#D4FF3F]">
-            Selected Work
-          </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white font-heading">
-            Proven results shipped to production.
-          </h2>
-          <p className="text-slate-400 max-w-2xl text-base sm:text-lg leading-relaxed">
-            7 real-world projects built with custom architecture — fast loading, mobile-first, and engineered for conversion.
-          </p>
-        </div>
+        <SectionHeader
+          eyebrow="Selected work"
+          title="Real projects, shipped to production."
+          copy="Seven custom-built products — fast-loading, mobile-first, and engineered to convert visitors into customers."
+        />
 
-        {/* 1. Featured Project Card (Large Display) */}
-        <div className="mb-12">
-          <Tilt
-            tiltMaxAngleX={4}
-            tiltMaxAngleY={4}
-            perspective={1200}
-            transitionSpeed={1200}
-            scale={1.01}
-            glareEnable={true}
-            glareMaxOpacity={0.12}
-            glareColor="#ffffff"
-            glareBorderRadius="1.5rem"
-            className="w-full"
-          >
-            <div className="relative bg-[#121215]/90 border border-white/10 hover:border-[#D4FF3F]/40 rounded-3xl p-6 sm:p-10 backdrop-blur-xl transition-all duration-300 shadow-2xl overflow-hidden group">
-              {/* Background ambient lighting */}
-              <div className="absolute top-0 right-0 w-96 h-96 bg-[#D4FF3F]/10 rounded-full blur-3xl pointer-events-none group-hover:bg-[#D4FF3F]/15 transition-colors" />
-
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
-                {/* Left: Project Image (16/10 aspect ratio) */}
-                <div className="lg:col-span-7">
-                  <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden border border-white/10 shadow-xl group-hover:scale-[1.02] transition-transform duration-500 bg-[#161720]">
-                    <Image
-                      src={featuredProject.mockup}
-                      alt={featuredProject.alt}
-                      fill
-                      priority
-                      sizes="(max-width: 1024px) 100vw, 60vw"
-                      className="object-cover"
-                    />
-                    <div className="absolute top-4 left-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0A0A0B]/80 backdrop-blur-md border border-white/10 text-xs font-mono text-[#D4FF3F] font-semibold">
-                      <span className="w-2 h-2 rounded-full bg-[#D4FF3F] animate-pulse" />
-                      Featured Project
-                    </div>
-                  </div>
+        {/* Featured project (large) */}
+        <Tilt {...tiltProps} className="w-full mb-6 lg:mb-8">
+          <article className="relative bg-surface border border-line rounded-[2rem] p-6 sm:p-10 shadow-[0_20px_60px_rgba(28,25,23,0.08)] overflow-hidden">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              <div className="lg:col-span-7">
+                <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden border border-line bg-cream">
+                  <Image
+                    src={featuredProject.mockup}
+                    alt={featuredProject.alt}
+                    fill
+                    priority
+                    sizes="(max-width: 1024px) 100vw, 58vw"
+                    className="object-cover"
+                  />
+                  <span className="absolute top-4 left-4 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/90 backdrop-blur-md border border-line text-[11px] font-semibold uppercase tracking-[0.1em] text-ember shadow-sm">
+                    <span className="w-2 h-2 rounded-full bg-ember animate-pulse" aria-hidden="true" />
+                    Featured
+                  </span>
                 </div>
+              </div>
 
-                {/* Right: Project Details & CTAs */}
-                <div className="lg:col-span-5 space-y-6 flex flex-col justify-between">
-                  <div className="space-y-4">
-                    <div className="flex flex-wrap gap-2">
-                      {featuredProject.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="text-xs font-mono px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-
-                    <h3 className="text-2xl sm:text-3xl font-bold text-white group-hover:text-[#D4FF3F] transition-colors">
-                      {featuredProject.title}
-                    </h3>
-
-                    <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-normal">
-                      {featuredProject.outcome}
-                    </p>
-                  </div>
-
-                  {/* Action Buttons */}
-                  <div className="flex flex-wrap items-center gap-3 pt-4 border-t border-white/10">
-                    <Link
-                      href={featuredProject.caseStudyUrl}
-                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs uppercase font-bold tracking-wider bg-white/10 hover:bg-white/20 text-white border border-white/10 transition-all"
+              <div className="lg:col-span-5 space-y-5">
+                <div className="flex flex-wrap gap-2">
+                  {featuredProject.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="text-xs font-medium px-3 py-1 rounded-full bg-cream border border-line text-body"
                     >
-                      <FaBookOpen className="w-3.5 h-3.5" />
-                      <span>Case Study</span>
-                    </Link>
-
-                    {featuredProject.liveUrl && (
-                      <a
-                        href={featuredProject.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs uppercase font-bold tracking-wider bg-[#D4FF3F] text-[#0A0A0B] hover:bg-[#c6f032] shadow-[0_0_15px_rgba(212,255,63,0.3)] transition-all"
-                      >
-                        <span>{featuredProject.liveLabel}</span>
-                        <FaArrowUpRightFromSquare className="w-3 h-3" />
-                      </a>
-                    )}
-                  </div>
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <h3 className="font-heading text-2xl sm:text-3xl font-semibold text-ink tracking-tight">
+                  {featuredProject.title}
+                </h3>
+                <p className="text-body leading-relaxed">
+                  {featuredProject.outcome}
+                </p>
+                <div className="pt-4 border-t border-line">
+                  <ProjectButtons project={featuredProject} />
                 </div>
               </div>
             </div>
-          </Tilt>
-        </div>
+          </article>
+        </Tilt>
 
-        {/* 2. Grid of 6 Remaining Projects (Rendered Exactly Once) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        {/* Remaining 6 projects */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
           {gridProjects.map((project) => (
-            <Tilt
-              key={project.id}
-              tiltMaxAngleX={6}
-              tiltMaxAngleY={6}
-              perspective={1000}
-              transitionSpeed={1000}
-              scale={1.01}
-              glareEnable={true}
-              glareMaxOpacity={0.12}
-              glareColor="#ffffff"
-              glareBorderRadius="1rem"
-              className="h-full"
-            >
-              <div className="h-full bg-[#121215]/80 hover:bg-[#15161c] border border-white/10 hover:border-[#D4FF3F]/40 rounded-2xl p-5 backdrop-blur-xl transition-all duration-300 shadow-xl hover:shadow-[0_15px_35px_rgba(0,0,0,0.6),0_0_25px_rgba(212,255,63,0.1)] flex flex-col justify-between group">
-                <div className="space-y-4">
-                  {/* Mockup Image at 16/10 aspect ratio */}
-                  <div className="relative w-full aspect-[16/10] rounded-xl overflow-hidden border border-white/10 bg-[#161720]">
+            <Tilt key={project.id} {...tiltProps} glareBorderRadius="1rem" className="h-full">
+              <article className="h-full bg-surface border border-line rounded-3xl p-5 shadow-[0_10px_36px_rgba(28,25,23,0.05)] hover:shadow-[0_18px_48px_rgba(28,25,23,0.10)] hover:-translate-y-1 hover:border-ember/25 transition-all duration-300 flex flex-col">
+                <div className="space-y-4 flex-1">
+                  <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden border border-line bg-cream">
                     <Image
                       src={project.mockup}
                       alt={project.alt}
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="object-cover"
                     />
-
-                    {/* Live indicator if active */}
                     {project.isLive && (
-                      <div className="absolute top-3 right-3 inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#0A0A0B]/80 backdrop-blur-md border border-[#22c55e]/30 text-[10px] font-mono text-[#4ade80] font-semibold">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#22c55e] animate-pulse" />
+                      <span className="absolute top-3 right-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/90 backdrop-blur-md border border-line text-[10px] font-semibold uppercase tracking-wider text-ember shadow-sm">
+                        <span className="w-1.5 h-1.5 rounded-full bg-ember animate-pulse" aria-hidden="true" />
                         Live
-                      </div>
+                      </span>
                     )}
                   </div>
 
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-1.5 pt-1">
+                  <div className="flex flex-wrap gap-1.5">
                     {project.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-white/5 border border-white/5 text-slate-400"
+                        className="text-[11px] font-medium px-2.5 py-1 rounded-full bg-cream border border-line text-muted"
                       >
                         {tag}
                       </span>
                     ))}
                   </div>
 
-                  {/* Title & Outcome */}
                   <div className="space-y-2">
-                    <h3 className="text-xl font-bold text-white group-hover:text-[#D4FF3F] transition-colors">
+                    <h3 className="font-heading text-xl font-semibold text-ink tracking-tight">
                       {project.title}
                     </h3>
-                    <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
+                    <p className="text-sm text-body leading-relaxed">
                       {project.outcome}
                     </p>
                   </div>
                 </div>
 
-                {/* CTAs */}
-                <div className="pt-5 mt-5 border-t border-white/10 flex items-center justify-between gap-3">
-                  <Link
-                    href={project.caseStudyUrl}
-                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-300 hover:text-white transition-colors"
-                  >
-                    <FaBookOpen className="w-3 h-3 text-slate-400" />
-                    <span>Case Study</span>
-                  </Link>
-
-                  {project.liveUrl && project.isLive ? (
-                    <a
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider bg-[#D4FF3F] text-[#0A0A0B] hover:bg-[#c6f032] shadow-[0_0_12px_rgba(212,255,63,0.25)] transition-all"
-                    >
-                      <span>{project.liveLabel || "Live Site"}</span>
-                      <FaArrowUpRightFromSquare className="w-2.5 h-2.5" />
-                    </a>
-                  ) : project.liveUrl && !project.isLive ? (
-                    <span
-                      title="Production deployment undergoing server maintenance"
-                      className="text-[11px] font-mono px-2.5 py-1 rounded bg-white/5 text-slate-500 border border-white/5 cursor-help"
-                    >
-                      {project.liveLabel}
-                    </span>
-                  ) : null}
+                <div className="pt-5 mt-5 border-t border-line">
+                  <ProjectButtons project={project} compact />
                 </div>
-              </div>
+              </article>
             </Tilt>
           ))}
+        </div>
+
+        {/* Concept builds — fictional restaurant demo sites */}
+        <div className="mt-16 lg:mt-20">
+          <div className="flex flex-col items-center text-center mb-10 space-y-3 max-w-2xl mx-auto">
+            <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-line text-[11px] font-semibold uppercase tracking-[0.14em] text-ember shadow-sm">
+              <FaFlask className="w-3 h-3" aria-hidden="true" />
+              Concept builds
+            </span>
+            <h3 className="font-heading font-semibold tracking-tight text-ink text-[clamp(1.5rem,3vw,2.2rem)] leading-tight">
+              Imagine your restaurant here.
+            </h3>
+            <p className="text-body text-base leading-relaxed">
+              Three fictional restaurant websites showing exactly what I can build for you —
+              menus, reservations, galleries, and locations, all custom-coded.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-6">
+            {conceptBuilds.map((demo) => (
+              <Tilt key={demo.id} {...tiltProps} glareBorderRadius="1rem" className="h-full">
+                <Link
+                  href={demo.route}
+                  className="group h-full bg-surface border border-line rounded-3xl overflow-hidden shadow-[0_10px_36px_rgba(28,25,23,0.05)] hover:shadow-[0_18px_48px_rgba(28,25,23,0.10)] hover:-translate-y-1 hover:border-ember/30 transition-all duration-300 flex flex-col focus:outline-none focus-visible:ring-2 focus-visible:ring-ember"
+                >
+                  <div className="relative w-full aspect-[16/10] overflow-hidden bg-cream">
+                    <Image
+                      src={demo.thumb}
+                      alt={demo.alt}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <span className="absolute top-3 left-3 px-3 py-1.5 rounded-full bg-ink/85 text-white backdrop-blur-md text-[10px] font-semibold uppercase tracking-[0.1em]">
+                      Concept demo — fictional restaurant
+                    </span>
+                  </div>
+                  <div className="p-6 space-y-3 flex-1 flex flex-col">
+                    <h4 className="font-heading text-xl font-semibold text-ink tracking-tight group-hover:text-ember transition-colors">
+                      {demo.name}
+                    </h4>
+                    <p className="text-sm text-body leading-relaxed flex-1">
+                      {demo.blurb}
+                    </p>
+                    <div className="flex flex-wrap gap-1.5 pt-1">
+                      {demo.features.map((f) => (
+                        <span key={f} className="text-[11px] font-medium px-2.5 py-1 rounded-full bg-ember-tint border border-ember/15 text-ember">
+                          {f}
+                        </span>
+                      ))}
+                    </div>
+                    <span className="inline-flex items-center gap-2 pt-2 text-xs uppercase font-bold tracking-[0.12em] text-ink group-hover:text-ember transition-colors">
+                      <span>Explore the demo</span>
+                      <FaArrowUpRightFromSquare className="w-3 h-3" aria-hidden="true" />
+                    </span>
+                  </div>
+                </Link>
+              </Tilt>
+            ))}
+          </div>
         </div>
       </div>
     </section>

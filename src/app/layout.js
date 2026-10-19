@@ -4,11 +4,8 @@ import "@/resources/custom.css";
 
 import classNames from "classnames";
 import {
-  Background,
   Column,
   Flex,
-  Meta,
-  RevealFx,
 } from "@once-ui-system/core";
 import { Footer, Header, RouteGuard, Providers } from "@/components";
 import { baseURL, effects, fonts, style, dataStyle, home } from "@/resources";
@@ -60,7 +57,7 @@ export default async function RootLayout({ children }) {
       as="html"
       lang="en"
       fillWidth
-      data-theme="dark"
+      data-theme="light"
       className={classNames(
         fonts.heading.variable,
         fonts.body.variable,
@@ -76,9 +73,9 @@ export default async function RootLayout({ children }) {
               (function() {
                 try {
                   const root = document.documentElement;
-                  root.setAttribute('data-theme', 'dark');
-                  localStorage.setItem('data-theme', 'dark');
-                  
+                  root.setAttribute('data-theme', 'light');
+                  localStorage.setItem('data-theme', 'light');
+
                   // Set defaults from config
                   const config = ${JSON.stringify({
               brand: style.brand,
@@ -92,13 +89,13 @@ export default async function RootLayout({ children }) {
               scaling: style.scaling,
               "viz-style": dataStyle.variant,
             })};
-                  
+
                   // Apply default values
                   Object.entries(config).forEach(([key, value]) => {
                     root.setAttribute('data-' + key, value);
                   });
                 } catch (e) {
-                  document.documentElement.setAttribute('data-theme', 'dark');
+                  document.documentElement.setAttribute('data-theme', 'light');
                 }
               })();
             `,
@@ -111,14 +108,12 @@ export default async function RootLayout({ children }) {
           suppressHydrationWarning
           background="page"
           fillWidth
-          style={{ minHeight: "100vh", backgroundColor: "#0A0A0B" }}
+          style={{ minHeight: "100vh", backgroundColor: "#FDFCFB", color: "#1C1917" }}
           margin="0"
           padding="0"
           horizontal="center"
+          className="font-body"
         >
-          {/* Subtle noise grain texture overlay */}
-          <div className="noise-overlay" aria-hidden="true" />
-          
           <Header />
           <Flex zIndex={0} fillWidth padding="0" horizontal="center" flex={1}>
             <Flex horizontal="center" fillWidth minHeight="0">

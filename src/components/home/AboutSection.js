@@ -10,109 +10,113 @@ export const AboutSection = () => {
     {
       title: "Direct communication with the developer",
       description:
-        "No middlemen, account managers, or junior handoffs. You work directly with the engineer writing every line of code.",
+        "No middlemen or junior handoffs — you work directly with the person writing every line of code.",
       icon: FaUserCheck,
     },
     {
-      title: "100% custom code — zero page builder bloat",
+      title: "100% custom code",
       description:
-        "No sluggish WordPress plugins, Wix templates, or locked-in platforms. Pure, clean Next.js and React built for lightning speed and security.",
+        "No sluggish page builders or locked-in templates. Clean Next.js and React built for speed and security.",
       icon: FaCode,
     },
     {
       title: "Fast, predictable turnaround",
       description:
-        "Agile delivery with interactive mockups and milestone check-ins, launching your website in weeks, not months.",
+        "Design mockups first, then agile delivery with check-ins — launched in weeks, not months.",
       icon: FaBolt,
     },
     {
-      title: "Post-launch support included",
+      title: "Post-launch support",
       description:
-        "Your project is fully covered after go-live with bug warranties, speed audits, and available monthly retainers.",
+        "Covered after go-live with bug fixes, speed checkups, and maintenance when you need it.",
       icon: FaHeadset,
     },
   ];
 
   return (
-    <section id="about" className="w-full scroll-mt-24 py-20 relative">
+    <section id="about" className="w-full scroll-mt-24 py-20 md:py-28 bg-paper">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-[#121215]/80 border border-white/10 rounded-3xl p-8 sm:p-12 lg:p-16 backdrop-blur-xl shadow-2xl relative overflow-hidden">
-          {/* Subtle background glow */}
-          <div className="absolute top-0 right-1/4 w-80 h-80 bg-[#D4FF3F]/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="bg-surface border border-line rounded-[2rem] p-7 sm:p-12 lg:p-16 shadow-[0_20px_60px_rgba(28,25,23,0.07)] relative overflow-hidden">
+          <div
+            className="absolute top-0 right-0 w-96 h-96 rounded-full blur-3xl pointer-events-none"
+            aria-hidden="true"
+            style={{ background: "radial-gradient(circle, rgba(166,58,10,0.08) 0%, transparent 70%)" }}
+          />
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            {/* Left: Professional Portrait & Monogram */}
-            <div className="lg:col-span-5 flex flex-col items-center sm:items-start space-y-6">
-              <div className="relative w-64 sm:w-72 aspect-[4/5] rounded-2xl overflow-hidden border border-white/15 shadow-2xl bg-[#161720] group">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center relative">
+            {/* Portrait */}
+            <div className="lg:col-span-5 flex flex-col items-center sm:items-start gap-5">
+              <div className="relative w-60 sm:w-72 aspect-[4/5] rounded-3xl overflow-hidden border border-line shadow-[0_20px_50px_rgba(28,25,23,0.12)] bg-cream">
                 <Image
                   src={person.avatar}
-                  alt="Sheikh Muqtasid - Full-Stack & Custom Website Developer"
+                  alt="Portrait of Sheikh Muqtasid, custom website and full-stack developer"
                   fill
-                  sizes="(max-width: 768px) 280px, 320px"
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  sizes="(max-width: 768px) 240px, 300px"
+                  className="object-cover"
                   style={{ objectPosition: "50% 16%" }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0B]/80 via-transparent to-transparent pointer-events-none" />
-                
-                {/* Floating pill badge */}
-                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between px-3.5 py-2 rounded-xl bg-[#0A0A0B]/85 backdrop-blur-md border border-white/10">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-[#D4FF3F] animate-pulse" />
-                    <span className="text-xs font-bold text-white tracking-wide">Sheikh Muqtasid</span>
-                  </div>
-                  <span className="text-[10px] font-mono text-[#D4FF3F]">FULL-STACK</span>
+                <div className="absolute inset-x-4 bottom-4 flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-white/90 backdrop-blur-md border border-line shadow-sm">
+                  <span className="text-xs font-semibold text-ink">Sheikh Muqtasid</span>
+                  <span className="text-[10px] font-bold tracking-[0.12em] text-ember uppercase">Full-stack</span>
                 </div>
               </div>
 
-              {/* Location Tag */}
-              <div className="flex items-center gap-2 text-xs font-mono text-slate-400 bg-white/5 border border-white/5 px-4 py-2 rounded-full">
-                <FaLocationDot className="w-3.5 h-3.5 text-[#D4FF3F]" />
-                <span>Islamabad, Pakistan · Available for US &amp; Global Clients</span>
-              </div>
+              <p className="inline-flex items-center gap-2 text-xs font-medium text-muted bg-cream border border-line px-4 py-2 rounded-full">
+                <FaLocationDot className="w-3.5 h-3.5 text-ember" aria-hidden="true" />
+                Islamabad, Pakistan · Working with US &amp; global clients
+              </p>
             </div>
 
-            {/* Right: Bio & Why Work With Me */}
-            <div className="lg:col-span-7 space-y-8">
+            {/* Bio + why work with me */}
+            <div className="lg:col-span-7 space-y-7">
               <div className="space-y-4">
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-xs font-mono uppercase tracking-widest text-[#D4FF3F]">
+                <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-ember-tint border border-ember/15 text-[11px] font-semibold uppercase tracking-[0.14em] text-ember">
                   About Sheikh Muqtasid
-                </div>
-                <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white font-heading">
-                  Engineering high-performance web experiences that grow businesses.
+                </span>
+                <h2 className="font-heading font-semibold tracking-tight text-ink text-[clamp(1.9rem,4vw,2.9rem)] leading-[1.12]">
+                  A developer who treats your website like his own business.
                 </h2>
-                <p className="text-base sm:text-lg text-slate-300 leading-relaxed font-normal">
-                  I am a full-stack web developer who builds with custom code (MERN stack, Next.js, Flutter). I specialize in helping restaurants, local businesses, and modern startups establish a dominant online presence that captures attention and converts visitors into loyal paying customers.
-                </p>
+                <div className="space-y-4 text-body leading-relaxed text-base sm:text-lg max-w-2xl">
+                  <p>
+                    I&rsquo;m <strong className="text-ink font-semibold">Sheikh Muqtasid</strong>, a
+                    full-stack developer specializing in custom websites for restaurants, local
+                    businesses, and startups. I write every line of code myself — Next.js, React,
+                    Node.js, and Flutter — so nothing is outsourced and nothing is templated.
+                  </p>
+                  <p>
+                    My focus is simple: websites that look premium, load fast, and turn visitors
+                    into paying customers — online orders, booked tables, and booked calls.
+                  </p>
+                </div>
               </div>
 
-              {/* "Why Work With Me" Bullets */}
-              <div className="space-y-4 pt-4 border-t border-white/10">
-                <h3 className="text-xs font-mono uppercase tracking-wider text-slate-400 font-bold">
+              <div className="space-y-4 pt-6 border-t border-line">
+                <h3 className="text-xs font-bold uppercase tracking-[0.14em] text-muted">
                   Why work with me
                 </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {valueProps.map((prop, idx) => {
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 list-none m-0 p-0">
+                  {valueProps.map((prop) => {
                     const Icon = prop.icon;
                     return (
-                      <div
-                        key={idx}
-                        className="p-4 rounded-xl bg-white/[0.03] border border-white/5 hover:border-[#D4FF3F]/30 transition-all space-y-2 group"
+                      <li
+                        key={prop.title}
+                        className="p-5 rounded-2xl bg-cream/70 border border-line hover:border-ember/25 transition-colors"
                       >
-                        <div className="flex items-center gap-2.5">
-                          <div className="w-7 h-7 rounded-lg bg-white/5 flex items-center justify-center text-[#D4FF3F] group-hover:scale-110 transition-transform">
-                            <Icon className="w-3.5 h-3.5" />
-                          </div>
-                          <h4 className="text-sm font-bold text-white group-hover:text-[#D4FF3F] transition-colors leading-snug">
+                        <div className="flex items-center gap-2.5 mb-2">
+                          <span className="w-8 h-8 rounded-xl bg-white border border-line flex items-center justify-center text-ember shadow-sm" aria-hidden="true">
+                            <Icon className="w-4 h-4" />
+                          </span>
+                          <h4 className="text-sm font-semibold text-ink leading-snug">
                             {prop.title}
                           </h4>
                         </div>
-                        <p className="text-xs text-slate-400 leading-relaxed pl-9">
+                        <p className="text-[13px] text-body leading-relaxed">
                           {prop.description}
                         </p>
-                      </div>
+                      </li>
                     );
                   })}
-                </div>
+                </ul>
               </div>
             </div>
           </div>

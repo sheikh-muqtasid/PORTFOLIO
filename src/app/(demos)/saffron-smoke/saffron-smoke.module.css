@@ -1,0 +1,1093 @@
+/* Saffron & Smoke — self-contained demo styles.
+   Palette: deep charcoal / ivory with emerald + gold accents.
+   All classes are module-scoped; nothing here depends on the
+   portfolio's own theme tokens. */
+
+.page {
+  --charcoal: #141210;
+  --charcoal-deep: #0e0c0a;
+  --emerald: #0f5c46;
+  --emerald-deep: #0a3f31;
+  --gold: #c9a24b;
+  --gold-light: #e3c878;
+  --ivory: #f6f1e4;
+  --ivory-soft: #efe7d3;
+  --ink: #221d16;
+  --muted: rgba(246, 241, 228, 0.72);
+  --muted-dark: rgba(34, 29, 22, 0.72);
+
+  background: var(--charcoal);
+  color: var(--ivory);
+  font-family: var(--ss-body, "Inter", system-ui, -apple-system, "Segoe UI", sans-serif);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page :where(a, button, input, select, textarea):focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.container {
+  width: 100%;
+  max-width: 72rem;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 4vw, 2.5rem);
+}
+
+.section {
+  padding-block: clamp(3.5rem, 8vw, 6.5rem);
+  scroll-margin-top: 8rem;
+}
+
+/* ---------- typography ---------- */
+.display {
+  font-family: var(--ss-display, "Cormorant Garamond", Georgia, "Times New Roman", serif);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: 0.01em;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.eyebrow::before,
+.eyebrow.center::after {
+  content: "";
+  display: block;
+  width: 2.5rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold));
+}
+
+.eyebrow.center::after {
+  background: linear-gradient(90deg, var(--gold), transparent);
+}
+
+.sectionTitle {
+  font-family: var(--ss-display, "Cormorant Garamond", Georgia, "Times New Roman", serif);
+  font-weight: 600;
+  font-size: clamp(2rem, 4.5vw + 1rem, 3.25rem);
+  line-height: 1.1;
+  margin: 0.9rem 0 0;
+  text-wrap: balance;
+}
+
+.lede {
+  font-size: clamp(1rem, 1.2vw + 0.85rem, 1.2rem);
+  color: var(--muted);
+  max-width: 44rem;
+  margin-top: 1.1rem;
+}
+
+/* ---------- navbar ---------- */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  background: rgba(14, 12, 10, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(201, 162, 75, 0.22);
+}
+
+.navInner {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding-block: 0.8rem;
+}
+
+/* Top row: brand + reserve button. The link row sits below it.
+   At desktop widths the wrapper dissolves and everything sits on one row. */
+.navTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  text-decoration: none;
+  color: var(--ivory);
+  flex-shrink: 0;
+}
+
+.brandMark {
+  display: grid;
+  place-items: center;
+  width: 2.35rem;
+  height: 2.35rem;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  font-family: var(--ss-display, "Cormorant Garamond", Georgia, serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+}
+
+.brandName {
+  font-family: var(--ss-display, "Cormorant Garamond", Georgia, serif);
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.brandTag {
+  display: block;
+  font-family: var(--ss-body, "Inter", system-ui, sans-serif);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.9rem, 3vw, 1.6rem);
+  list-style: none;
+  margin: 0;
+  padding: 0.2rem 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.navLinks::-webkit-scrollbar {
+  display: none;
+}
+
+.navLinks li {
+  flex-shrink: 0;
+}
+
+.navLinks a {
+  color: var(--ivory);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.85;
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+.navLinks a:hover {
+  color: var(--gold-light);
+  opacity: 1;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.6rem;
+  border: 1px solid var(--gold);
+  border-radius: 2px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+
+.btnGold {
+  background: var(--gold);
+  color: var(--charcoal-deep);
+}
+
+.btnGold:hover {
+  background: var(--gold-light);
+  transform: translateY(-1px);
+}
+
+.btnGhost {
+  background: transparent;
+  color: var(--ivory);
+}
+
+.btnGhost:hover {
+  background: rgba(201, 162, 75, 0.14);
+}
+
+.btnSmall {
+  padding: 0.6rem 1.1rem;
+  font-size: 0.75rem;
+}
+
+/* ---------- hero ---------- */
+.hero {
+  position: relative;
+  min-height: min(92vh, 56rem);
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.heroMedia {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+}
+
+.heroMedia img {
+  object-fit: cover;
+}
+
+.heroShade {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(180deg, rgba(14, 12, 10, 0.55) 0%, rgba(14, 12, 10, 0.18) 38%, rgba(14, 12, 10, 0.88) 100%),
+    radial-gradient(80% 60% at 50% 40%, transparent 0%, rgba(14, 12, 10, 0.45) 100%);
+}
+
+.heroContent {
+  padding-block: clamp(4rem, 10vh, 7rem);
+  max-width: 46rem;
+}
+
+.heroHeadline {
+  font-family: var(--ss-display, "Cormorant Garamond", Georgia, serif);
+  font-size: clamp(2.75rem, 7vw + 1rem, 5.5rem);
+  font-weight: 600;
+  line-height: 1.02;
+  margin: 1.1rem 0 0;
+  text-wrap: balance;
+}
+
+.heroHeadline em {
+  font-style: italic;
+  color: var(--gold-light);
+}
+
+.heroSub {
+  font-size: clamp(1.02rem, 1.4vw + 0.85rem, 1.25rem);
+  color: rgba(246, 241, 228, 0.88);
+  max-width: 34rem;
+  margin: 1.25rem 0 0;
+}
+
+.heroCtas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 2rem;
+}
+
+.heroMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.75rem;
+  margin-top: 2.25rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(201, 162, 75, 0.28);
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  color: rgba(246, 241, 228, 0.8);
+}
+
+.heroMeta strong {
+  color: var(--gold-light);
+  font-weight: 600;
+}
+
+/* ---------- story ---------- */
+.story {
+  background: var(--ivory);
+  color: var(--ink);
+}
+
+.story .lede {
+  color: var(--muted-dark);
+}
+
+.storyGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.storyCopy p {
+  margin: 1.25rem 0 0;
+  font-size: 1.02rem;
+  color: rgba(34, 29, 22, 0.85);
+  max-width: 38rem;
+}
+
+.storyCopy p:first-of-type {
+  margin-top: 1.5rem;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(15, 92, 70, 0.25);
+}
+
+.statNum {
+  font-family: var(--ss-display, "Cormorant Garamond", Georgia, serif);
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 700;
+  color: var(--emerald);
+  line-height: 1;
+}
+
+.statLabel {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(34, 29, 22, 0.6);
+  margin-top: 0.45rem;
+}
+
+.quoteCard {
+  background: var(--emerald-deep);
+  color: var(--ivory);
+  border-radius: 4px;
+  padding: clamp(1.75rem, 4vw, 2.75rem);
+  position: relative;
+  overflow: hidden;
+}
+
+.quoteCard::before {
+  content: "";
+  position: absolute;
+  inset: 0.75rem;
+  border: 1px solid rgba(201, 162, 75, 0.4);
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+.quoteMark {
+  font-family: var(--ss-display, "Cormorant Garamond", Georgia, serif);
+  font-size: 4rem;
+  line-height: 1;
+  color: var(--gold);
+}
+
+.quoteText {
+  font-family: var(--ss-display, "Cormorant Garamond", Georgia, serif);
+  font-size: clamp(1.25rem, 2.4vw, 1.6rem);
+  font-style: italic;
+  line-height: 1.5;
+  margin: 0.5rem 0 0;
+}
+
+.quoteBy {
+  margin-top: 1.25rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+}
+
+/* ---------- signature dishes ---------- */
+.dishGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-top: 2.75rem;
+}
+
+.dishCard {
+  background: #1c1813;
+  border: 1px solid rgba(201, 162, 75, 0.2);
+  border-radius: 4px;
+  overflow: hidden;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.dishCard:hover {
+  transform: translateY(-4px);
+  border-color: rgba(201, 162, 75, 0.55);
+}
+
+.dishMedia {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.dishMedia img {
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.dishCard:hover .dishMedia img {
+  transform: scale(1.04);
+}
+
+.dishTag {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: rgba(14, 12, 10, 0.82);
+  border: 1px solid rgba(201, 162, 75, 0.5);
+  color: var(--gold-light);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  padding: 0.4rem 0.8rem;
+  border-radius: 2px;
+}
+
+.dishArt {
+  aspect-ratio: 4 / 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  background:
+    radial-gradient(120% 120% at 50% 0%, #16684f 0%, var(--emerald-deep) 55%, #072a21 100%);
+  position: relative;
+  text-align: center;
+  padding: 1.5rem;
+}
+
+.dishArt::before {
+  content: "";
+  position: absolute;
+  inset: 0.9rem;
+  border: 1px solid rgba(201, 162, 75, 0.45);
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+.dishArtMonogram {
+  font-family: var(--ss-display, "Cormorant Garamond", Georgia, serif);
+  font-size: 3.5rem;
+  font-style: italic;
+  color: var(--gold-light);
+  line-height: 1;
+}
+
+.dishArtLabel {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(246, 241, 228, 0.75);
+}
+
+.dishBody {
+  padding: 1.6rem 1.6rem 1.75rem;
+}
+
+.dishName {
+  font-family: var(--ss-display, "Cormorant Garamond", Georgia, serif);
+  font-size: 1.55rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.dishDesc {
+  font-size: 0.94rem;
+  color: var(--muted);
+  margin: 0.7rem 0 0;
+}
+
+.dishFoot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1.25rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid rgba(201, 162, 75, 0.18);
+}
+
+.dishPrice {
+  font-family: var(--ss-display, "Cormorant Garamond", Georgia, serif);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--gold-light);
+}
+
+.dishNote {
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(246, 241, 228, 0.55);
+}
+
+/* ---------- menu ---------- */
+.menuSection {
+  background: var(--charcoal-deep);
+}
+
+.menuGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-top: 2.75rem;
+}
+
+.menuCard {
+  border: 1px solid rgba(201, 162, 75, 0.22);
+  border-radius: 4px;
+  padding: 1.75rem;
+  background: rgba(28, 24, 19, 0.6);
+}
+
+.menuCardTitle {
+  font-family: var(--ss-display, "Cormorant Garamond", Georgia, serif);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--gold-light);
+  margin: 0 0 0.35rem;
+}
+
+.menuCardSub {
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin: 0 0 1.25rem;
+}
+
+.menuList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1.05rem;
+}
+
+.menuItemHead {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+}
+
+.menuItemName {
+  font-weight: 600;
+  font-size: 0.98rem;
+  letter-spacing: 0.01em;
+}
+
+.menuDots {
+  flex: 1;
+  border-bottom: 1px dotted rgba(201, 162, 75, 0.45);
+  transform: translateY(-4px);
+  min-width: 1.5rem;
+}
+
+.menuPrice {
+  font-family: var(--ss-display, "Cormorant Garamond", Georgia, serif);
+  font-weight: 700;
+  font-size: 1.08rem;
+  color: var(--gold-light);
+  white-space: nowrap;
+}
+
+.menuItemDesc {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin: 0.25rem 0 0;
+  max-width: 26rem;
+}
+
+.menuFoot {
+  margin-top: 2.5rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.menuFoot strong {
+  color: var(--gold-light);
+}
+
+/* ---------- gallery ---------- */
+.galleryTrack {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: min(78vw, 26rem);
+  gap: 1.25rem;
+  overflow-x: auto;
+  margin-top: 2.75rem;
+  padding-bottom: 1rem;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold) transparent;
+}
+
+.galleryItem {
+  scroll-snap-align: start;
+  border: 1px solid rgba(201, 162, 75, 0.25);
+  border-radius: 4px;
+  overflow: hidden;
+  background: #1c1813;
+}
+
+.galleryMedia {
+  position: relative;
+  aspect-ratio: 4 / 3;
+}
+
+.galleryMedia img {
+  object-fit: cover;
+}
+
+.galleryCaption {
+  padding: 1rem 1.25rem;
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+
+.galleryCaption strong {
+  display: block;
+  font-family: var(--ss-display, "Cormorant Garamond", Georgia, serif);
+  font-size: 1.1rem;
+  color: var(--ivory);
+  font-weight: 600;
+}
+
+/* ---------- visit ---------- */
+.visit {
+  background: var(--ivory);
+  color: var(--ink);
+}
+
+.visit .lede {
+  color: var(--muted-dark);
+}
+
+.visitGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  margin-top: 2.75rem;
+}
+
+.hoursCard,
+.findCard {
+  border: 1px solid rgba(15, 92, 70, 0.28);
+  border-radius: 4px;
+  padding: clamp(1.5rem, 4vw, 2.25rem);
+  background: #fffdf6;
+}
+
+.cardTitle {
+  font-family: var(--ss-display, "Cormorant Garamond", Georgia, serif);
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin: 0 0 1.25rem;
+  color: var(--ink);
+}
+
+.hoursList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.85rem;
+}
+
+.hoursRow {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  font-size: 0.98rem;
+}
+
+.hoursRow .menuDots {
+  border-bottom-color: rgba(15, 92, 70, 0.35);
+}
+
+.hoursDay {
+  font-weight: 600;
+}
+
+.hoursTime {
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.hoursClosed {
+  color: #a33b2e;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.visitLine {
+  margin: 0 0 1.1rem;
+  font-size: 0.98rem;
+  color: rgba(34, 29, 22, 0.85);
+}
+
+.visitLine strong {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--emerald);
+  margin-bottom: 0.3rem;
+}
+
+.visitLine a {
+  color: var(--emerald);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.visitLine a:hover {
+  color: var(--emerald-deep);
+}
+
+/* ---------- reservations ---------- */
+.reserveGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  margin-top: 2.75rem;
+  align-items: start;
+}
+
+.reserveCopy p {
+  color: var(--muted);
+  font-size: 1rem;
+  max-width: 30rem;
+}
+
+.reservePoints {
+  list-style: none;
+  margin: 1.75rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.reservePoints li {
+  display: flex;
+  gap: 0.9rem;
+  align-items: flex-start;
+  font-size: 0.95rem;
+  color: rgba(246, 241, 228, 0.85);
+}
+
+.reservePoints svg {
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+  color: var(--gold);
+}
+
+.formCard {
+  background: #1c1813;
+  border: 1px solid rgba(201, 162, 75, 0.3);
+  border-radius: 4px;
+  padding: clamp(1.5rem, 4vw, 2.25rem);
+}
+
+.formTitle {
+  font-family: var(--ss-display, "Cormorant Garamond", Georgia, serif);
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.formSub {
+  font-size: 0.88rem;
+  color: var(--muted);
+  margin: 0.5rem 0 1.75rem;
+}
+
+.fieldGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.15rem;
+}
+
+.field label {
+  display: block;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  margin-bottom: 0.45rem;
+}
+
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  background: rgba(14, 12, 10, 0.7);
+  border: 1px solid rgba(201, 162, 75, 0.32);
+  border-radius: 2px;
+  color: var(--ivory);
+  font-size: 1rem;
+  font-family: inherit;
+  padding: 0.8rem 0.95rem;
+  transition: border-color 0.2s ease;
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+  color: rgba(246, 241, 228, 0.38);
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: var(--gold);
+  outline: none;
+}
+
+.field select option {
+  background: #1c1813;
+  color: var(--ivory);
+}
+
+.fieldError {
+  font-size: 0.82rem;
+  color: #f0a08f;
+  margin-top: 0.4rem;
+}
+
+.fieldInvalid input,
+.fieldInvalid select {
+  border-color: #c05a44;
+}
+
+.formNote {
+  font-size: 0.8rem;
+  color: rgba(246, 241, 228, 0.5);
+  margin: 1.25rem 0 0;
+}
+
+.formSubmit {
+  width: 100%;
+  margin-top: 1.5rem;
+}
+
+.successCard {
+  text-align: center;
+  padding: 1rem 0.25rem;
+}
+
+.successIcon {
+  display: inline-grid;
+  place-items: center;
+  width: 4rem;
+  height: 4rem;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  color: var(--gold);
+  margin-bottom: 1.25rem;
+}
+
+.successTitle {
+  font-family: var(--ss-display, "Cormorant Garamond", Georgia, serif);
+  font-size: 1.9rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.successText {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin: 0.9rem 0 0;
+}
+
+.successDetails {
+  list-style: none;
+  margin: 1.6rem 0 0;
+  padding: 1.4rem;
+  background: rgba(14, 12, 10, 0.55);
+  border: 1px solid rgba(201, 162, 75, 0.25);
+  border-radius: 4px;
+  display: grid;
+  gap: 0.7rem;
+  text-align: left;
+  font-size: 0.94rem;
+}
+
+.successDetails strong {
+  color: var(--gold-light);
+  font-weight: 600;
+  min-width: 5.5rem;
+  display: inline-block;
+}
+
+/* ---------- footer ---------- */
+.footer {
+  background: var(--charcoal-deep);
+  border-top: 1px solid rgba(201, 162, 75, 0.25);
+  padding: clamp(3rem, 7vw, 4.5rem) 0 0;
+}
+
+.footerGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.25rem;
+  padding-bottom: 2.75rem;
+}
+
+.footerBrand p {
+  color: var(--muted);
+  font-size: 0.92rem;
+  max-width: 24rem;
+  margin: 1rem 0 0;
+}
+
+.footerTitle {
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  margin: 0 0 1.1rem;
+}
+
+.footerList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.7rem;
+  font-size: 0.94rem;
+  color: var(--muted);
+}
+
+.footerList a {
+  color: var(--ivory);
+  text-decoration: none;
+  opacity: 0.85;
+}
+
+.footerList a:hover {
+  color: var(--gold-light);
+  opacity: 1;
+}
+
+.demoBanner {
+  border-top: 1px solid rgba(201, 162, 75, 0.22);
+  padding: 1.5rem 0;
+  text-align: center;
+  font-size: 0.85rem;
+  color: rgba(246, 241, 228, 0.62);
+}
+
+.demoBanner strong {
+  color: var(--gold-light);
+  font-weight: 600;
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 30rem) {
+  .brandName {
+    font-size: 1.05rem;
+  }
+
+  .brandTag {
+    display: none;
+  }
+
+  .navLinks a {
+    font-size: 0.76rem;
+  }
+
+  .heroCtas .btn {
+    flex: 1 1 100%;
+  }
+}
+
+/* Single-row navbar on wide screens; the two-row stacked nav
+   is kept below this breakpoint so nothing ever crowds or overlaps. */
+@media (min-width: 64rem) {
+  .section {
+    scroll-margin-top: 5.5rem;
+  }
+
+  .navInner {
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .navTop {
+    display: contents;
+  }
+
+  .navBrand {
+    order: 1;
+  }
+
+  .navLinks {
+    order: 2;
+    margin-inline: auto;
+    overflow: visible;
+  }
+
+  .navCta {
+    order: 3;
+  }
+}
+
+@media (min-width: 48rem) {
+  .storyGrid {
+    grid-template-columns: 1.15fr 0.85fr;
+  }
+
+  .dishGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .menuGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .visitGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .reserveGrid {
+    grid-template-columns: 0.9fr 1.1fr;
+  }
+
+  .fieldGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .fieldFull {
+    grid-column: 1 / -1;
+  }
+
+  .footerGrid {
+    grid-template-columns: 1.4fr 1fr 1fr;
+  }
+}
+
+@media (min-width: 80rem) {
+  .menuGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

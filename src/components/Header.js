@@ -10,7 +10,7 @@ export const Header = () => {
   const pathname = usePathname() || "";
   const isHomePage = pathname === "/";
 
-  // Add subtle background shadow/blur increase on scroll
+  // Add subtle shadow once the user scrolls past the hero
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
@@ -19,7 +19,7 @@ export const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close mobile menu on resize to desktop
+  // Close the mobile menu when resizing up to desktop
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 768) {
@@ -30,7 +30,7 @@ export const Header = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Prevent background scroll when mobile menu is open
+  // Lock background scroll while the mobile menu is open
   useEffect(() => {
     if (mobileMenuOpen) {
       document.body.style.overflow = "hidden";
@@ -42,6 +42,12 @@ export const Header = () => {
     };
   }, [mobileMenuOpen]);
 
+  // Standalone demo restaurant sites render their own chrome; hide portfolio nav there.
+  const isDemoRoute = ["/ember-oak", "/casa-fuego", "/saffron-smoke"].some((r) =>
+    pathname.startsWith(r),
+  );
+  if (isDemoRoute) return null;
+
   const navLinks = [
     { name: "Work", href: isHomePage ? "#work" : "/#work" },
     { name: "Services", href: isHomePage ? "#services" : "/#services" },
@@ -49,6 +55,8 @@ export const Header = () => {
     { name: "About", href: isHomePage ? "#about" : "/#about" },
     { name: "Contact", href: isHomePage ? "#contact" : "/#contact" },
   ];
+
+  const contactHref = isHomePage ? "#contact" : "/#contact";
 
   const handleLinkClick = (e, href) => {
     setMobileMenuOpen(false);
@@ -63,56 +71,54 @@ export const Header = () => {
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
-        scrolled
-          ? "bg-[#0A0A0B]/90 backdrop-blur-xl border-b border-white/10 shadow-lg shadow-black/40"
-          : "bg-[#0A0A0B]/70 backdrop-blur-md border-b border-white/5"
+      className={`sticky top-0 z-50 w-full bg-white/85 backdrop-blur-xl border-b border-line transition-shadow duration-300 ${
+        scrolled ? "shadow-[0_8px_30px_rgba(28,25,23,0.08)]" : ""
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-18 sm:h-20">
+        <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4FF3F] rounded-lg p-1"
-            aria-label="Sheikh Muqtasid Home"
+            className="flex items-center gap-3 group rounded-xl p-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-ember"
+            aria-label="Sheikh Muqtasid — home"
           >
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-white/10 to-white/5 border border-white/15 flex items-center justify-center font-bold text-base text-[#D4FF3F] group-hover:border-[#D4FF3F]/50 group-hover:shadow-[0_0_15px_rgba(212,255,63,0.3)] transition-all duration-300">
+            <span className="w-10 h-10 rounded-xl bg-ember-tint border border-ember/20 flex items-center justify-center font-heading font-semibold text-lg text-ember group-hover:bg-ember group-hover:text-white transition-colors duration-300">
               SM.
-            </div>
-            <div className="flex flex-col">
-              <span className="text-sm font-semibold tracking-tight text-white group-hover:text-[#D4FF3F] transition-colors">
+            </span>
+            <span className="flex flex-col leading-tight">
+              <span className="text-[15px] font-semibold tracking-tight text-ink">
                 Sheikh Muqtasid
               </span>
-              <span className="text-[11px] text-slate-400 font-medium">
+              <span className="text-[11px] text-muted font-medium">
                 Custom Web Engineer
               </span>
-            </div>
+            </span>
           </Link>
 
-          {/* Desktop Navigation */}
+          {/* Desktop navigation */}
           <nav
-            className="hidden md:flex items-center gap-1 bg-white/[0.03] border border-white/10 px-3 py-1.5 rounded-full backdrop-blur-lg shadow-inner"
-            aria-label="Main Navigation"
+            className="hidden md:flex items-center gap-1 bg-cream/70 border border-line px-2 py-1.5 rounded-full"
+            aria-label="Main navigation"
           >
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
                 onClick={(e) => handleLinkClick(e, link.href)}
-                className="px-4 py-2 text-sm font-medium text-slate-300 hover:text-white rounded-full transition-all hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4FF3F]"
+                className="px-4 py-2 text-sm font-medium text-body hover:text-ink rounded-full transition-colors hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-ember"
               >
                 {link.name}
               </a>
             ))}
           </nav>
 
-          {/* Desktop CTA Button */}
-          <div className="hidden md:flex items-center gap-3">
+          {/* Desktop CTA */}
+          <div className="hidden md:block">
             <a
-              href={isHomePage ? "#contact" : "/#contact"}
-              onClick={(e) => handleLinkClick(e, isHomePage ? "#contact" : "/#contact")}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs uppercase tracking-wider font-bold bg-[#D4FF3F] text-[#0A0A0B] hover:bg-[#c6f032] hover:shadow-[0_0_20px_rgba(212,255,63,0.4)] transition-all duration-300 transform hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#D4FF3F]"
+              href={contactHref}
+              onClick={(e) => handleLinkClick(e, contactHref)}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs uppercase tracking-wider font-bold bg-ember text-white hover:bg-ember-dark transition-all duration-300 hover:-translate-y-0.5 shadow-[0_8px_20px_rgba(166,58,10,0.25)] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ember"
             >
               <span>Start a Project</span>
               <svg
@@ -121,73 +127,77 @@ export const Header = () => {
                 viewBox="0 0 24 24"
                 stroke="currentColor"
                 strokeWidth={2.5}
+                aria-hidden="true"
               >
                 <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
             </a>
           </div>
 
-          {/* Mobile Hamburger Button */}
+          {/* Mobile: compact CTA + hamburger */}
           <div className="flex md:hidden items-center gap-2">
             <a
-              href={isHomePage ? "#contact" : "/#contact"}
-              onClick={(e) => handleLinkClick(e, isHomePage ? "#contact" : "/#contact")}
-              className="px-3 py-1.5 rounded-full text-xs font-semibold bg-[#D4FF3F] text-[#0A0A0B]"
+              href={contactHref}
+              onClick={(e) => handleLinkClick(e, contactHref)}
+              className="px-3.5 py-2 rounded-full text-xs font-bold bg-ember text-white"
             >
-              Hire Me
+              Get a Quote
             </a>
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-slate-200 hover:text-white hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4FF3F]"
+              className="p-2.5 rounded-xl bg-white border border-line text-ink shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-ember"
               aria-expanded={mobileMenuOpen}
-              aria-label="Toggle navigation menu"
+              aria-controls="mobile-menu"
+              aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
             >
-              <span className="sr-only">Open main menu</span>
-              <div className="w-5 h-4 flex flex-col justify-between">
+              <span className="block w-5 h-4 relative" aria-hidden="true">
                 <span
-                  className={`block h-0.5 w-full bg-current transform transition-all duration-300 origin-left ${
-                    mobileMenuOpen ? "rotate-45 translate-x-0.5" : ""
+                  className={`absolute top-0 left-0 block h-0.5 w-full bg-current rounded transition-all duration-300 ${
+                    mobileMenuOpen ? "top-[7px] rotate-45" : ""
                   }`}
                 />
                 <span
-                  className={`block h-0.5 w-full bg-current transition-opacity duration-200 ${
+                  className={`absolute top-[7px] left-0 block h-0.5 w-full bg-current rounded transition-opacity duration-200 ${
                     mobileMenuOpen ? "opacity-0" : "opacity-100"
                   }`}
                 />
                 <span
-                  className={`block h-0.5 w-full bg-current transform transition-all duration-300 origin-left ${
-                    mobileMenuOpen ? "-rotate-45 translate-x-0.5" : ""
+                  className={`absolute bottom-0 left-0 block h-0.5 w-full bg-current rounded transition-all duration-300 ${
+                    mobileMenuOpen ? "bottom-[7px] -rotate-45" : ""
                   }`}
                 />
-              </div>
+              </span>
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Menu Dropdown */}
+      {/* Mobile menu panel — in normal flow below the bar, never floating over content */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-b border-white/10 bg-[#0A0A0B]/98 backdrop-blur-2xl px-5 pt-4 pb-8 space-y-4 animate-in fade-in slide-in-from-top-4 duration-200">
-          <nav className="flex flex-col space-y-2">
+        <div
+          id="mobile-menu"
+          className="md:hidden border-t border-line bg-white/98 backdrop-blur-2xl px-5 pt-4 pb-[calc(2rem+env(safe-area-inset-bottom))] shadow-[0_20px_40px_rgba(28,25,23,0.10)]"
+        >
+          <nav className="flex flex-col gap-1" aria-label="Mobile navigation">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
                 onClick={(e) => handleLinkClick(e, link.href)}
-                className="px-4 py-3 text-base font-medium text-slate-200 hover:text-white hover:bg-white/10 rounded-xl transition-colors flex items-center justify-between"
+                className="px-4 py-3 text-base font-medium text-body hover:text-ink hover:bg-cream rounded-xl transition-colors flex items-center justify-between"
               >
                 <span>{link.name}</span>
-                <span className="text-slate-600">→</span>
+                <span className="text-muted" aria-hidden="true">→</span>
               </a>
             ))}
           </nav>
 
-          <div className="pt-2 border-t border-white/10">
+          <div className="pt-3 mt-3 border-t border-line">
             <a
-              href={isHomePage ? "#contact" : "/#contact"}
-              onClick={(e) => handleLinkClick(e, isHomePage ? "#contact" : "/#contact")}
-              className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl text-sm uppercase tracking-wider font-bold bg-[#D4FF3F] text-[#0A0A0B] shadow-[0_0_20px_rgba(212,255,63,0.3)]"
+              href={contactHref}
+              onClick={(e) => handleLinkClick(e, contactHref)}
+              className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl text-sm uppercase tracking-wider font-bold bg-ember text-white shadow-[0_8px_20px_rgba(166,58,10,0.25)]"
             >
               <span>Start a Project</span>
               <svg
@@ -196,20 +206,17 @@ export const Header = () => {
                 viewBox="0 0 24 24"
                 stroke="currentColor"
                 strokeWidth={2.5}
+                aria-hidden="true"
               >
                 <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
             </a>
           </div>
 
-          <div className="flex items-center justify-center gap-6 pt-2 text-xs text-slate-400">
-            <span className="inline-flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-[#D4FF3F] animate-pulse" />
-              Available for new projects
-            </span>
-            <span>·</span>
-            <span>Replies &lt; 24h</span>
-          </div>
+          <p className="flex items-center justify-center gap-2 pt-4 text-xs text-muted">
+            <span className="w-2 h-2 rounded-full bg-ember animate-pulse" aria-hidden="true" />
+            Available for new projects · Replies within 24 hours
+          </p>
         </div>
       )}
     </header>
