@@ -15,11 +15,11 @@ const iconMap = {
 export const ServicesSection = () => {
   return (
     <section id="services" className="w-full scroll-mt-24 py-20 md:py-28 bg-paper relative overflow-hidden">
-      {/* Ambient ember glow */}
+      {/* Ambient accent glow */}
       <div
-        className="ember-drift absolute -top-32 left-1/2 -translate-x-1/2 w-[720px] h-[380px] rounded-full blur-3xl pointer-events-none"
+        className="accent-drift absolute -top-32 left-1/2 -translate-x-1/2 w-[720px] h-[380px] rounded-full blur-3xl pointer-events-none"
         aria-hidden="true"
-        style={{ background: "radial-gradient(ellipse, rgba(232,112,42,0.10) 0%, transparent 70%)" }}
+        style={{ background: "radial-gradient(ellipse, rgba(139,124,255,0.10) 0%, transparent 70%)" }}
       />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <SectionHeader
@@ -38,13 +38,13 @@ export const ServicesSection = () => {
                 className="cine-card group relative rounded-3xl p-7 sm:p-9 flex flex-col overflow-hidden"
               >
                 <div
-                  className="absolute top-0 left-8 right-8 h-px ember-hairline opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  className="absolute top-0 left-8 right-8 h-px accent-hairline opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                   aria-hidden="true"
                 />
                 <div className="space-y-6 flex-1">
                   {/* Icon + tag */}
                   <div className="flex items-center justify-between">
-                    <div className="w-13 h-13 p-3.5 rounded-2xl bg-ember-tint border border-ember/20 flex items-center justify-center text-ember group-hover:bg-ember group-hover:text-[#160b03] group-hover:border-ember group-hover:scale-105 transition-all duration-300 shadow-[0_0_24px_rgba(232,112,42,0.15)]">
+                    <div className="w-13 h-13 p-3.5 rounded-2xl bg-accent-tint border border-accent/20 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-[#141126] group-hover:border-accent group-hover:scale-105 transition-all duration-300 shadow-[0_0_24px_rgba(139,124,255,0.15)]">
                       <Icon className="w-6 h-6" aria-hidden="true" />
                     </div>
                     <span className="text-[11px] font-semibold uppercase tracking-[0.12em] px-3 py-1.5 rounded-full bg-cream border border-line text-muted">
@@ -66,7 +66,7 @@ export const ServicesSection = () => {
                   <ul className="space-y-3 pt-5 border-t border-line">
                     {service.deliverables.map((item, idx) => (
                       <li key={idx} className="flex items-start gap-3 text-sm text-body">
-                        <span className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-ember-tint border border-ember/20 flex items-center justify-center text-ember" aria-hidden="true">
+                        <span className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-accent-tint border border-accent/20 flex items-center justify-center text-accent" aria-hidden="true">
                           <FaCheck className="w-3 h-3" />
                         </span>
                         <span className="leading-relaxed">{item}</span>
@@ -79,7 +79,7 @@ export const ServicesSection = () => {
                 <div className="pt-6 mt-6 border-t border-line">
                   <a
                     href="#contact"
-                    className="inline-flex items-center gap-2 text-xs uppercase font-bold tracking-[0.12em] text-ink hover:text-ember transition-colors rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-ember"
+                    className="inline-flex items-center gap-2 text-xs uppercase font-bold tracking-[0.12em] text-ink hover:text-accent transition-colors rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                   >
                     <span>Request details</span>
                     <span aria-hidden="true" className="group-hover:translate-x-1 transition-transform">→</span>
@@ -95,7 +95,7 @@ export const ServicesSection = () => {
           <p className="text-sm sm:text-base text-body leading-relaxed">
             <strong className="text-ink font-semibold">Pricing note:</strong> Every project is
             quoted individually based on your requirements —{" "}
-            <a href="#contact" className="underline decoration-ember/40 underline-offset-4 text-ember font-semibold hover:decoration-ember transition-all rounded">
+            <a href="#contact" className="underline decoration-accent/40 underline-offset-4 text-accent font-semibold hover:decoration-accent transition-all rounded">
               tell me what you need
             </a>{" "}
             and I&rsquo;ll send a tailored estimate and timeline.

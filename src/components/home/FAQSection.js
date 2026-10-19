@@ -30,7 +30,7 @@ export const FAQSection = () => {
               <div
                 key={idx}
                 className={`bg-surface border rounded-2xl overflow-hidden transition-all duration-300 shadow-[0_8px_28px_rgba(0,0,0,0.35)] ${
-                  isOpen ? "border-ember/40 shadow-[0_8px_32px_rgba(0,0,0,0.45),0_0_28px_rgba(232,112,42,0.08)]" : "border-line hover:border-white/20"
+                  isOpen ? "border-accent/40 shadow-[0_8px_32px_rgba(0,0,0,0.45),0_0_28px_rgba(139,124,255,0.08)]" : "border-line hover:border-white/20"
                 }`}
               >
                 <h3 className="m-0">
@@ -40,7 +40,7 @@ export const FAQSection = () => {
                     aria-expanded={isOpen}
                     aria-controls={panelId}
                     onClick={() => toggleFAQ(idx)}
-                    className="w-full px-6 py-5 text-left flex items-center justify-between gap-4 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ember"
+                    className="w-full px-6 py-5 text-left flex items-center justify-between gap-4 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent"
                   >
                     <span className="text-base sm:text-lg font-semibold text-ink">
                       {faq.question}
@@ -48,7 +48,7 @@ export const FAQSection = () => {
                     <span
                       className={`w-8 h-8 rounded-full border flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
                         isOpen
-                          ? "rotate-180 bg-ember-deep text-white border-ember-deep shadow-[0_0_16px_rgba(166,58,10,0.5)]"
+                          ? "rotate-180 bg-accent-deep text-white border-accent-deep shadow-[0_0_16px_rgba(109,93,246,0.5)]"
                           : "bg-cream border-line text-muted"
                       }`}
                       aria-hidden="true"
@@ -76,7 +76,7 @@ export const FAQSection = () => {
           Have a different question?{" "}
           <a
             href="#contact"
-            className="text-ember font-semibold underline decoration-ember/40 underline-offset-4 hover:decoration-ember rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-ember"
+            className="text-accent font-semibold underline decoration-accent/40 underline-offset-4 hover:decoration-accent rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
           >
             Send a quick message
           </a>{" "}

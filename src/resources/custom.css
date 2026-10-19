@@ -7,22 +7,22 @@
   --font-body: var(--font-body), system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-code: var(--font-code), ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  /* Dark cinematic palette — near-black warm backgrounds, ember accents.
-     --color-ember is the bright ember for text/icons/rings on dark (6.3:1 on paper);
-     --color-ember-deep keeps the original #A63A0A family for filled buttons
-     (white text at 6.5:1); --color-ember-dark is the button hover state. */
+  /* Dark cinematic palette — near-black base, violet/indigo accents.
+     --color-accent is the bright violet for text/icons/rings on dark (6.1:1);
+     --color-accent-deep is the filled-button violet (white text at 4.6:1);
+     --color-accent-dark is the button hover state (deep indigo). */
   --color-paper: #0a0908;   /* page background: near-black warm */
-  --color-cream: #14110d;   /* alt section tint: lifted warm charcoal */
-  --color-surface: #181410; /* cards */
-  --color-elev: #201a14;    /* elevated surfaces */
-  --color-line: #2c251d;    /* 1px warm borders on dark */
-  --color-ink: #f4ede2;     /* primary text: warm porcelain */
-  --color-body: #cfc3b1;    /* body text */
-  --color-muted: #9a8d7b;   /* muted text */
-  --color-ember: #e8702a;   /* accent — bright ember for dark backgrounds */
-  --color-ember-deep: #a63a0a; /* filled-button ember (original family) */
-  --color-ember-dark: #7e2c07; /* accent hover */
-  --color-ember-tint: #251309; /* accent wash background (dark) */
+  --color-cream: #12101b;   /* alt section tint: lifted cool charcoal */
+  --color-surface: #151324; /* cards */
+  --color-elev: #1b1832;    /* elevated surfaces */
+  --color-line: #2a2547;    /* 1px cool borders on dark */
+  --color-ink: #f1eefa;     /* primary text: cool porcelain */
+  --color-body: #c8c3da;    /* body text */
+  --color-muted: #8f89a6;   /* muted text */
+  --color-accent: #8B7CFF;     /* primary accent — electric violet for dark backgrounds */
+  --color-accent-deep: #6D5DF6;  /* filled-button violet (white text 4.6:1) */
+  --color-accent-dark: #4F46E5;  /* accent hover — deep indigo */
+  --color-accent-tint: #141126;  /* accent wash background (dark violet) */
 }
 
 /* Custom CSS */
@@ -307,12 +307,12 @@ html {
 
 /* ========================================================
    DARK CINEMATIC DESIGN SYSTEM
-   Near-black warm backgrounds, ember glow accents.
+   Near-black base, violet glow accents.
    ======================================================== */
 
 html, body {
   background-color: #0a0908;
-  color: #f4ede2;
+  color: #f1eefa;
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -338,15 +338,15 @@ img, video, canvas {
 
 /* Visible, consistent keyboard focus for AA accessibility */
 :focus-visible {
-  outline: 2px solid #e8702a;
+  outline: 2px solid #8B7CFF;
   outline-offset: 3px;
   border-radius: 4px;
 }
 
-/* Warm text selection */
+/* Violet text selection */
 ::selection {
-  background: #a63a0a;
-  color: #f4ede2;
+  background: #6D5DF6;
+  color: #f1eefa;
 }
 
 /* Elegant thin scrollbar */
@@ -357,11 +357,11 @@ img, video, canvas {
   background: #0a0908;
 }
 ::-webkit-scrollbar-thumb {
-  background: #3a3129;
+  background: #2e2a45;
   border-radius: 8px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #e8702a;
+  background: #8B7CFF;
 }
 
 /* Respect prefers-reduced-motion */
@@ -390,16 +390,16 @@ img, video, canvas {
    DARK CINEMATIC HELPERS
    ======================================================== */
 
-/* Slow drifting ember ambience — transform + opacity only. */
-@keyframes ember-drift {
+/* Slow drifting violet ambience — transform + opacity only. */
+@keyframes accent-drift {
   0%, 100% { transform: translate3d(0, 0, 0); opacity: 0.7; }
   50% { transform: translate3d(0, -28px, 0); opacity: 1; }
 }
-.ember-drift {
+.accent-drift {
   animation: none;
 }
 @media (prefers-reduced-motion: no-preference) {
-  .ember-drift { animation: ember-drift 9s ease-in-out infinite; }
+  .accent-drift { animation: accent-drift 9s ease-in-out infinite; }
 }
 
 /* Subtle film grain overlay for cinematic depth (static, no repaint cost). */
@@ -415,20 +415,20 @@ img, video, canvas {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
 }
 
-/* Cinematic card: deep surface, warm border, ember edge-glow on hover. */
+/* Cinematic card: deep surface, cool border, violet edge-glow on hover. */
 .cine-card {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.012)), #181410;
-  border: 1px solid #2c251d;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.012)), #151324;
+  border: 1px solid #2a2547;
   box-shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease, box-shadow 0.35s ease;
 }
 .cine-card:hover {
   transform: translateY(-6px);
-  border-color: rgba(232, 112, 42, 0.35);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55), 0 0 44px rgba(232, 112, 42, 0.10);
+  border-color: rgba(139, 124, 255, 0.35);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55), 0 0 44px rgba(139, 124, 255, 0.10);
 }
 
-/* Ember hairline used on top of premium cards. */
-.ember-hairline {
-  background: linear-gradient(90deg, transparent, rgba(232, 112, 42, 0.85) 25%, rgba(166, 58, 10, 0.85) 75%, transparent);
+/* Accent hairline used on top of premium cards. */
+.accent-hairline {
+  background: linear-gradient(90deg, transparent, rgba(139, 124, 255, 0.85) 25%, rgba(109, 93, 246, 0.85) 75%, transparent);
 }

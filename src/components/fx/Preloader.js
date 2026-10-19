@@ -135,7 +135,7 @@ export default function Preloader() {
           style={{
             width: 48,
             height: 2,
-            background: "linear-gradient(90deg, #A63A0A, #E06B1F)",
+            background: "linear-gradient(90deg, #4F46E5, #8B7CFF)",
             borderRadius: 2,
           }}
           aria-hidden="true"
@@ -157,7 +157,7 @@ export default function Preloader() {
         aria-hidden="true"
       >
         {count}
-        <span style={{ fontSize: "0.45em", color: "#A63A0A" }}>%</span>
+        <span style={{ fontSize: "0.45em", color: "#8B7CFF" }}>%</span>
       </div>
     </div>
   );

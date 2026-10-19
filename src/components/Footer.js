@@ -41,15 +41,15 @@ export const Footer = () => {
   return (
     <footer className="w-full border-t border-line bg-[#0c0a08] relative z-10 pt-14 pb-[calc(2.5rem+env(safe-area-inset-bottom))] overflow-hidden">
       <div
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-[720px] h-px ember-hairline opacity-60"
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-[720px] h-px accent-hairline opacity-60"
         aria-hidden="true"
       />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 pb-10 border-b border-line">
           {/* Brand */}
           <div className="space-y-3 max-w-sm">
-            <Link href="/" className="flex items-center gap-2.5 rounded-lg w-fit focus:outline-none focus-visible:ring-2 focus-visible:ring-ember">
-              <span className="w-9 h-9 rounded-xl bg-ember-tint border border-ember/25 flex items-center justify-center font-heading font-semibold text-sm text-ember shadow-[0_0_20px_rgba(232,112,42,0.15)]">
+            <Link href="/" className="flex items-center gap-2.5 rounded-lg w-fit focus:outline-none focus-visible:ring-2 focus-visible:ring-accent">
+              <span className="w-9 h-9 rounded-xl bg-accent-tint border border-accent/25 flex items-center justify-center font-heading font-semibold text-sm text-accent shadow-[0_0_20px_rgba(139,124,255,0.15)]">
                 SM.
               </span>
               <span className="text-lg font-heading font-semibold tracking-tight text-ink">
@@ -68,7 +68,7 @@ export const Footer = () => {
                 key={link.name}
                 href={link.href}
                 onClick={(e) => handleScroll(e, link.href)}
-                className="hover:text-ember transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-ember rounded"
+                className="hover:text-accent transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
               >
                 {link.name}
               </a>
@@ -81,7 +81,7 @@ export const Footer = () => {
               href={github}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 rounded-xl bg-white/[0.05] border border-line text-body hover:text-ember hover:border-ember/40 hover:bg-white/[0.09] hover:-translate-y-0.5 transition-all shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-ember"
+              className="p-3 rounded-xl bg-white/[0.05] border border-line text-body hover:text-accent hover:border-accent/40 hover:bg-white/[0.09] hover:-translate-y-0.5 transition-all shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
               aria-label="GitHub profile (opens in a new tab)"
             >
               <FaGithub className="w-5 h-5" aria-hidden="true" />
@@ -90,14 +90,14 @@ export const Footer = () => {
               href={linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 rounded-xl bg-white/[0.05] border border-line text-body hover:text-ember hover:border-ember/40 hover:bg-white/[0.09] hover:-translate-y-0.5 transition-all shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-ember"
+              className="p-3 rounded-xl bg-white/[0.05] border border-line text-body hover:text-accent hover:border-accent/40 hover:bg-white/[0.09] hover:-translate-y-0.5 transition-all shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
               aria-label="LinkedIn profile (opens in a new tab)"
             >
               <FaLinkedin className="w-5 h-5" aria-hidden="true" />
             </a>
             <a
               href={`mailto:${person.email}`}
-              className="p-3 rounded-xl bg-white/[0.05] border border-line text-body hover:text-ember hover:border-ember/40 hover:bg-white/[0.09] hover:-translate-y-0.5 transition-all shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-ember"
+              className="p-3 rounded-xl bg-white/[0.05] border border-line text-body hover:text-accent hover:border-accent/40 hover:bg-white/[0.09] hover:-translate-y-0.5 transition-all shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
               aria-label={`Email ${person.email}`}
             >
               <FaEnvelope className="w-5 h-5" aria-hidden="true" />

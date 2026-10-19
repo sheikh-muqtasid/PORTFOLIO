@@ -8,16 +8,16 @@ import { SectionHeader } from "./SectionHeader";
 export const TestimonialsSection = () => {
   return (
     <section className="grain w-full py-20 md:py-28 bg-cream/60 relative overflow-hidden">
-      {/* Ambient ember glows */}
+      {/* Ambient accent glows */}
       <div
-        className="ember-drift absolute -top-32 right-1/4 w-[560px] h-[360px] rounded-full blur-3xl pointer-events-none"
+        className="accent-drift absolute -top-32 right-1/4 w-[560px] h-[360px] rounded-full blur-3xl pointer-events-none"
         aria-hidden="true"
-        style={{ background: "radial-gradient(ellipse, rgba(232,112,42,0.09) 0%, transparent 70%)" }}
+        style={{ background: "radial-gradient(ellipse, rgba(139,124,255,0.09) 0%, transparent 70%)" }}
       />
       <div
-        className="ember-drift absolute -bottom-40 left-1/5 w-[520px] h-[360px] rounded-full blur-3xl pointer-events-none"
+        className="accent-drift absolute -bottom-40 left-1/5 w-[520px] h-[360px] rounded-full blur-3xl pointer-events-none"
         aria-hidden="true"
-        style={{ background: "radial-gradient(ellipse, rgba(166,58,10,0.12) 0%, transparent 70%)", animationDelay: "-4.5s" }}
+        style={{ background: "radial-gradient(ellipse, rgba(109,93,246,0.12) 0%, transparent 70%)", animationDelay: "-4.5s" }}
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
@@ -34,13 +34,13 @@ export const TestimonialsSection = () => {
               className="cine-card group relative rounded-3xl p-7 sm:p-8 flex flex-col overflow-hidden"
             >
               <div
-                className="absolute top-0 left-8 right-8 h-px ember-hairline opacity-60 group-hover:opacity-100 transition-opacity duration-500"
+                className="absolute top-0 left-8 right-8 h-px accent-hairline opacity-60 group-hover:opacity-100 transition-opacity duration-500"
                 aria-hidden="true"
               />
 
               <div className="flex items-center justify-between mb-5">
                 <div
-                  className="flex items-center gap-1 text-ember drop-shadow-[0_0_8px_rgba(232,112,42,0.45)]"
+                  className="flex items-center gap-1 text-accent drop-shadow-[0_0_8px_rgba(139,124,255,0.45)]"
                   role="img"
                   aria-label={`Rated ${item.rating} out of 5 stars`}
                 >
@@ -48,7 +48,7 @@ export const TestimonialsSection = () => {
                     <FaStar key={i} className="w-4 h-4" aria-hidden="true" />
                   ))}
                 </div>
-                <FaQuoteLeft className="w-6 h-6 text-ember/20 group-hover:text-ember/35 transition-colors duration-300" aria-hidden="true" />
+                <FaQuoteLeft className="w-6 h-6 text-accent/20 group-hover:text-accent/35 transition-colors duration-300" aria-hidden="true" />
               </div>
 
               <blockquote className="text-body leading-relaxed text-[15px] flex-1">
@@ -57,7 +57,7 @@ export const TestimonialsSection = () => {
 
               <figcaption className="pt-5 mt-6 border-t border-line flex items-center gap-3.5">
                 <span
-                  className="w-11 h-11 rounded-full bg-ember-tint border border-ember/25 flex items-center justify-center font-heading font-semibold text-base text-ember flex-shrink-0 shadow-[0_0_20px_rgba(232,112,42,0.15)]"
+                  className="w-11 h-11 rounded-full bg-accent-tint border border-accent/25 flex items-center justify-center font-heading font-semibold text-base text-accent flex-shrink-0 shadow-[0_0_20px_rgba(139,124,255,0.15)]"
                   aria-hidden="true"
                 >
                   {item.clientName.charAt(0)}

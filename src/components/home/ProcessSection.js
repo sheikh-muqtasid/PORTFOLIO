@@ -10,11 +10,11 @@ const stepIcons = [FaPhone, FaPenNib, FaCode, FaRocket];
 export const ProcessSection = () => {
   return (
     <section id="process" className="w-full scroll-mt-24 py-20 md:py-28 bg-paper relative overflow-hidden">
-      {/* Ambient ember glow */}
+      {/* Ambient accent glow */}
       <div
-        className="ember-drift absolute -bottom-40 -left-40 w-[600px] h-[420px] rounded-full blur-3xl pointer-events-none"
+        className="accent-drift absolute -bottom-40 -left-40 w-[600px] h-[420px] rounded-full blur-3xl pointer-events-none"
         aria-hidden="true"
-        style={{ background: "radial-gradient(ellipse, rgba(232,112,42,0.07) 0%, transparent 70%)" }}
+        style={{ background: "radial-gradient(ellipse, rgba(139,124,255,0.07) 0%, transparent 70%)" }}
       />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <SectionHeader
@@ -33,10 +33,10 @@ export const ProcessSection = () => {
                 className="cine-card relative rounded-3xl p-7 flex flex-col"
               >
                 <div className="flex items-center justify-between mb-6">
-                  <span className="w-12 h-12 rounded-2xl bg-ember-tint border border-ember/20 flex items-center justify-center text-ember shadow-[0_0_24px_rgba(232,112,42,0.15)]">
+                  <span className="w-12 h-12 rounded-2xl bg-accent-tint border border-accent/20 flex items-center justify-center text-accent shadow-[0_0_24px_rgba(139,124,255,0.15)]">
                     <Icon className="w-5 h-5" aria-hidden="true" />
                   </span>
-                  <span className="font-heading text-3xl font-semibold text-ember/25" aria-hidden="true">
+                  <span className="font-heading text-3xl font-semibold text-accent/25" aria-hidden="true">
                     {step.step}
                   </span>
                 </div>
@@ -49,7 +49,7 @@ export const ProcessSection = () => {
                 <div className="mt-6 pt-5 border-t border-line" aria-hidden="true">
                   <div className="w-full h-1 bg-white/[0.06] rounded-full overflow-hidden">
                     <div
-                      className="h-full rounded-full bg-gradient-to-r from-ember-deep to-ember shadow-[0_0_12px_rgba(232,112,42,0.5)]"
+                      className="h-full rounded-full bg-gradient-to-r from-accent-deep to-accent shadow-[0_0_12px_rgba(139,124,255,0.5)]"
                       style={{ width: `${(idx + 1) * 25}%` }}
                     />
                   </div>

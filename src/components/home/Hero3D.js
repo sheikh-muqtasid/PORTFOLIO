@@ -28,7 +28,7 @@ class WebGLErrorBoundary extends Component {
 }
 
 /**
- * Static layered CSS gradient fallback — ember glow on near-black.
+ * Static layered CSS gradient fallback — accent glow on near-black.
  * Pure CSS, zero GPU cost, never a blank hero.
  */
 export function Hero3DFallback({ simplified = false }) {
@@ -36,30 +36,30 @@ export function Hero3DFallback({ simplified = false }) {
     <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
       {/* near-black base */}
       <div className="absolute inset-0" style={{ background: "#0A0908" }} />
-      {/* ember core glow, offset right where the 3D form would sit */}
+      {/* accent core glow, offset right where the 3D form would sit */}
       <div
         className={`absolute -right-[10%] top-1/2 h-[80vmin] w-[80vmin] -translate-y-1/2 rounded-full blur-3xl ${
           simplified ? "" : "motion-safe:animate-pulse"
         }`}
         style={{
           background:
-            "radial-gradient(circle, rgba(166,58,10,0.42) 0%, rgba(166,58,10,0.14) 45%, transparent 70%)",
+            "radial-gradient(circle, rgba(109,93,246,0.42) 0%, rgba(109,93,246,0.14) 45%, transparent 70%)",
         }}
       />
-      {/* faint amber wash, upper left */}
+      {/* faint violet wash, upper left */}
       <div
         className="absolute left-[6%] top-[10%] h-[52vmin] w-[52vmin] rounded-full blur-3xl"
         style={{
           background:
-            "radial-gradient(circle, rgba(217,130,43,0.16) 0%, transparent 65%)",
+            "radial-gradient(circle, rgba(139,124,255,0.16) 0%, transparent 65%)",
         }}
       />
-      {/* ember horizon hairline */}
+      {/* accent horizon hairline */}
       <div
         className="absolute inset-x-0 bottom-[20%] h-px"
         style={{
           background:
-            "linear-gradient(90deg, transparent, rgba(217,130,43,0.35), transparent)",
+            "linear-gradient(90deg, transparent, rgba(139,124,255,0.35), transparent)",
         }}
       />
     </div>

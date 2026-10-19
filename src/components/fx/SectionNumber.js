@@ -45,7 +45,7 @@ export default function SectionNumber({
             fontWeight: 600,
             letterSpacing: "0.32em",
             textTransform: "uppercase",
-            color: "#E06B1F",
+            color: "#8B7CFF",
             paddingLeft: "0.32em",
           }}
         >

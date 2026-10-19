@@ -80,10 +80,10 @@ export const Header = () => {
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center gap-3 group rounded-xl p-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-ember"
+            className="flex items-center gap-3 group rounded-xl p-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             aria-label="Sheikh Muqtasid — home"
           >
-            <span className="w-10 h-10 rounded-xl bg-ember-tint border border-ember/25 flex items-center justify-center font-heading font-semibold text-lg text-ember group-hover:bg-ember group-hover:text-[#160b03] group-hover:border-ember transition-colors duration-300 shadow-[0_0_20px_rgba(232,112,42,0.15)]">
+            <span className="w-10 h-10 rounded-xl bg-accent-tint border border-accent/25 flex items-center justify-center font-heading font-semibold text-lg text-accent group-hover:bg-accent group-hover:text-[#141126] group-hover:border-accent transition-colors duration-300 shadow-[0_0_20px_rgba(139,124,255,0.15)]">
               SM.
             </span>
             <span className="flex flex-col leading-tight">
@@ -106,7 +106,7 @@ export const Header = () => {
                 key={link.name}
                 href={link.href}
                 onClick={(e) => handleLinkClick(e, link.href)}
-                className="px-4 py-2 text-sm font-medium text-body hover:text-ink rounded-full transition-colors hover:bg-white/[0.08] focus:outline-none focus-visible:ring-2 focus-visible:ring-ember"
+                className="px-4 py-2 text-sm font-medium text-body hover:text-ink rounded-full transition-colors hover:bg-white/[0.08] focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
               >
                 {link.name}
               </a>
@@ -118,7 +118,7 @@ export const Header = () => {
             <a
               href={contactHref}
               onClick={(e) => handleLinkClick(e, contactHref)}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs uppercase tracking-wider font-bold bg-ember-deep text-white hover:bg-ember-dark transition-all duration-300 hover:-translate-y-0.5 shadow-[0_8px_20px_rgba(166,58,10,0.4)] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ember"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs uppercase tracking-wider font-bold bg-accent-deep text-white hover:bg-accent-dark transition-all duration-300 hover:-translate-y-0.5 shadow-[0_8px_20px_rgba(109,93,246,0.4)] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent"
             >
               <span>Start a Project</span>
               <svg
@@ -139,14 +139,14 @@ export const Header = () => {
             <a
               href={contactHref}
               onClick={(e) => handleLinkClick(e, contactHref)}
-              className="px-3.5 py-2 rounded-full text-xs font-bold bg-ember-deep text-white shadow-[0_6px_16px_rgba(166,58,10,0.4)]"
+              className="px-3.5 py-2 rounded-full text-xs font-bold bg-accent-deep text-white shadow-[0_6px_16px_rgba(109,93,246,0.4)]"
             >
               Get a Quote
             </a>
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2.5 rounded-xl bg-white/[0.06] border border-line text-ink shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-ember"
+              className="p-2.5 rounded-xl bg-white/[0.06] border border-line text-ink shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-menu"
               aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
@@ -197,7 +197,7 @@ export const Header = () => {
             <a
               href={contactHref}
               onClick={(e) => handleLinkClick(e, contactHref)}
-              className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl text-sm uppercase tracking-wider font-bold bg-ember-deep text-white shadow-[0_8px_20px_rgba(166,58,10,0.4)]"
+              className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl text-sm uppercase tracking-wider font-bold bg-accent-deep text-white shadow-[0_8px_20px_rgba(109,93,246,0.4)]"
             >
               <span>Start a Project</span>
               <svg
@@ -214,7 +214,7 @@ export const Header = () => {
           </div>
 
           <p className="flex items-center justify-center gap-2 pt-4 text-xs text-muted">
-            <span className="w-2 h-2 rounded-full bg-ember animate-pulse" aria-hidden="true" />
+            <span className="w-2 h-2 rounded-full bg-accent animate-pulse" aria-hidden="true" />
             Available for new projects · Replies within 24 hours
           </p>
         </div>

@@ -133,8 +133,8 @@ export const HeroSection = () => {
             className="mb-7 inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.06] px-4 py-2 backdrop-blur-md"
           >
             <span className="relative flex h-2 w-2" aria-hidden="true">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#ff7a1a] opacity-60" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-[#ff7a1a]" />
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#8B7CFF] opacity-60" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-[#8B7CFF]" />
             </span>
             <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-stone-300">
               Available for new projects
@@ -172,7 +172,7 @@ export const HeroSection = () => {
                       w.accent
                         ? {
                             background:
-                              "linear-gradient(100deg,#ffb15e 0%,#f97316 55%,#c2490f 100%)",
+                              "linear-gradient(100deg,#A78BFA 0%,#8B7CFF 55%,#6D5DF6 100%)",
                             WebkitBackgroundClip: "text",
                             backgroundClip: "text",
                             color: "transparent",
@@ -209,7 +209,7 @@ export const HeroSection = () => {
               <button
                 type="button"
                 onClick={() => scrollTo("contact")}
-                className="inline-flex w-full items-center justify-center gap-2.5 rounded-full bg-[#c2490f] px-8 py-4 text-sm font-bold uppercase tracking-[0.14em] text-white shadow-[0_14px_44px_rgba(194,73,15,0.4)] transition-colors duration-300 hover:bg-[#a63a0a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ff7a1a] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0908] sm:w-auto"
+                className="inline-flex w-full items-center justify-center gap-2.5 rounded-full bg-[#6D5DF6] px-8 py-4 text-sm font-bold uppercase tracking-[0.14em] text-white shadow-[0_14px_44px_rgba(109,93,246,0.4)] transition-colors duration-300 hover:bg-[#4F46E5] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B7CFF] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0908] sm:w-auto"
               >
                 <span>Get a Free Quote</span>
                 <svg
@@ -233,7 +233,7 @@ export const HeroSection = () => {
               <button
                 type="button"
                 onClick={() => scrollTo("work")}
-                className="inline-flex w-full items-center justify-center gap-2.5 rounded-full border border-white/15 bg-white/[0.04] px-8 py-4 text-sm font-bold uppercase tracking-[0.14em] text-stone-100 backdrop-blur transition-colors duration-300 hover:border-white/30 hover:bg-white/[0.08] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ff7a1a] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0908] sm:w-auto"
+                className="inline-flex w-full items-center justify-center gap-2.5 rounded-full border border-white/15 bg-white/[0.04] px-8 py-4 text-sm font-bold uppercase tracking-[0.14em] text-stone-100 backdrop-blur transition-colors duration-300 hover:border-white/30 hover:bg-white/[0.08] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B7CFF] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0908] sm:w-auto"
               >
                 <span>View My Work</span>
                 <svg
@@ -264,7 +264,7 @@ export const HeroSection = () => {
             <p className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs font-medium text-stone-400 sm:text-sm">
               <span className="flex items-center gap-2">
                 <span
-                  className="h-1.5 w-1.5 rounded-full bg-[#ff7a1a]"
+                  className="h-1.5 w-1.5 rounded-full bg-[#8B7CFF]"
                   aria-hidden="true"
                 />
                 <strong className="font-semibold text-stone-200">7+</strong>&nbsp;projects
@@ -275,7 +275,7 @@ export const HeroSection = () => {
               </span>
               <span className="flex items-center gap-2">
                 <span
-                  className="h-1.5 w-1.5 rounded-full bg-[#ff7a1a]"
+                  className="h-1.5 w-1.5 rounded-full bg-[#8B7CFF]"
                   aria-hidden="true"
                 />
                 Custom code specialist
@@ -285,7 +285,7 @@ export const HeroSection = () => {
               </span>
               <span className="flex items-center gap-2">
                 <span
-                  className="h-1.5 w-1.5 rounded-full bg-[#ff7a1a]"
+                  className="h-1.5 w-1.5 rounded-full bg-[#8B7CFF]"
                   aria-hidden="true"
                 />
                 Replies within 24 hours
@@ -304,7 +304,7 @@ export const HeroSection = () => {
           Scroll
         </span>
         <span className="block h-10 w-px overflow-hidden bg-white/10">
-          <span className="block h-4 w-px bg-[#ff7a1a] motion-safe:animate-bounce" />
+          <span className="block h-4 w-px bg-[#8B7CFF] motion-safe:animate-bounce" />
         </span>
       </div>
     </section>

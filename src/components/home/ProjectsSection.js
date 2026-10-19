@@ -160,9 +160,9 @@ function ProjectButtons({ project, compact = false }) {
     <div className="flex flex-wrap items-center gap-3">
       <Link
         href={project.caseStudyUrl}
-        className={`inline-flex items-center gap-2 ${btn} rounded-full font-bold uppercase tracking-wider bg-white/[0.06] text-ink border border-line hover:border-ember/50 hover:text-ember shadow-sm transition-all`}
+        className={`inline-flex items-center gap-2 ${btn} rounded-full font-bold uppercase tracking-wider bg-white/[0.06] text-ink border border-line hover:border-accent/50 hover:text-accent shadow-sm transition-all`}
       >
-        <FaBookOpen className="w-3.5 h-3.5 text-ember" aria-hidden="true" />
+        <FaBookOpen className="w-3.5 h-3.5 text-accent" aria-hidden="true" />
         <span>Case Study</span>
       </Link>
       {project.liveUrl && project.isLive && (
@@ -170,7 +170,7 @@ function ProjectButtons({ project, compact = false }) {
           href={project.liveUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className={`inline-flex items-center gap-2 ${btn} rounded-full font-bold uppercase tracking-wider bg-ember-deep text-white hover:bg-ember-dark shadow-[0_8px_20px_rgba(166,58,10,0.35)] transition-all`}
+          className={`inline-flex items-center gap-2 ${btn} rounded-full font-bold uppercase tracking-wider bg-accent-deep text-white hover:bg-accent-dark shadow-[0_8px_20px_rgba(109,93,246,0.35)] transition-all`}
         >
           <span>{project.liveLabel || "Live Site"}</span>
           <FaArrowUpRightFromSquare className="w-3 h-3" aria-hidden="true" />
@@ -186,11 +186,11 @@ export const ProjectsSection = () => {
 
   return (
     <section id="work" className="w-full scroll-mt-24 py-20 md:py-28 bg-cream/60 relative overflow-hidden">
-      {/* Ambient ember glow */}
+      {/* Ambient accent glow */}
       <div
-        className="ember-drift absolute top-24 -right-40 w-[640px] h-[420px] rounded-full blur-3xl pointer-events-none"
+        className="accent-drift absolute top-24 -right-40 w-[640px] h-[420px] rounded-full blur-3xl pointer-events-none"
         aria-hidden="true"
-        style={{ background: "radial-gradient(ellipse, rgba(232,112,42,0.08) 0%, transparent 70%)" }}
+        style={{ background: "radial-gradient(ellipse, rgba(139,124,255,0.08) 0%, transparent 70%)" }}
       />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <SectionHeader
@@ -203,7 +203,7 @@ export const ProjectsSection = () => {
         <Tilt {...tiltProps} className="w-full mb-6 lg:mb-8">
           <article className="cine-card relative rounded-[2rem] p-6 sm:p-10 overflow-hidden">
             <div
-              className="absolute top-0 left-10 right-10 h-px ember-hairline"
+              className="absolute top-0 left-10 right-10 h-px accent-hairline"
               aria-hidden="true"
             />
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
@@ -217,8 +217,8 @@ export const ProjectsSection = () => {
                     sizes="(max-width: 1024px) 100vw, 58vw"
                     className="object-cover"
                   />
-                  <span className="absolute top-4 left-4 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-[11px] font-semibold uppercase tracking-[0.1em] text-ember shadow-sm">
-                    <span className="w-2 h-2 rounded-full bg-ember animate-pulse" aria-hidden="true" />
+                  <span className="absolute top-4 left-4 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-[11px] font-semibold uppercase tracking-[0.1em] text-accent shadow-sm">
+                    <span className="w-2 h-2 rounded-full bg-accent animate-pulse" aria-hidden="true" />
                     Featured
                   </span>
                 </div>
@@ -264,8 +264,8 @@ export const ProjectsSection = () => {
                       className="object-cover"
                     />
                     {project.isLive && (
-                      <span className="absolute top-3 right-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-[10px] font-semibold uppercase tracking-wider text-ember shadow-sm">
-                        <span className="w-1.5 h-1.5 rounded-full bg-ember animate-pulse" aria-hidden="true" />
+                      <span className="absolute top-3 right-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-[10px] font-semibold uppercase tracking-wider text-accent shadow-sm">
+                        <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" aria-hidden="true" />
                         Live
                       </span>
                     )}
@@ -303,7 +303,7 @@ export const ProjectsSection = () => {
         {/* Concept builds — fictional restaurant demo sites */}
         <div className="mt-16 lg:mt-20">
           <div className="flex flex-col items-center text-center mb-10 space-y-3 max-w-2xl mx-auto">
-            <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.05] border border-line text-[11px] font-semibold uppercase tracking-[0.14em] text-ember shadow-sm">
+            <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.05] border border-line text-[11px] font-semibold uppercase tracking-[0.14em] text-accent shadow-sm">
               <FaFlask className="w-3 h-3" aria-hidden="true" />
               Concept builds
             </span>
@@ -321,7 +321,7 @@ export const ProjectsSection = () => {
               <Tilt key={demo.id} {...tiltProps} glareBorderRadius="1rem" className="h-full">
                 <Link
                   href={demo.route}
-                  className="cine-card group h-full rounded-3xl overflow-hidden flex flex-col focus:outline-none focus-visible:ring-2 focus-visible:ring-ember"
+                  className="cine-card group h-full rounded-3xl overflow-hidden flex flex-col focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                 >
                   <div className="relative w-full aspect-[16/10] overflow-hidden bg-cream">
                     <Image
@@ -331,12 +331,12 @@ export const ProjectsSection = () => {
                       sizes="(max-width: 768px) 100vw, 33vw"
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
-                    <span className="absolute top-3 left-3 px-3 py-1.5 rounded-full bg-black/65 text-ember backdrop-blur-md border border-white/10 text-[10px] font-semibold uppercase tracking-[0.1em]">
+                    <span className="absolute top-3 left-3 px-3 py-1.5 rounded-full bg-black/65 text-accent backdrop-blur-md border border-white/10 text-[10px] font-semibold uppercase tracking-[0.1em]">
                       Concept demo — fictional restaurant
                     </span>
                   </div>
                   <div className="p-6 space-y-3 flex-1 flex flex-col">
-                    <h4 className="font-heading text-xl font-semibold text-ink tracking-tight group-hover:text-ember transition-colors">
+                    <h4 className="font-heading text-xl font-semibold text-ink tracking-tight group-hover:text-accent transition-colors">
                       {demo.name}
                     </h4>
                     <p className="text-sm text-body leading-relaxed flex-1">
@@ -344,12 +344,12 @@ export const ProjectsSection = () => {
                     </p>
                     <div className="flex flex-wrap gap-1.5 pt-1">
                       {demo.features.map((f) => (
-                        <span key={f} className="text-[11px] font-medium px-2.5 py-1 rounded-full bg-ember-tint border border-ember/15 text-ember">
+                        <span key={f} className="text-[11px] font-medium px-2.5 py-1 rounded-full bg-accent-tint border border-accent/15 text-accent">
                           {f}
                         </span>
                       ))}
                     </div>
-                    <span className="inline-flex items-center gap-2 pt-2 text-xs uppercase font-bold tracking-[0.12em] text-ink group-hover:text-ember transition-colors">
+                    <span className="inline-flex items-center gap-2 pt-2 text-xs uppercase font-bold tracking-[0.12em] text-ink group-hover:text-accent transition-colors">
                       <span>Explore the demo</span>
                       <FaArrowUpRightFromSquare className="w-3 h-3" aria-hidden="true" />
                     </span>

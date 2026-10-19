@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 
 /**
- * ScrollProgress — fixed ember-gradient progress bar pinned to the top
+ * ScrollProgress — fixed accent-gradient progress bar pinned to the top
  * of the viewport. scaleX is driven by a passive, rAF-throttled scroll
  * listener; transform-only so it never triggers layout.
  */
@@ -55,7 +55,7 @@ export default function ScrollProgress({ height = 3, className = "" }) {
         zIndex: 9000,
         transform: "scaleX(0)",
         transformOrigin: "0 50%",
-        background: "linear-gradient(90deg, #A63A0A 0%, #E06B1F 55%, #F2994A 100%)",
+        background: "linear-gradient(90deg, #4F46E5 0%, #7C6CFF 55%, #A78BFA 100%)",
         willChange: "transform",
         pointerEvents: "none",
       }}

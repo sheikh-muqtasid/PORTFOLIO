@@ -108,10 +108,10 @@ export const ContactForm = () => {
         {/* Eyebrow */}
         <div className="flex items-center justify-center gap-2 mb-4">
           <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-ember opacity-60" />
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-ember" />
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-60" />
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-accent" />
           </span>
-          <span className="text-xs uppercase font-semibold tracking-[0.14em] text-ember">
+          <span className="text-xs uppercase font-semibold tracking-[0.14em] text-accent">
             Let&rsquo;s build together
           </span>
         </div>
@@ -132,12 +132,12 @@ export const ContactForm = () => {
           <div
             className="absolute top-0 left-0 right-0 h-1"
             aria-hidden="true"
-            style={{ background: "linear-gradient(90deg, transparent, #a63a0a 30%, #a63a0a 70%, transparent)" }}
+            style={{ background: "linear-gradient(90deg, transparent, #6d5df6 30%, #6d5df6 70%, transparent)" }}
           />
 
           {submitted ? (
             <div className="py-10 px-4 text-center space-y-4">
-              <div className="w-16 h-16 rounded-full bg-ember-tint border border-ember/25 flex items-center justify-center mx-auto text-ember mb-4">
+              <div className="w-16 h-16 rounded-full bg-accent-tint border border-accent/25 flex items-center justify-center mx-auto text-accent mb-4">
                 <FaCheck className="w-7 h-7" aria-hidden="true" />
               </div>
               <h3 className="font-heading text-2xl font-semibold text-ink">
@@ -151,7 +151,7 @@ export const ContactForm = () => {
               <button
                 type="button"
                 onClick={() => setSubmitted(false)}
-                className="mt-4 inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-xs uppercase font-bold tracking-wider bg-cream border border-line text-ink hover:border-ember/40 transition-all cursor-pointer"
+                className="mt-4 inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-xs uppercase font-bold tracking-wider bg-cream border border-line text-ink hover:border-accent/40 transition-all cursor-pointer"
               >
                 Send another message
               </button>
@@ -161,7 +161,7 @@ export const ContactForm = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div className="space-y-2">
                   <label htmlFor="contact-name" className="block text-xs uppercase font-semibold tracking-[0.1em] text-body">
-                    Your name <span className="text-ember" aria-hidden="true">*</span>
+                    Your name <span className="text-accent" aria-hidden="true">*</span>
                   </label>
                   <input
                     id="contact-name"
@@ -172,13 +172,13 @@ export const ContactForm = () => {
                     value={formData.name}
                     onChange={handleChange}
                     placeholder="Alex Morgan"
-                    className="w-full px-4 py-3.5 rounded-xl bg-paper border border-line text-ink placeholder:text-muted text-sm focus:outline-none focus:border-ember focus:ring-2 focus:ring-ember/25 transition-all"
+                    className="w-full px-4 py-3.5 rounded-xl bg-paper border border-line text-ink placeholder:text-muted text-sm focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/25 transition-all"
                   />
                 </div>
 
                 <div className="space-y-2">
                   <label htmlFor="contact-email" className="block text-xs uppercase font-semibold tracking-[0.1em] text-body">
-                    Email address <span className="text-ember" aria-hidden="true">*</span>
+                    Email address <span className="text-accent" aria-hidden="true">*</span>
                   </label>
                   <input
                     id="contact-email"
@@ -189,7 +189,7 @@ export const ContactForm = () => {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="alex@yourrestaurant.com"
-                    className="w-full px-4 py-3.5 rounded-xl bg-paper border border-line text-ink placeholder:text-muted text-sm focus:outline-none focus:border-ember focus:ring-2 focus:ring-ember/25 transition-all"
+                    className="w-full px-4 py-3.5 rounded-xl bg-paper border border-line text-ink placeholder:text-muted text-sm focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/25 transition-all"
                   />
                 </div>
               </div>
@@ -203,7 +203,7 @@ export const ContactForm = () => {
                   name="projectType"
                   value={formData.projectType}
                   onChange={handleChange}
-                  className="w-full px-4 py-3.5 rounded-xl bg-paper border border-line text-ink text-sm focus:outline-none focus:border-ember focus:ring-2 focus:ring-ember/25 transition-all"
+                  className="w-full px-4 py-3.5 rounded-xl bg-paper border border-line text-ink text-sm focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/25 transition-all"
                 >
                   <option value="Restaurant Website">Restaurant Website (menu, reservations &amp; more)</option>
                   <option value="Business Website">Business Website</option>
@@ -216,7 +216,7 @@ export const ContactForm = () => {
 
               <div className="space-y-2">
                 <label htmlFor="contact-details" className="block text-xs uppercase font-semibold tracking-[0.1em] text-body">
-                  Project details &amp; goals <span className="text-ember" aria-hidden="true">*</span>
+                  Project details &amp; goals <span className="text-accent" aria-hidden="true">*</span>
                 </label>
                 <textarea
                   id="contact-details"
@@ -226,7 +226,7 @@ export const ContactForm = () => {
                   value={formData.details}
                   onChange={handleChange}
                   placeholder="Tell me about your restaurant or business, what the website should do (online menu, reservations, takeaway orders…), and any target launch date."
-                  className="w-full px-4 py-3.5 rounded-xl bg-paper border border-line text-ink placeholder:text-muted text-sm focus:outline-none focus:border-ember focus:ring-2 focus:ring-ember/25 transition-all resize-y min-h-[120px]"
+                  className="w-full px-4 py-3.5 rounded-xl bg-paper border border-line text-ink placeholder:text-muted text-sm focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/25 transition-all resize-y min-h-[120px]"
                 />
               </div>
 
@@ -239,7 +239,7 @@ export const ContactForm = () => {
               <button
                 type="submit"
                 disabled={submitting}
-                className="w-full py-4 px-6 rounded-full text-sm uppercase tracking-wider font-bold bg-ember-deep text-white hover:bg-ember-dark transition-all duration-300 hover:-translate-y-0.5 shadow-[0_12px_28px_rgba(166,58,10,0.28)] disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ember"
+                className="w-full py-4 px-6 rounded-full text-sm uppercase tracking-wider font-bold bg-accent-deep text-white hover:bg-accent-dark transition-all duration-300 hover:-translate-y-0.5 shadow-[0_12px_28px_rgba(109,93,246,0.28)] disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent"
               >
                 <FaPaperPlane className="w-4 h-4" aria-hidden="true" />
                 {submitting ? <span>Sending…</span> : <span>Send project inquiry</span>}
@@ -249,7 +249,7 @@ export const ContactForm = () => {
                 Prefer email? Write to{" "}
                 <a
                   href={`mailto:${person.email}`}
-                  className="text-ember font-semibold underline decoration-ember/40 underline-offset-4 hover:decoration-ember rounded"
+                  className="text-accent font-semibold underline decoration-accent/40 underline-offset-4 hover:decoration-accent rounded"
                 >
                   {person.email}
                 </a>
@@ -261,9 +261,9 @@ export const ContactForm = () => {
           <div className="mt-8 pt-8 border-t border-line grid grid-cols-1 sm:grid-cols-3 gap-4">
             <a
               href={`mailto:${person.email}`}
-              className="p-4 rounded-2xl bg-paper border border-line hover:border-ember/40 transition-all flex items-center gap-3 group"
+              className="p-4 rounded-2xl bg-paper border border-line hover:border-accent/40 transition-all flex items-center gap-3 group"
             >
-              <span className="w-10 h-10 rounded-xl bg-ember-tint flex items-center justify-center text-ember flex-shrink-0" aria-hidden="true">
+              <span className="w-10 h-10 rounded-xl bg-accent-tint flex items-center justify-center text-accent flex-shrink-0" aria-hidden="true">
                 <FaEnvelope className="w-4 h-4" />
               </span>
               <span className="min-w-0">
@@ -277,9 +277,9 @@ export const ContactForm = () => {
                 href={BOOKING_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-4 rounded-2xl bg-paper border border-line hover:border-ember/40 transition-all flex items-center gap-3 group"
+                className="p-4 rounded-2xl bg-paper border border-line hover:border-accent/40 transition-all flex items-center gap-3 group"
               >
-                <span className="w-10 h-10 rounded-xl bg-ember-tint flex items-center justify-center text-ember flex-shrink-0" aria-hidden="true">
+                <span className="w-10 h-10 rounded-xl bg-accent-tint flex items-center justify-center text-accent flex-shrink-0" aria-hidden="true">
                   <FaCalendarDays className="w-4 h-4" />
                 </span>
                 <span className="min-w-0">
@@ -289,26 +289,26 @@ export const ContactForm = () => {
               </a>
             ) : (
               <div
-                className="p-4 rounded-2xl bg-paper border border-dashed border-ember/30 flex items-center gap-3"
+                className="p-4 rounded-2xl bg-paper border border-dashed border-accent/30 flex items-center gap-3"
                 title="Add your scheduling URL in ContactForm.js → BOOKING_LINK"
               >
-                <span className="w-10 h-10 rounded-xl bg-ember-tint flex items-center justify-center text-ember flex-shrink-0" aria-hidden="true">
+                <span className="w-10 h-10 rounded-xl bg-accent-tint flex items-center justify-center text-accent flex-shrink-0" aria-hidden="true">
                   <FaCalendarDays className="w-4 h-4" />
                 </span>
                 <span className="min-w-0">
                   <span className="block text-[11px] text-muted font-semibold uppercase tracking-wider">Book a free call</span>
-                  <span className="block text-xs text-ember font-semibold">[scheduling link placeholder]</span>
+                  <span className="block text-xs text-accent font-semibold">[scheduling link placeholder]</span>
                 </span>
               </div>
             )}
 
             <div className="p-4 rounded-2xl bg-paper border border-line flex items-center gap-3">
-              <span className="w-10 h-10 rounded-xl bg-ember-tint flex items-center justify-center text-ember flex-shrink-0" aria-hidden="true">
+              <span className="w-10 h-10 rounded-xl bg-accent-tint flex items-center justify-center text-accent flex-shrink-0" aria-hidden="true">
                 <FaClock className="w-4 h-4" />
               </span>
               <span>
                 <span className="block text-[11px] text-muted font-semibold uppercase tracking-wider">Response promise</span>
-                <span className="block text-xs text-ember font-semibold">Replies within 24 hours</span>
+                <span className="block text-xs text-accent font-semibold">Replies within 24 hours</span>
               </span>
             </div>
           </div>

@@ -118,7 +118,7 @@ export default async function RootLayout({ children }) {
           suppressHydrationWarning
           background="page"
           fillWidth
-          style={{ minHeight: "100vh", backgroundColor: "#0A0908", color: "#F4EDE2" }}
+          style={{ minHeight: "100vh", backgroundColor: "#0A0908", color: "#F1EEFA" }}
           margin="0"
           padding="0"
           horizontal="center"

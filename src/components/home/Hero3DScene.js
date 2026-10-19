@@ -6,7 +6,7 @@ import { MeshDistortMaterial } from "@react-three/drei";
 import * as THREE from "three";
 
 /* ------------------------------------------------------------------ */
-/* Ember particle field — GPU shader drift. The CPU only bumps a time   */
+/* Violet particle field — GPU shader drift. The CPU only bumps a time   */
 /* uniform each frame; all motion (rise, sway, twinkle) happens in the  */
 /* vertex shader, so this costs ~zero per-frame JS work.               */
 /* ------------------------------------------------------------------ */
@@ -38,14 +38,14 @@ const particleFragment = /* glsl */ `
   void main() {
     float d = length(gl_PointCoord - 0.5);
     float g = pow(smoothstep(0.5, 0.0, d), 1.9);
-    vec3 hot = vec3(1.0, 0.55, 0.18);
-    vec3 deep = vec3(0.65, 0.23, 0.04);
+    vec3 hot = vec3(0.65, 0.55, 0.98);
+    vec3 deep = vec3(0.31, 0.27, 0.90);
     vec3 col = mix(deep, hot, g);
     gl_FragColor = vec4(col * g, g * vAlpha);
   }
 `;
 
-function EmberParticles({ count }) {
+function VioletParticles({ count }) {
   const matRef = useRef(null);
 
   const geometry = useMemo(() => {
@@ -104,7 +104,7 @@ function EmberParticles({ count }) {
 
 /* ------------------------------------------------------------------ */
 /* Hero form — a dark metallic distorted icosahedron (drei              */
-/* MeshDistortMaterial, shader-driven morph = free), an ember wireframe */
+/* MeshDistortMaterial, shader-driven morph = free), an accent wireframe */
 /* shell, a tilted emissive orbit ring, and an additive halo sprite.   */
 /* ------------------------------------------------------------------ */
 
@@ -118,9 +118,9 @@ function HeroForm({ mobile }) {
     c.height = 128;
     const ctx = c.getContext("2d");
     const grd = ctx.createRadialGradient(64, 64, 0, 64, 64, 64);
-    grd.addColorStop(0, "rgba(255,122,26,0.55)");
-    grd.addColorStop(0.4, "rgba(166,58,10,0.22)");
-    grd.addColorStop(1, "rgba(166,58,10,0)");
+    grd.addColorStop(0, "rgba(167,139,250,0.55)");
+    grd.addColorStop(0.4, "rgba(109,93,246,0.22)");
+    grd.addColorStop(1, "rgba(109,93,246,0)");
     ctx.fillStyle = grd;
     ctx.fillRect(0, 0, 128, 128);
     return new THREE.CanvasTexture(c);
@@ -162,20 +162,20 @@ function HeroForm({ mobile }) {
         <mesh>
           <icosahedronGeometry args={[1.3, detail]} />
           <MeshDistortMaterial
-            color="#20130c"
+            color="#141126"
             metalness={0.55}
             roughness={0.38}
             distort={0.42}
             speed={1.4}
-            emissive="#2a0e02"
+            emissive="#1E1B4B"
             emissiveIntensity={0.55}
           />
         </mesh>
-        {/* faint ember wireframe shell for rim definition */}
+        {/* faint accent wireframe shell for rim definition */}
         <mesh scale={1.02}>
           <icosahedronGeometry args={[1.3, Math.max(detail - 2, 1)]} />
           <meshBasicMaterial
-            color="#ff6a1a"
+            color="#8b7cff"
             wireframe
             transparent
             opacity={0.1}
@@ -187,8 +187,8 @@ function HeroForm({ mobile }) {
       <mesh ref={ringRef} rotation={[1.15, 0, 0.4]}>
         <torusGeometry args={[2.05, 0.016, 12, mobile ? 48 : 96]} />
         <meshStandardMaterial
-          color="#c2490f"
-          emissive="#ff7a1a"
+          color="#6d5df6"
+          emissive="#8b7cff"
           emissiveIntensity={1.6}
           roughness={0.4}
           metalness={0.6}
@@ -313,20 +313,20 @@ export default function Hero3DScene({ mobile = false, staticFrame = false }) {
         <color attach="background" args={["#0a0908"]} />
         <fog attach="fog" args={["#0a0908", 7.5, 15]} />
 
-        {/* cinematic lighting: warm key, ember rim, faint fill */}
-        <hemisphereLight args={["#4a2c17", "#0a0908", 0.7]} />
-        <directionalLight position={[4, 5, 3]} color="#ffd9b0" intensity={2.4} />
-        <directionalLight position={[-5, -2, -3]} color="#ff5a00" intensity={1.6} />
+        {/* cinematic lighting: cool key, violet rim, faint fill */}
+        <hemisphereLight args={["#2e2a5e", "#0a0908", 0.7]} />
+        <directionalLight position={[4, 5, 3]} color="#e2dcff" intensity={2.4} />
+        <directionalLight position={[-5, -2, -3]} color="#7c6cff" intensity={1.6} />
         <pointLight
           position={[0, 0.5, 3.5]}
-          color="#ffb36b"
+          color="#a78bfa"
           intensity={10}
           distance={14}
           decay={2}
         />
 
         <CameraRig staticFrame={staticFrame}>
-          <EmberParticles count={mobile ? 220 : 600} />
+          <VioletParticles count={mobile ? 220 : 600} />
           <HeroForm mobile={mobile} />
         </CameraRig>
 

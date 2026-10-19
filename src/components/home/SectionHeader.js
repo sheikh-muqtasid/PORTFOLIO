@@ -23,8 +23,8 @@ export const SectionHeader = ({ eyebrow, title, copy, align = "center" }) => {
       transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
       className={`flex flex-col ${alignCls} mb-12 md:mb-16 space-y-4 max-w-3xl`}
     >
-      <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-ember-tint border border-ember/20 text-[11px] font-semibold uppercase tracking-[0.14em] text-ember shadow-[0_0_28px_rgba(232,112,42,0.18)]">
-        <span className="w-1.5 h-1.5 rounded-full bg-ember" aria-hidden="true" />
+      <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent-tint border border-accent/20 text-[11px] font-semibold uppercase tracking-[0.14em] text-accent shadow-[0_0_28px_rgba(139,124,255,0.18)]">
+        <span className="w-1.5 h-1.5 rounded-full bg-accent" aria-hidden="true" />
         {eyebrow}
       </span>
       <h2 className="font-heading font-semibold tracking-tight text-ink text-[clamp(1.9rem,4vw,3rem)] leading-[1.12]">

@@ -53,10 +53,10 @@ function MarqueeItems({ items }) {
     <>
       {items.map((item) => (
         <span key={item} className="flex items-center shrink-0">
-          <span className="px-6 text-sm uppercase tracking-[0.25em] text-[#CFC3B1]">
+          <span className="px-6 text-sm uppercase tracking-[0.25em] text-[#C8C3DA]">
             {item}
           </span>
-          <span aria-hidden="true" className="text-[#E8702A] text-xs">
+          <span aria-hidden="true" className="text-[#8B7CFF] text-xs">
             ✦
           </span>
         </span>
