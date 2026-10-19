@@ -231,7 +231,7 @@ export const ContactForm = () => {
               </div>
 
               {error && (
-                <p role="alert" className="p-4 rounded-xl bg-red-50 border border-red-200 text-red-800 text-sm">
+                <p role="alert" className="p-4 rounded-xl bg-red-950/60 border border-red-500/30 text-red-200 text-sm">
                   {error}
                 </p>
               )}
@@ -239,7 +239,7 @@ export const ContactForm = () => {
               <button
                 type="submit"
                 disabled={submitting}
-                className="w-full py-4 px-6 rounded-full text-sm uppercase tracking-wider font-bold bg-ember text-white hover:bg-ember-dark transition-all duration-300 hover:-translate-y-0.5 shadow-[0_12px_28px_rgba(166,58,10,0.28)] disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ember"
+                className="w-full py-4 px-6 rounded-full text-sm uppercase tracking-wider font-bold bg-ember-deep text-white hover:bg-ember-dark transition-all duration-300 hover:-translate-y-0.5 shadow-[0_12px_28px_rgba(166,58,10,0.28)] disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ember"
               >
                 <FaPaperPlane className="w-4 h-4" aria-hidden="true" />
                 {submitting ? <span>Sending…</span> : <span>Send project inquiry</span>}

@@ -71,8 +71,8 @@ export const Header = () => {
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full bg-white/85 backdrop-blur-xl border-b border-line transition-shadow duration-300 ${
-        scrolled ? "shadow-[0_8px_30px_rgba(28,25,23,0.08)]" : ""
+      className={`sticky top-0 z-50 w-full bg-[#0a0908]/80 backdrop-blur-xl border-b border-line transition-shadow duration-300 ${
+        scrolled ? "shadow-[0_8px_30px_rgba(0,0,0,0.55)]" : ""
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -83,7 +83,7 @@ export const Header = () => {
             className="flex items-center gap-3 group rounded-xl p-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-ember"
             aria-label="Sheikh Muqtasid — home"
           >
-            <span className="w-10 h-10 rounded-xl bg-ember-tint border border-ember/20 flex items-center justify-center font-heading font-semibold text-lg text-ember group-hover:bg-ember group-hover:text-white transition-colors duration-300">
+            <span className="w-10 h-10 rounded-xl bg-ember-tint border border-ember/25 flex items-center justify-center font-heading font-semibold text-lg text-ember group-hover:bg-ember group-hover:text-[#160b03] group-hover:border-ember transition-colors duration-300 shadow-[0_0_20px_rgba(232,112,42,0.15)]">
               SM.
             </span>
             <span className="flex flex-col leading-tight">
@@ -98,7 +98,7 @@ export const Header = () => {
 
           {/* Desktop navigation */}
           <nav
-            className="hidden md:flex items-center gap-1 bg-cream/70 border border-line px-2 py-1.5 rounded-full"
+            className="hidden md:flex items-center gap-1 bg-white/[0.04] border border-line px-2 py-1.5 rounded-full"
             aria-label="Main navigation"
           >
             {navLinks.map((link) => (
@@ -106,7 +106,7 @@ export const Header = () => {
                 key={link.name}
                 href={link.href}
                 onClick={(e) => handleLinkClick(e, link.href)}
-                className="px-4 py-2 text-sm font-medium text-body hover:text-ink rounded-full transition-colors hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-ember"
+                className="px-4 py-2 text-sm font-medium text-body hover:text-ink rounded-full transition-colors hover:bg-white/[0.08] focus:outline-none focus-visible:ring-2 focus-visible:ring-ember"
               >
                 {link.name}
               </a>
@@ -118,7 +118,7 @@ export const Header = () => {
             <a
               href={contactHref}
               onClick={(e) => handleLinkClick(e, contactHref)}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs uppercase tracking-wider font-bold bg-ember text-white hover:bg-ember-dark transition-all duration-300 hover:-translate-y-0.5 shadow-[0_8px_20px_rgba(166,58,10,0.25)] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ember"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs uppercase tracking-wider font-bold bg-ember-deep text-white hover:bg-ember-dark transition-all duration-300 hover:-translate-y-0.5 shadow-[0_8px_20px_rgba(166,58,10,0.4)] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ember"
             >
               <span>Start a Project</span>
               <svg
@@ -139,14 +139,14 @@ export const Header = () => {
             <a
               href={contactHref}
               onClick={(e) => handleLinkClick(e, contactHref)}
-              className="px-3.5 py-2 rounded-full text-xs font-bold bg-ember text-white"
+              className="px-3.5 py-2 rounded-full text-xs font-bold bg-ember-deep text-white shadow-[0_6px_16px_rgba(166,58,10,0.4)]"
             >
               Get a Quote
             </a>
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2.5 rounded-xl bg-white border border-line text-ink shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-ember"
+              className="p-2.5 rounded-xl bg-white/[0.06] border border-line text-ink shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-ember"
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-menu"
               aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
@@ -177,7 +177,7 @@ export const Header = () => {
       {mobileMenuOpen && (
         <div
           id="mobile-menu"
-          className="md:hidden border-t border-line bg-white/98 backdrop-blur-2xl px-5 pt-4 pb-[calc(2rem+env(safe-area-inset-bottom))] shadow-[0_20px_40px_rgba(28,25,23,0.10)]"
+          className="md:hidden border-t border-line bg-[#0d0b08]/95 backdrop-blur-2xl px-5 pt-4 pb-[calc(2rem+env(safe-area-inset-bottom))] shadow-[0_20px_40px_rgba(0,0,0,0.6)]"
         >
           <nav className="flex flex-col gap-1" aria-label="Mobile navigation">
             {navLinks.map((link) => (
@@ -185,7 +185,7 @@ export const Header = () => {
                 key={link.name}
                 href={link.href}
                 onClick={(e) => handleLinkClick(e, link.href)}
-                className="px-4 py-3 text-base font-medium text-body hover:text-ink hover:bg-cream rounded-xl transition-colors flex items-center justify-between"
+                className="px-4 py-3 text-base font-medium text-body hover:text-ink hover:bg-white/[0.06] rounded-xl transition-colors flex items-center justify-between"
               >
                 <span>{link.name}</span>
                 <span className="text-muted" aria-hidden="true">→</span>
@@ -197,7 +197,7 @@ export const Header = () => {
             <a
               href={contactHref}
               onClick={(e) => handleLinkClick(e, contactHref)}
-              className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl text-sm uppercase tracking-wider font-bold bg-ember text-white shadow-[0_8px_20px_rgba(166,58,10,0.25)]"
+              className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl text-sm uppercase tracking-wider font-bold bg-ember-deep text-white shadow-[0_8px_20px_rgba(166,58,10,0.4)]"
             >
               <span>Start a Project</span>
               <svg

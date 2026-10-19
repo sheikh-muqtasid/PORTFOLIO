@@ -36,17 +36,21 @@ export const AboutSection = () => {
   return (
     <section id="about" className="w-full scroll-mt-24 py-20 md:py-28 bg-paper">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-surface border border-line rounded-[2rem] p-7 sm:p-12 lg:p-16 shadow-[0_20px_60px_rgba(28,25,23,0.07)] relative overflow-hidden">
+        <div className="bg-surface border border-line rounded-[2rem] p-7 sm:p-12 lg:p-16 shadow-[0_24px_70px_rgba(0,0,0,0.5)] relative overflow-hidden">
           <div
-            className="absolute top-0 right-0 w-96 h-96 rounded-full blur-3xl pointer-events-none"
+            className="ember-drift absolute -top-24 -right-24 w-96 h-96 rounded-full blur-3xl pointer-events-none"
             aria-hidden="true"
-            style={{ background: "radial-gradient(circle, rgba(166,58,10,0.08) 0%, transparent 70%)" }}
+            style={{ background: "radial-gradient(circle, rgba(232,112,42,0.12) 0%, transparent 70%)" }}
+          />
+          <div
+            className="absolute top-0 left-12 right-12 h-px ember-hairline opacity-70"
+            aria-hidden="true"
           />
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center relative">
             {/* Portrait */}
             <div className="lg:col-span-5 flex flex-col items-center sm:items-start gap-5">
-              <div className="relative w-60 sm:w-72 aspect-[4/5] rounded-3xl overflow-hidden border border-line shadow-[0_20px_50px_rgba(28,25,23,0.12)] bg-cream">
+              <div className="relative w-60 sm:w-72 aspect-[4/5] rounded-3xl overflow-hidden border border-line shadow-[0_24px_60px_rgba(0,0,0,0.55)] bg-cream">
                 <Image
                   src={person.avatar}
                   alt="Portrait of Sheikh Muqtasid, custom website and full-stack developer"
@@ -55,7 +59,7 @@ export const AboutSection = () => {
                   className="object-cover"
                   style={{ objectPosition: "50% 16%" }}
                 />
-                <div className="absolute inset-x-4 bottom-4 flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-white/90 backdrop-blur-md border border-line shadow-sm">
+                <div className="absolute inset-x-4 bottom-4 flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-black/60 backdrop-blur-md border border-white/10 shadow-sm">
                   <span className="text-xs font-semibold text-ink">Sheikh Muqtasid</span>
                   <span className="text-[10px] font-bold tracking-[0.12em] text-ember uppercase">Full-stack</span>
                 </div>
@@ -100,10 +104,10 @@ export const AboutSection = () => {
                     return (
                       <li
                         key={prop.title}
-                        className="p-5 rounded-2xl bg-cream/70 border border-line hover:border-ember/25 transition-colors"
+                        className="p-5 rounded-2xl bg-cream/70 border border-line hover:border-ember/30 hover:bg-white/[0.03] transition-colors"
                       >
                         <div className="flex items-center gap-2.5 mb-2">
-                          <span className="w-8 h-8 rounded-xl bg-white border border-line flex items-center justify-center text-ember shadow-sm" aria-hidden="true">
+                          <span className="w-8 h-8 rounded-xl bg-white/[0.06] border border-white/10 flex items-center justify-center text-ember shadow-sm" aria-hidden="true">
                             <Icon className="w-4 h-4" />
                           </span>
                           <h4 className="text-sm font-semibold text-ink leading-snug">

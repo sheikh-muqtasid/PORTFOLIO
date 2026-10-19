@@ -29,8 +29,8 @@ export const FAQSection = () => {
             return (
               <div
                 key={idx}
-                className={`bg-surface border rounded-2xl overflow-hidden transition-all duration-300 shadow-[0_6px_24px_rgba(28,25,23,0.04)] ${
-                  isOpen ? "border-ember/30" : "border-line hover:border-ink/20"
+                className={`bg-surface border rounded-2xl overflow-hidden transition-all duration-300 shadow-[0_8px_28px_rgba(0,0,0,0.35)] ${
+                  isOpen ? "border-ember/40 shadow-[0_8px_32px_rgba(0,0,0,0.45),0_0_28px_rgba(232,112,42,0.08)]" : "border-line hover:border-white/20"
                 }`}
               >
                 <h3 className="m-0">
@@ -48,7 +48,7 @@ export const FAQSection = () => {
                     <span
                       className={`w-8 h-8 rounded-full border flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
                         isOpen
-                          ? "rotate-180 bg-ember text-white border-ember"
+                          ? "rotate-180 bg-ember-deep text-white border-ember-deep shadow-[0_0_16px_rgba(166,58,10,0.5)]"
                           : "bg-cream border-line text-muted"
                       }`}
                       aria-hidden="true"
@@ -65,7 +65,7 @@ export const FAQSection = () => {
                   hidden={!isOpen}
                   className="px-6 pb-6 text-body text-sm sm:text-base leading-relaxed"
                 >
-                  <p className="pt-1 border-t border-line mt-1 pt-4 m-0">{faq.answer}</p>
+                  <p className="pt-4 border-t border-line m-0">{faq.answer}</p>
                 </div>
               </div>
             );

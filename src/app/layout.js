@@ -8,6 +8,12 @@ import {
   Flex,
 } from "@once-ui-system/core";
 import { Footer, Header, RouteGuard, Providers } from "@/components";
+import {
+  SmoothScroll,
+  Preloader,
+  CustomCursor,
+  ScrollProgress,
+} from "@/components/fx";
 import { baseURL, effects, fonts, style, dataStyle, home } from "@/resources";
 
 export async function generateMetadata() {
@@ -57,7 +63,7 @@ export default async function RootLayout({ children }) {
       as="html"
       lang="en"
       fillWidth
-      data-theme="light"
+      data-theme="dark"
       className={classNames(
         fonts.heading.variable,
         fonts.body.variable,
@@ -73,8 +79,8 @@ export default async function RootLayout({ children }) {
               (function() {
                 try {
                   const root = document.documentElement;
-                  root.setAttribute('data-theme', 'light');
-                  localStorage.setItem('data-theme', 'light');
+                  root.setAttribute('data-theme', 'dark');
+                  localStorage.setItem('data-theme', 'dark');
 
                   // Set defaults from config
                   const config = ${JSON.stringify({
@@ -95,7 +101,7 @@ export default async function RootLayout({ children }) {
                     root.setAttribute('data-' + key, value);
                   });
                 } catch (e) {
-                  document.documentElement.setAttribute('data-theme', 'light');
+                  document.documentElement.setAttribute('data-theme', 'dark');
                 }
               })();
             `,
@@ -103,12 +109,16 @@ export default async function RootLayout({ children }) {
         />
       </head>
       <Providers>
+        <SmoothScroll />
+        <CustomCursor />
+        <ScrollProgress />
+        <Preloader />
         <Column
           as="body"
           suppressHydrationWarning
           background="page"
           fillWidth
-          style={{ minHeight: "100vh", backgroundColor: "#FDFCFB", color: "#1C1917" }}
+          style={{ minHeight: "100vh", backgroundColor: "#0A0908", color: "#F4EDE2" }}
           margin="0"
           padding="0"
           horizontal="center"

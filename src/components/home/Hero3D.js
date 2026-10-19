@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState, useEffect, Component } from "react";
+import React, { Component, useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 
-// Error boundary: any WebGL context loss or init failure falls back to a static visual.
+// Error boundary: any WebGL context loss or init failure falls back to a
+// static visual — the hero is never blank.
 class WebGLErrorBoundary extends Component {
   constructor(props) {
     super(props);
@@ -26,54 +27,41 @@ class WebGLErrorBoundary extends Component {
   }
 }
 
-// Static gradient fallback — light, refined, no animation when `simplified`.
+/**
+ * Static layered CSS gradient fallback — ember glow on near-black.
+ * Pure CSS, zero GPU cost, never a blank hero.
+ */
 export function Hero3DFallback({ simplified = false }) {
-  const ringCls = simplified ? "" : "spin-slower";
-  const pulseCls = simplified ? "" : "motion-safe:animate-pulse";
   return (
-    <div className="relative w-full h-[300px] sm:h-[400px] flex items-center justify-center overflow-hidden select-none pointer-events-none">
-      {/* Warm ambient glow */}
+    <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
+      {/* near-black base */}
+      <div className="absolute inset-0" style={{ background: "#0A0908" }} />
+      {/* ember core glow, offset right where the 3D form would sit */}
       <div
-        className="absolute w-72 h-72 sm:w-96 sm:h-96 rounded-full blur-3xl"
-        aria-hidden="true"
+        className={`absolute -right-[10%] top-1/2 h-[80vmin] w-[80vmin] -translate-y-1/2 rounded-full blur-3xl ${
+          simplified ? "" : "motion-safe:animate-pulse"
+        }`}
         style={{
           background:
-            "radial-gradient(circle, rgba(166,58,10,0.14) 0%, rgba(166,58,10,0.05) 50%, transparent 70%)",
+            "radial-gradient(circle, rgba(166,58,10,0.42) 0%, rgba(166,58,10,0.14) 45%, transparent 70%)",
         }}
       />
-
-      {/* Outer ring */}
+      {/* faint amber wash, upper left */}
       <div
-        className={`absolute w-56 h-56 sm:w-72 sm:h-72 rounded-full border border-ember/25 ${ringCls}`}
-        aria-hidden="true"
-        style={{ borderStyle: "dashed" }}
+        className="absolute left-[6%] top-[10%] h-[52vmin] w-[52vmin] rounded-full blur-3xl"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(217,130,43,0.16) 0%, transparent 65%)",
+        }}
       />
-
-      {/* Glass ring */}
+      {/* ember horizon hairline */}
       <div
-        className="absolute w-44 h-44 sm:w-56 sm:h-56 rounded-full border border-ink/10 bg-white/40 backdrop-blur-md"
-        aria-hidden="true"
-        style={{ transform: "rotateX(60deg) rotateY(15deg)" }}
+        className="absolute inset-x-0 bottom-[20%] h-px"
+        style={{
+          background:
+            "linear-gradient(90deg, transparent, rgba(217,130,43,0.35), transparent)",
+        }}
       />
-
-      {/* Core faceted mark */}
-      <div
-        className="relative z-10 w-28 h-28 sm:w-36 sm:h-36 rounded-3xl flex items-center justify-center bg-white/80 backdrop-blur-xl border border-line shadow-[0_24px_50px_rgba(28,25,23,0.10)]"
-        style={{ transform: "rotate(-8deg)" }}
-      >
-        <div className="text-center p-3">
-          <div className="w-10 h-10 mx-auto mb-1.5 rounded-xl bg-ember-tint border border-ember/25 flex items-center justify-center text-ember font-heading font-semibold text-sm">
-            SM
-          </div>
-          <span className="text-[11px] tracking-[0.14em] text-muted font-semibold">
-            CUSTOM CODE
-          </span>
-        </div>
-      </div>
-
-      {/* Orbital accents */}
-      <div className={`absolute w-2 h-2 rounded-full bg-ember ${pulseCls}`} style={{ top: "25%", right: "28%" }} aria-hidden="true" />
-      <div className={`absolute w-1.5 h-1.5 rounded-full bg-ink/30 ${pulseCls}`} style={{ bottom: "28%", left: "30%" }} aria-hidden="true" />
     </div>
   );
 }
@@ -81,49 +69,49 @@ export function Hero3DFallback({ simplified = false }) {
 // Lazy-load the Three.js scene — no SSR, so it never blocks first paint.
 const DynamicScene = dynamic(() => import("./Hero3DScene"), {
   ssr: false,
-  loading: () => <Hero3DFallback simplified={true} />,
+  loading: () => <Hero3DFallback simplified />,
 });
 
+function detectWebGL() {
+  try {
+    const canvas = document.createElement("canvas");
+    return !!(
+      window.WebGLRenderingContext &&
+      (canvas.getContext("webgl2") ||
+        canvas.getContext("webgl") ||
+        canvas.getContext("experimental-webgl"))
+    );
+  } catch (e) {
+    return false;
+  }
+}
+
 export default function Hero3D() {
-  const [useFallback, setUseFallback] = useState(false);
-  const [mounted, setMounted] = useState(false);
+  const [mode, setMode] = useState("loading"); // loading | scene | fallback
+  const [mobile, setMobile] = useState(false);
+  const [staticFrame, setStaticFrame] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
-
-    const prefersReducedMotion = window.matchMedia(
+    const reducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
-    const isMobile = window.innerWidth < 768;
-    const hasWebGL = (() => {
-      try {
-        const canvas = document.createElement("canvas");
-        return !!(
-          window.WebGLRenderingContext &&
-          (canvas.getContext("webgl") || canvas.getContext("experimental-webgl"))
-        );
-      } catch (e) {
-        return false;
-      }
-    })();
-
-    // Reduced motion, small screens, or no WebGL → static fallback.
-    if (prefersReducedMotion || isMobile || !hasWebGL) {
-      setUseFallback(true);
-    }
+    setMobile(window.matchMedia("(max-width: 767px)").matches);
+    // Reduced motion: render one static 3D frame (frameloop="never"), never animate.
+    setStaticFrame(reducedMotion);
+    setMode(detectWebGL() ? "scene" : "fallback");
   }, []);
 
-  if (!mounted) {
-    return <Hero3DFallback simplified={true} />;
-  }
-
-  if (useFallback) {
-    return <Hero3DFallback simplified={true} />;
-  }
-
   return (
-    <WebGLErrorBoundary fallback={<Hero3DFallback />}>
-      <DynamicScene />
-    </WebGLErrorBoundary>
+    <div className="absolute inset-0" aria-hidden="true">
+      <WebGLErrorBoundary fallback={<Hero3DFallback />}>
+        {mode === "fallback" ? (
+          <Hero3DFallback />
+        ) : mode === "scene" ? (
+          <DynamicScene mobile={mobile} staticFrame={staticFrame} />
+        ) : (
+          <Hero3DFallback simplified />
+        )}
+      </WebGLErrorBoundary>
+    </div>
   );
 }

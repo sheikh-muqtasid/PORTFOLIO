@@ -14,8 +14,14 @@ const iconMap = {
 
 export const ServicesSection = () => {
   return (
-    <section id="services" className="w-full scroll-mt-24 py-20 md:py-28 bg-paper">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="services" className="w-full scroll-mt-24 py-20 md:py-28 bg-paper relative overflow-hidden">
+      {/* Ambient ember glow */}
+      <div
+        className="ember-drift absolute -top-32 left-1/2 -translate-x-1/2 w-[720px] h-[380px] rounded-full blur-3xl pointer-events-none"
+        aria-hidden="true"
+        style={{ background: "radial-gradient(ellipse, rgba(232,112,42,0.10) 0%, transparent 70%)" }}
+      />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <SectionHeader
           eyebrow="What I deliver"
           title="Websites and apps built to bring you customers."
@@ -29,12 +35,16 @@ export const ServicesSection = () => {
             return (
               <article
                 key={service.id}
-                className="group relative bg-surface border border-line rounded-3xl p-7 sm:p-9 shadow-[0_10px_36px_rgba(28,25,23,0.05)] hover:shadow-[0_18px_48px_rgba(28,25,23,0.10)] hover:-translate-y-1 hover:border-ember/30 transition-all duration-300 flex flex-col"
+                className="cine-card group relative rounded-3xl p-7 sm:p-9 flex flex-col overflow-hidden"
               >
+                <div
+                  className="absolute top-0 left-8 right-8 h-px ember-hairline opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  aria-hidden="true"
+                />
                 <div className="space-y-6 flex-1">
                   {/* Icon + tag */}
                   <div className="flex items-center justify-between">
-                    <div className="w-13 h-13 p-3.5 rounded-2xl bg-ember-tint border border-ember/15 flex items-center justify-center text-ember group-hover:bg-ember group-hover:text-white group-hover:scale-105 transition-all duration-300">
+                    <div className="w-13 h-13 p-3.5 rounded-2xl bg-ember-tint border border-ember/20 flex items-center justify-center text-ember group-hover:bg-ember group-hover:text-[#160b03] group-hover:border-ember group-hover:scale-105 transition-all duration-300 shadow-[0_0_24px_rgba(232,112,42,0.15)]">
                       <Icon className="w-6 h-6" aria-hidden="true" />
                     </div>
                     <span className="text-[11px] font-semibold uppercase tracking-[0.12em] px-3 py-1.5 rounded-full bg-cream border border-line text-muted">
@@ -56,7 +66,7 @@ export const ServicesSection = () => {
                   <ul className="space-y-3 pt-5 border-t border-line">
                     {service.deliverables.map((item, idx) => (
                       <li key={idx} className="flex items-start gap-3 text-sm text-body">
-                        <span className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-ember-tint flex items-center justify-center text-ember" aria-hidden="true">
+                        <span className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-ember-tint border border-ember/20 flex items-center justify-center text-ember" aria-hidden="true">
                           <FaCheck className="w-3 h-3" />
                         </span>
                         <span className="leading-relaxed">{item}</span>

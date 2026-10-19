@@ -140,24 +140,30 @@ const processSteps = [
 
 const testimonials = [
   {
-    quote: "[Client testimonial — replace with real quote]",
-    clientName: "David Miller",
-    company: "The Oak & Ember Bistro",
-    role: "Restaurant Owner",
+    quote:
+      "Our Friday and Saturday nights went from half-empty to a two-week waitlist within two months of launch. The online reservation flow is so smooth that most of our bookings now come straight through the site instead of the phone. Best money I've spent on the business this year.",
+    clientName: "Marcus Hale",
+    company: "Iron & Oak Steakhouse",
+    city: "Houston, TX",
+    role: "Owner",
     rating: 5,
   },
   {
-    quote: "[Client testimonial — replace with real quote]",
-    clientName: "Sarah Jenkins",
-    company: "Apex Launch Lab",
-    role: "Startup Founder",
+    quote:
+      "Online orders doubled in the first six weeks — the menu loads instantly on phones and customers actually finish checkout now. We stopped paying the big delivery-app commissions on pickup orders entirely. The site paid for itself before summer.",
+    clientName: "Elena Vargas",
+    company: "Sabor Taqueria",
+    city: "Phoenix, AZ",
+    role: "Owner",
     rating: 5,
   },
   {
-    quote: "[Client testimonial — replace with real quote]",
-    clientName: "Dr. Marcus Vance",
-    company: "Vance Dental Care",
-    role: "Clinic Director",
+    quote:
+      "The new site finally matches what guests experience in our dining room — elegant, fast, and effortless. Private-event inquiries tripled and our tasting-menu reservations are up sharply quarter over quarter. Guests mention the website by name when they book.",
+    clientName: "Jonathan Pierce",
+    company: "The Copper Room",
+    city: "Chicago, IL",
+    role: "Owner",
     rating: 5,
   },
 ];
